@@ -16,4 +16,16 @@ class Ingredient {
   get unit() {
     return this._unit;
   }
+
+  set name(name) {
+    this._name = name;
+  }
+
+  set quantity(quantity) {
+    this._quantity = quantity;
+  }
+
+  set unit(unit) {
+    this._unit = unit;
+  }
 }

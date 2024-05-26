@@ -3,15 +3,30 @@ class IndexApp {
     this._recipes = recipes.map(recipe => { return new Recipe(recipe) })
   }
 
-
-  get photographer() {
-      return this._photographer
+  get recipes() {
+      return this._recipes
   }
 
-  get medias() {
-      return this._medias
+  getIngredients() {
+    let ingredients = [];
+    this._recipes.forEach(recipe => {
+      recipe.ingredients.forEach(ingredient => {
+        ingredients.push(ingredient)
+      })
+    })
+    return ingredients
+  }
+
+  getUstensils() {
+    let ustensils = [];
+    this._recipes.forEach(recipe => {
+      recipe.ustensils.forEach(ustensil => {
+        ustensils.push(ustensil)
+      })
+    })
+    return ustensils
   }
 }
 
-const app = new IndexApp();
-app.fetchData();
+const app = new IndexApp(recipes);
+console.log(app.getUstensils());
