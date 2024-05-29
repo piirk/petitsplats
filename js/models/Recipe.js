@@ -49,7 +49,7 @@ class Recipe {
 
   // Method to search a recipe by an ingredient
   searchIngredient(query) {
-    return this._ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(query.toLowerCase()))
+    return this._ingredients.some(ingredient => ingredient.name.toLowerCase().includes(query.toLowerCase()))
   }
 
   // Method to search a recipe by an appliance
