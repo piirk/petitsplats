@@ -29,4 +29,3 @@ class IndexApp {
 }
 
 const app = new IndexApp(recipes);
-console.log(app.getUstensils());

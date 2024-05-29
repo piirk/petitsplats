@@ -61,4 +61,9 @@ class Recipe {
   searchUstensil(query) {
     return this._ustensils.some(ustensil => ustensil.toLowerCase().includes(query.toLowerCase()))
   }
+
+  // Method to search a recipe by description
+  searchDescription(query) {
+    return this._description.toLowerCase().includes(query.toLowerCase())
+  }
 }

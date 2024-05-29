@@ -10,6 +10,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
 
     <!-- js -->
     <script defer src="data/recipes.js"></script>
@@ -20,32 +24,72 @@
     <script defer src="js/pages/index.js"></script>
   </head>
 
-  <body class="bg-gray">
+  <body>
 
-    <header 
-      class="bg-image" 
-      style="
-        background-image: url('assets/image/background.avif');
-        background-size: cover;
-        background-position: center;
-        height: 670px;
-      "
-    >
-      <a href="index.html" class="text-decoration-none">
-        <h1 class="text-uppercase text-white">Les petits plats</h1>
-      </a>
-      <form>
-        <label for="search">Cherchez parmi plus de 1500 recettes du quotidien, simples et délicieuses</label>
-        <input type="text" id="search" name="search" placeholder="Rechercher une recette, un ingrédient, ...">
-        <button type="submit"><i class="fas fa-search"></i></button>
+    <header class="bg-image">
+      <div class="container-xl pt-5">
+        <a href="index.html" class="text-decoration-none">
+          <img src="assets/image/logo.svg" alt="Logo de Les Petits Plats">
+        </a>
+      </div>
+      <form class="container-xl d-flex flex-column justify-content-center align-items-center text-center">
+        <h1 class="d-none">Les Petits Plats : Cherchez parmi plus de 1500 du quotidien, simples et délicieuses</h1>
+        <label class="main-label font-family-anton text-uppercase text-yellow" for="search">Cherchez parmi plus de 1500<br />du quotidien, simples et délicieuses</label>
+        <div class="mt-4">
+          <input class="main-input form-control d-inline-block align-middle" type="text" id="search" name="search" placeholder="Rechercher une recette, un ingrédient, ...">
+          <button class="btn btn-primary btn-lg text-white align-middle" type="submit"><i class="fas fa-search"></i></button>
+        </div>
       </form>
     </header>
     
     <main class="container">
-      <section class="row">
-        <h2 class="text-uppercase">Dernières recettes</h2>
-        <div class="row" id="recipes"></div>
-      </section>
+      <div class="d-flex justify-content-between align-items-center py-4">
+        <div>
+          <div class="custom-select">
+            <select id="1" name="sort">
+              <option value="title-asc">Titre (A-Z)</option>
+              <option value="title-desc">Titre (Z-A)</option>
+            </select>
+            <select id="2" name="sort">
+              <option value="title-asc">Titre (A-Z)</option>
+              <option value="title-desc">Titre (Z-A)</option>
+            </select>
+            <select id="3" name="sort">
+              <option value="title-asc">Titre (A-Z)</option>
+              <option value="title-desc">Titre (Z-A)</option>
+            </select>
+          </div>
+        </div>
+        <span class="recipes-count font-family-anton">1500 recettes</span>
+      </div>
+      <div class="cards d-flex justify-content-between flex-wrap">
+        <div class="card font-family-manrope">
+          <img src="assets/image/recipe/Recette01.jpg" class="card-img-top" alt="...">
+          <div class="card-body d-flex flex-column">
+            <h2 class="card-title font-family-anton mt-3">Limonade de Coco</h2>
+            <div>
+              <h3 class="text-uppercase">Recette</h3>
+              <p class="card-text">Mettre les glaçons à votre goût dans le blender, Ajouter le lait  la crème de coco, 
+                le jus de 2 citrons et le sucre ensemble. Mixer jusqu'à obtenir la consistance désirée.</p>
+            </div>
+            <div>
+              <h3 class="text-uppercase">ingrédients</h3>
+              <div class="card-text">
+                <ul class="ingredients-list list-group d-flex flex-row flex-wrap">
+                  <li class="list-group-item">Lait de coco<br /><span class="ingredient-quantity">400ml</span></li>
+                  <li class="list-group-item">Jus de citron<br /><span class="ingredient-quantity">2</span></li>
+                  <li class="list-group-item">Crème de coco<br /><span class="ingredient-quantity">4 cuillères</span></li>
+                  <li class="list-group-item">Sugre<br /><span class="ingredient-quantity">20g</span></li>
+                  <li class="list-group-item">Glaçons<br /><span class="ingredient-quantity">2</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card font-family-manrope"></div>
+        <div class="card font-family-manrope"></div>
+        <div class="card font-family-manrope"></div>
+      </div>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
