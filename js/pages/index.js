@@ -14,7 +14,14 @@ class IndexApp {
   }
 
   displayRecipes() {
-    // todo
+    let recipesContainer = '';
+
+    this._recipes.forEach(recipe => {
+      const recipeTemplate = new RecipeTemplate(recipe);
+      recipesContainer += recipeTemplate.render();
+    });
+
+    document.getElementById('recipesContainer').innerHTML = recipesContainer;
   }
 
   addListenersMainSearch() {

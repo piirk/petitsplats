@@ -10,10 +10,16 @@ class Ingredient {
   }
 
   get quantity() {
+    if (this._quantity === undefined) {
+      return '';
+    }
     return this._quantity;
   }
 
   get unit() {
+    if (this._unit === undefined) {
+      return '';
+    }
     return this._unit;
   }
 

@@ -1,6 +1,7 @@
 class Recipe {
   constructor(data) {
     this._id = data.id
+    this._image = data.image
     this._name = data.name
     this._description = data.description
     this._ingredients = data.ingredients.map(ingredient => { return new Ingredient(ingredient.ingredient, ingredient.quantity, ingredient.unit) });
@@ -12,6 +13,10 @@ class Recipe {
 
   get id() {
     return this._id
+  }
+
+  get image() {
+    return this._image
   }
 
   get name() {
