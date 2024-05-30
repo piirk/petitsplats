@@ -19,6 +19,7 @@ class IndexApp {
       recipesContainer += recipeTemplate.render();
     });
     document.getElementById('recipesContainer').innerHTML = recipesContainer;
+    document.getElementById('recipesCount').innerText = recipes.length + ' recettes';
   }
 
   addListenersMainSearch() {
