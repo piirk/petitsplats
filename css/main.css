@@ -74,6 +74,8 @@ header h1 {
 .card-body {
   row-gap: 30px;
   padding: 25px;
+  font-size: 17px;
+  line-height: 24px;
 }
 
 .card-title {
@@ -86,10 +88,21 @@ header h1 {
   line-height: 16.39px;
   letter-spacing: 0.09em;
   color: #7A7A7A;
+  margin-bottom: 15px;
 }
 
 .card .list-group-item {
   width: 50%;
   border: none;
   padding: 0;
+  font-weight: 500;
+}
+
+.card .list-group-item .ingredient-quantity {
+  font-weight: 400;
+  color: #7A7A7A;
+}
+
+.ingredients-list {
+  row-gap: 10px;
 }
