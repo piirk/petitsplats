@@ -71,19 +71,40 @@ header h1 {
   border-top-right-radius: 20px;
 }
 
+.badge {
+  position: absolute;
+  width: 65px;
+  padding: 5px, 15px;
+  top: 21px;
+  left: 295px;
+  background-color: #FFD15B;
+  color: #1B1B1B;
+  border-radius: 14px;
+  font-size: 12px;
+  font-weight: 400;
+  font-family: Manrope;
+  line-height: 16.39px;
+  text-align: center;
+}
+
 .card-body {
   row-gap: 30px;
   padding: 25px;
-  font-size: 17px;
+  font-size: 15px;
   line-height: 24px;
 }
 
 .card-title {
-  font-size: 24px;
+  font-size: 19px;
+}
+
+.card .card-text-description {
+  height: 120px;
+  overflow: hidden;
 }
 
 .card h3 {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   line-height: 16.39px;
   letter-spacing: 0.09em;
@@ -96,6 +117,9 @@ header h1 {
   border: none;
   padding: 0;
   font-weight: 500;
+  overflow: hidden;
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
 }
 
 .card .list-group-item .ingredient-quantity {
@@ -105,4 +129,5 @@ header h1 {
 
 .ingredients-list {
   row-gap: 10px;
+  line-height: 19px;
 }

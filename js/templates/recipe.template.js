@@ -8,11 +8,12 @@ class RecipeTemplate {
     return `
       <div class="card font-family-manrope">
         <img src="assets/image/recipe/${this._recipe.image}" class="card-img-top" alt="${this._recipe.name}">
+        <span class="badge">${this._recipe.time}min</span>
         <div class="card-body d-flex flex-column">
           <h2 class="card-title font-family-anton mt-3">${this._recipe.name}</h2>
           <div>
             <h3 class="text-uppercase">Recette</h3>
-            <p class="card-text">${this._recipe.description}</p>
+            <p class="card-text-description">${this._recipe.description}</p>
           </div>
           <div>
             <h3 class="text-uppercase">ingrédients</h3>
