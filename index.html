@@ -66,32 +66,35 @@
         <span class="recipes-count font-family-anton">1500 recettes</span>
       </div>
       <div id="recipesContainer" class="cards d-flex justify-content-between flex-wrap">
-        <div class="card font-family-manrope">
-          <img src="assets/image/recipe/Recette01.jpg" class="card-img-top" alt="...">
-          <div class="card-body d-flex flex-column">
-            <h2 class="card-title font-family-anton mt-3">Limonade de Coco</h2>
-            <div>
-              <h3 class="text-uppercase">Recette</h3>
-              <p class="card-text">Mettre les glaçons à votre goût dans le blender, Ajouter le lait  la crème de coco, 
-                le jus de 2 citrons et le sucre ensemble. Mixer jusqu'à obtenir la consistance désirée.</p>
-            </div>
-            <div>
-              <h3 class="text-uppercase">ingrédients</h3>
-              <div class="card-text">
-                <ul class="ingredients-list list-group d-flex flex-row flex-wrap">
-                  <li class="list-group-item">Lait de coco<br /><span class="ingredient-quantity">400ml</span></li>
-                  <li class="list-group-item">Jus de citron<br /><span class="ingredient-quantity">2</span></li>
-                  <li class="list-group-item">Crème de coco<br /><span class="ingredient-quantity">4 cuillères</span></li>
-                  <li class="list-group-item">Sugre<br /><span class="ingredient-quantity">20g</span></li>
-                  <li class="list-group-item">Glaçons<br /><span class="ingredient-quantity">2</span></li>
-                </ul>
+
+        <!-- Start recipe card template -->
+        <template id="recipeCardTemplate">
+          <div class="card font-family-manrope">
+            <img src="assets/image/recipe/Recette01.jpg" class="card-img-top" alt="...">
+            <div class="card-body d-flex flex-column">
+              <h2 class="card-title font-family-anton mt-3">Limonade de Coco</h2>
+              <div>
+                <h3 class="text-uppercase">Recette</h3>
+                <p class="card-text">Mettre les glaçons à votre goût dans le blender, Ajouter le lait  la crème de coco, 
+                  le jus de 2 citrons et le sucre ensemble. Mixer jusqu'à obtenir la consistance désirée.</p>
+              </div>
+              <div>
+                <h3 class="text-uppercase">ingrédients</h3>
+                <div class="card-text">
+                  <ul class="ingredients-list list-group d-flex flex-row flex-wrap">
+                    <li class="list-group-item">Lait de coco<br /><span class="ingredient-quantity">400ml</span></li>
+                    <li class="list-group-item">Jus de citron<br /><span class="ingredient-quantity">2</span></li>
+                    <li class="list-group-item">Crème de coco<br /><span class="ingredient-quantity">4 cuillères</span></li>
+                    <li class="list-group-item">Sugre<br /><span class="ingredient-quantity">20g</span></li>
+                    <li class="list-group-item">Glaçons<br /><span class="ingredient-quantity"></span></li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="card font-family-manrope"></div>
-        <div class="card font-family-manrope"></div>
-        <div class="card font-family-manrope"></div>
+        </template>
+        <!-- End recipe card template -->
+
       </div>
     </main>
 
