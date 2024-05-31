@@ -1,0 +1,14 @@
+// main.scss
+
+@import 'utils/variables';
+@import 'utils/mixins';
+@import 'utils/js-classes';
+
+@import 'base/typography';
+@import 'base/base';
+
+@import 'layout/header';
+
+@import 'components/selects';
+
+@import 'pages/index';
