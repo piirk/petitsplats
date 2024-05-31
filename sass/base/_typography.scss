@@ -39,6 +39,18 @@ h3 {
   font-family: $font-heading;
   font-size: 21px;
   text-wrap: nowrap;
+  color: $color-black;
+}
+
+.no-recipes {
+  font-size: 1.2rem;
+  text-align: center;
+  color: $color-black;
+
+  &__icon {
+    font-size: 60px;
+    color: $color-grey;
+  }
 }
 
 .card {

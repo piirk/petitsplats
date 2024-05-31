@@ -44,6 +44,17 @@ h3 {
   font-family: "Anton", sans-serif;
   font-size: 21px;
   text-wrap: nowrap;
+  color: #1B1B1B;
+}
+
+.no-recipes {
+  font-size: 1.2rem;
+  text-align: center;
+  color: #1B1B1B;
+}
+.no-recipes__icon {
+  font-size: 60px;
+  color: #7A7A7A;
 }
 
 .card {
@@ -135,15 +146,10 @@ body {
 }
 
 .no-recipes {
-  text-align: center;
-  color: #7A7A7A;
-}
-.no-recipes__icon {
-  font-size: 60px;
+  min-height: 50vh;
 }
 
 .cards {
-  min-height: 780px;
   display: grid;
   grid-template-columns: repeat(auto-fill, 380px);
   justify-content: space-between;
