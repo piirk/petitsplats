@@ -14,7 +14,7 @@ class IndexApp {
 
   displayRecipes(recipes = this._recipes) {
     const noRecipesContainer = document.getElementById('noRecipesContainer');
-    
+
     if (recipes.length === 0) {
       noRecipesContainer.classList.remove('hide');
       document.getElementById('recipesContainer').innerHTML = '';
@@ -60,17 +60,31 @@ class IndexApp {
     let ingredients = [];
     this._recipes.forEach(recipe => {
       recipe.ingredients.forEach(ingredient => {
-        ingredients.push(ingredient);
+        if (!ingredients.includes(ingredient)) {
+          ingredients.push(ingredient);
+        }
       });
     });
     return ingredients;
+  }
+
+  getAppliances() {
+    let appliances = [];
+    this._recipes.forEach(recipe => {
+      if (!appliances.includes(recipe.appliance)) {
+        appliances.push(recipe.appliance);
+      }
+    });
+    return appliances;
   }
 
   getUstensils() {
     let ustensils = [];
     this._recipes.forEach(recipe => {
       recipe.ustensils.forEach(ustensil => {
-        ustensils.push(ustensil);
+        if (!ustensils.includes(ustensil)) {
+          ustensils.push(ustensil);
+        }
       });
     });
     return ustensils;
