@@ -30,11 +30,15 @@
   <body>
 
     <header class="bg-image">
+
+      <!-- logo -->
       <div class="container-xl pt-5">
         <a href="index.html" class="text-decoration-none">
           <img src="assets/image/logo.svg" alt="Logo de Les Petits Plats">
         </a>
       </div>
+
+      <!-- main search form -->
       <form id="mainSearchForm" class="container-xl d-flex flex-column justify-content-center align-items-center text-center">
         <h1 class="d-none">Les Petits Plats : Cherchez parmi plus de 1500 du quotidien, simples et délicieuses</h1>
         <label class="main-label font-family-anton text-uppercase text-yellow" for="search">Cherchez parmi plus de 1500<br />du quotidien, simples et délicieuses</label>
@@ -43,28 +47,35 @@
           <button class="btn btn-primary btn-lg text-white align-middle" type="submit"><i class="fas fa-search"></i></button>
         </div>
       </form>
+
     </header>
     
     <main class="container">
+
       <div class="d-flex justify-content-between align-items-center py-4">
-        <div>
-          <div class="custom-select">
-            <select id="1" name="sort">
-              <option value="title-asc">Titre (A-Z)</option>
-              <option value="title-desc">Titre (Z-A)</option>
-            </select>
-            <select id="2" name="sort">
-              <option value="title-asc">Titre (A-Z)</option>
-              <option value="title-desc">Titre (Z-A)</option>
-            </select>
-            <select id="3" name="sort">
-              <option value="title-asc">Titre (A-Z)</option>
-              <option value="title-desc">Titre (Z-A)</option>
-            </select>
-          </div>
+
+        <!-- advanced form search -->
+        <div class="custom-select">
+          <select id="1" name="sort">
+            <option value="title-asc">Titre (A-Z)</option>
+            <option value="title-desc">Titre (Z-A)</option>
+          </select>
+          <select id="2" name="sort">
+            <option value="title-asc">Titre (A-Z)</option>
+            <option value="title-desc">Titre (Z-A)</option>
+          </select>
+          <select id="3" name="sort">
+            <option value="title-asc">Titre (A-Z)</option>
+            <option value="title-desc">Titre (Z-A)</option>
+          </select>
         </div>
+
+        <!-- recipes count -->
         <span id="recipesCount" class="recipes-count font-family-anton"></span>
+
       </div>
+
+      <!-- recipes container -->
       <div id="recipesContainer" class="cards d-flex justify-content-between flex-wrap">
 
         <!-- Start recipe card template -->
