@@ -31,8 +31,19 @@ h3 {
 }
 
 // specific typography
-.header__content__input {
-  color: $color-grey;
+.header__content {
+  &__clear {
+    font-size: 35px;
+    color: $color-grey;
+
+    &:hover {
+      color: $color-black;
+    }
+  }
+
+  &__input {
+    color: $color-grey;
+  }
 }
 
 .recipes-count {

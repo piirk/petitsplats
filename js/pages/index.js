@@ -31,13 +31,29 @@ class IndexApp {
   }
 
   addListenersMainSearch() {
+    const searchInput = document.getElementById('mainSearchInput');
+    const clearSearchButton = document.getElementById('clearSearchButton');
+
     // prevent the form from being submitted
     document.getElementById('mainSearchForm').addEventListener('submit', (e) => {
       e.preventDefault();
     });
 
-    const searchInput = document.getElementById('mainSearchInput');
+    // clear the search input when the user clicks on the clear button
+    clearSearchButton.addEventListener('click', () => {
+      clearSearchButton.classList.add('hide');
+      searchInput.value = '';
+      searchInput.focus();
+      this.displayRecipes();
+    });
+
     searchInput.addEventListener('input', () => {
+      if (searchInput.value.length > 0) {
+        clearSearchButton.classList.remove('hide');
+      } else {
+        clearSearchButton.classList.add('hide');
+      }
+
       // if the search input is less than 3 characters, display all recipes
       if (searchInput.value.length < 3) {
         this.displayRecipes();

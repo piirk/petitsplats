@@ -16,11 +16,20 @@
   }
 
   &__content {
+    position: relative;
     width: 80%;
     max-width: 954px;
     background-color: white;
     border-radius: 11px;
     padding: 10px;
+
+    &__clear {
+      width: 35px;
+      position: absolute;
+      right: 90px;
+      background: none;
+      border: none;
+    }
 
     &__input {
       width: 100%;
