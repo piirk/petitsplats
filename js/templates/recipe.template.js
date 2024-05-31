@@ -7,7 +7,7 @@ class RecipeTemplate {
   render() {
     return `
       <div class="card font-family-manrope">
-        <img src="assets/image/recipe/${this._recipe.image}" class="card-img-top" alt="${this._recipe.name}">
+        <img src="assets/image/recipe/${this._recipe.image}" class="card-img-top" alt="Photo du plat ${this._recipe.name}">
         <span class="badge card-badge">${this._recipe.time}min</span>
         <div class="card-body d-flex flex-column">
           <h2 class="card-title mt-3">${this._recipe.name}</h2>

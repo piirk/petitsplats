@@ -2,7 +2,19 @@
 
 .cards {
   min-height: 780px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 380px);
+  justify-content: space-between;
   row-gap: 65px;
+
+  @include xl {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 65px;
+  }
+
+  @include md {
+    grid-template-columns: repeat(1, 1fr);
+  }
 
   .card {
     width: 380px;
@@ -10,6 +22,10 @@
     box-shadow: 0px 4px 34px 30px rgba(0, 0, 0, 0.04);
     border: none;
     border-radius: 20px;
+
+    @include xl {
+      width: 100%;
+    }
 
     &-img-top {
       width: 100%;
@@ -23,7 +39,7 @@
     width: 65px;
     position: absolute;
     top: 21px;
-    left: 295px;
+    right: 20px;
     padding: 5px 15px;
     background-color: $color-yellow;
     border-radius: 14px;
@@ -35,8 +51,6 @@
     }
 
     &-text {
-      row-gap: 10px;
-
       &-description {
         height: 120px;
         overflow: hidden;

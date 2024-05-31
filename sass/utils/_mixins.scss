@@ -35,3 +35,40 @@
     left: 50%;
     translate: -50% -50%;
 }
+
+// breakpoint mixins
+
+// extra small devices
+@mixin xs {
+    @media (max-width: #{$screen-xs-max}) {
+        @content;
+    }
+ }
+ 
+// small devices
+@mixin sm {
+    @media (max-width: #{$screen-sm-max}) {
+        @content;
+    }
+ }
+ 
+ // medium devices
+ @mixin md {
+    @media (max-width: #{$screen-md-max}) {
+        @content;
+    }
+ }
+ 
+ // large devices
+ @mixin lg {
+    @media (max-width: #{$screen-lg-max}) {
+        @content;
+    }
+ }
+ 
+ // extra large devices
+ @mixin xl {
+    @media (max-width: #{$screen-xl-max}) {
+        @content;
+    }
+ }
