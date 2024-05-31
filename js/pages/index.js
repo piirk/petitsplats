@@ -110,3 +110,17 @@ class IndexApp {
 //
 const app = new IndexApp(recipes);
 app.init();
+
+const elements = {
+  button: document.querySelector('[role="combobox"]'),
+  dropdown: document.querySelector('[role="listbox"]'),
+}; // I like to group all my elements into one objects 🤓.
+let isDropdownOpen = false;
+
+const toggleDropdown = () => {
+  elements.dropdown.classList.toggle('active');
+  isDropdownOpen = !isDropdownOpen;
+  elements.button.setAttribute('aria-expanded', isDropdownOpen.toString()); // update the aria-expanded state
+};
+
+elements.button.addEventListener('click', toggleDropdown);

@@ -58,19 +58,58 @@
       <div class="d-flex justify-content-between align-items-center py-4">
 
         <!-- advanced form search -->
-        <div class="custom-select">
-          <select id="1" name="sort">
-            <option value="title-asc">Titre (A-Z)</option>
-            <option value="title-desc">Titre (Z-A)</option>
-          </select>
-          <select id="2" name="sort">
-            <option value="title-asc">Titre (A-Z)</option>
-            <option value="title-desc">Titre (Z-A)</option>
-          </select>
-          <select id="3" name="sort">
-            <option value="title-asc">Titre (A-Z)</option>
-            <option value="title-desc">Titre (Z-A)</option>
-          </select>
+        <div class="custom-select-container d-flex">
+          <div class="custom-select">
+            <label class="d-none" for="select">Custom Select box</label>
+            <button
+              role="combobox"
+              id="select"
+              value="Select"
+              aria-controls="listboxIngredients"
+              aria-haspopup="listboxIngredients"
+              tabindex="0"
+              aria-expanded="false">
+              Ingrédients</button>
+            <ul role="listbox" id="listboxIngredients">
+              <li role="option">Option 1</li>
+              <li role="option">Option 2</li>
+              <li role="option">Option 3</li>
+            </ul>
+          </div>
+          <div class="custom-select">
+            <label class="d-none" for="select">Custom Select box</label>
+            <button
+              role="combobox"
+              id="select"
+              value="Select"
+              aria-controls="listbox"
+              aria-haspopup="listbox"
+              tabindex="0"
+              aria-expanded="false">
+              Select</button>
+            <ul role="listbox" id="listbox">
+              <li role="option">Option 1</li>
+              <li role="option">Option 2</li>
+              <li role="option">Option 3</li>
+            </ul>
+          </div>
+          <div class="custom-select">
+            <label class="d-none" for="select">Custom Select box</label>
+            <button
+              role="combobox"
+              id="select"
+              value="Select"
+              aria-controls="listbox"
+              aria-haspopup="listbox"
+              tabindex="0"
+              aria-expanded="false">
+              Select</button>
+            <ul role="listbox" id="listbox">
+              <li role="option">Option 1</li>
+              <li role="option">Option 2</li>
+              <li role="option">Option 3</li>
+            </ul>
+          </div>
         </div>
 
         <!-- recipes count -->

@@ -5,6 +5,10 @@
   padding: 0 25px;
 }
 
+.custom-select-container {
+  gap: 60px;
+}
+
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, 380px);
