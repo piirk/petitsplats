@@ -13,11 +13,13 @@ class IndexApp {
   }
 
   displayRecipes(recipes = this._recipes) {
+    const noRecipesContainer = document.getElementById('noRecipesContainer');
+    
     if (recipes.length === 0) {
-      document.getElementById('noRecipesContainer').classList.remove('hide');
+      noRecipesContainer.classList.remove('hide');
       document.getElementById('recipesContainer').innerHTML = '';
     } else {
-      document.getElementById('noRecipesContainer').classList.add('hide');
+      noRecipesContainer.classList.add('hide');
       let recipesContainer = '';
       recipes.forEach(recipe => {
         const recipeTemplate = new RecipeTemplate(recipe);
@@ -33,6 +35,7 @@ class IndexApp {
     document.getElementById('mainSearchForm').addEventListener('submit', (e) => {
       e.preventDefault();
     });
+
     const searchInput = document.getElementById('mainSearchInput');
     searchInput.addEventListener('input', () => {
       // if the search input is less than 3 characters, display all recipes
