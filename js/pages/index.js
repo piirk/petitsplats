@@ -45,14 +45,17 @@ class IndexApp {
 
   displaySearchTags() {
     const searchTagsContainer = document.getElementById('searchTagsContainer');
-    searchTagsContainer.innerHTML = '';
+    let searchTags = '';
 
+    searchTagsContainer.innerHTML = '';
     this._criteria.forEach(criteria => {
-      const searchTag = document.createElement('div');
-      searchTag.classList.add('search-tag');
-      searchTag.innerHTML = criteria + '<button class="search-tag__close" aria-label="Supprimer le tag de recherche"></button>';
-      searchTagsContainer.appendChild(searchTag);
+      searchTags += `
+        <div class="search-tag">
+          ${criteria}<button class="search-tag__close" aria-label="Supprimer le tag de recherche '${criteria}'"></button>
+        </div>
+      `;
     });
+    searchTagsContainer.innerHTML = searchTags;
 
     // add a listener to each search tag to remove it when the user clicks on the close button
     searchTagsContainer.querySelectorAll('.search-tag__close').forEach(closeButton => {
