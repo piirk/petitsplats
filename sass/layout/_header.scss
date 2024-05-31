@@ -27,8 +27,14 @@
       height: 60px;
       padding: 0 20px;
       margin-right: 20px;
-      border: none;
+      border: 1px solid transparent;
       border-radius: 11px;
+      text-overflow: ellipsis;
+
+      &:focus {
+        box-shadow: none;
+        border: 1px solid $color-black;
+      }
     }
   }
 }
