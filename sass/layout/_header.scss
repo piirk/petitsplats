@@ -31,6 +31,10 @@
       border-radius: 11px;
       text-overflow: ellipsis;
 
+      &:hover {
+        border: 1px solid $color-light-grey;
+      }
+
       &:focus {
         box-shadow: none;
         border: 1px solid $color-black;
