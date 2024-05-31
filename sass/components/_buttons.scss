@@ -1,0 +1,21 @@
+// _buttons.scss
+
+// general buttons
+.btn {
+  width: 52px;
+  height: 52px;
+  background-color: $color-black;
+  color: white;
+
+  --bs-btn-active-color: #000000;
+  --bs-btn-active-bg: #FFD15B;
+
+  &:hover, &:focus, &:focus-visible {
+    background-color: $color-yellow;
+    color: $color-black;
+  }
+
+  &:focus, &:focus-visible {
+    border: 1px solid $color-black;
+  }
+}

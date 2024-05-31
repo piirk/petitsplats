@@ -27,6 +27,10 @@ h3 {
 }
 
 // specific typography
+.header__input {
+  color: $color-grey;
+}
+
 .recipes-count {
   font-family: $font-heading;
   font-size: 21px;
