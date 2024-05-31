@@ -48,13 +48,18 @@ h3 {
 }
 
 .no-recipes {
-  font-size: 1.2rem;
   text-align: center;
-  color: #1B1B1B;
 }
 .no-recipes__icon {
   font-size: 60px;
   color: #7A7A7A;
+}
+.no-recipes__text {
+  font-size: 1.2rem;
+  color: #1B1B1B;
+}
+.no-recipes__text-nowrap {
+  text-wrap: nowrap;
 }
 
 .card {
@@ -147,6 +152,7 @@ body {
 
 .no-recipes {
   min-height: 50vh;
+  padding: 0 25px;
 }
 
 .cards {

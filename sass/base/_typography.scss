@@ -43,13 +43,20 @@ h3 {
 }
 
 .no-recipes {
-  font-size: 1.2rem;
   text-align: center;
-  color: $color-black;
 
   &__icon {
     font-size: 60px;
     color: $color-grey;
+  }
+
+  &__text {
+    font-size: 1.2rem;
+    color: $color-black;
+
+    &-nowrap {
+      text-wrap: nowrap;
+    }
   }
 }
 
