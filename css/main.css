@@ -134,6 +134,14 @@ body {
   border: 1px solid #1B1B1B;
 }
 
+.no-recipes {
+  text-align: center;
+  color: #7A7A7A;
+}
+.no-recipes__icon {
+  font-size: 60px;
+}
+
 .cards {
   min-height: 780px;
   display: grid;

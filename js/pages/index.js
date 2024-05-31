@@ -13,16 +13,26 @@ class IndexApp {
   }
 
   displayRecipes(recipes = this._recipes) {
-    let recipesContainer = '';
-    recipes.forEach(recipe => {
-      const recipeTemplate = new RecipeTemplate(recipe);
-      recipesContainer += recipeTemplate.render();
-    });
-    document.getElementById('recipesContainer').innerHTML = recipesContainer;
+    if (recipes.length === 0) {
+      document.getElementById('noRecipesContainer').classList.remove('hide');
+      document.getElementById('recipesContainer').innerHTML = '';
+    } else {
+      document.getElementById('noRecipesContainer').classList.add('hide');
+      let recipesContainer = '';
+      recipes.forEach(recipe => {
+        const recipeTemplate = new RecipeTemplate(recipe);
+        recipesContainer += recipeTemplate.render();
+      });
+      document.getElementById('recipesContainer').innerHTML = recipesContainer;
+    }
     document.getElementById('recipesCount').innerText = recipes.length + (recipes.length > 1 ? ' recettes' : ' recette');
   }
 
   addListenersMainSearch() {
+    // prevent the form from being submitted
+    document.getElementById('mainSearchForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+    });
     const searchInput = document.getElementById('mainSearchInput');
     searchInput.addEventListener('input', () => {
       // if the search input is less than 3 characters, display all recipes

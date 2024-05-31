@@ -1,5 +1,13 @@
 // _index.scss
 
+.no-recipes {
+  text-align: center;
+  color: $color-grey;
+  &__icon {
+    font-size: 60px;
+  }
+}
+
 .cards {
   min-height: 780px;
   display: grid;
