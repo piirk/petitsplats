@@ -9,6 +9,10 @@
 
   &__form {
     margin-top: 160px;
+
+    @include sm {
+      margin-top: 125px;
+    }
   }
 
   &__content {
