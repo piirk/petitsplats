@@ -1,10 +1,20 @@
 class IndexApp {
   constructor(recipes) {
     this._recipes = recipes.map(recipe => { return new Recipe(recipe) });
+    this._sortedRecipes = this._recipes;
+    this._criteria = [];
   }
 
   get recipes() {
       return this._recipes;
+  }
+
+  get sortedRecipes() {
+    return this._sortedRecipes;
+  }
+
+  get criteria() {
+    return this._criteria;
   }
 
   init() {
@@ -12,32 +22,53 @@ class IndexApp {
     this.addListenersMainSearch();
   }
 
-  displayRecipes(recipes = this._recipes) {
+  displayRecipes() {
     const noRecipesContainer = document.getElementById('noRecipesContainer');
-
-    if (recipes.length === 0) {
+    
+    // if there are no recipes, display a message, otherwise display the recipes
+    if (this._sortedRecipes.length === 0) {
       noRecipesContainer.classList.remove('hide');
       document.getElementById('recipesContainer').innerHTML = '';
     } else {
       noRecipesContainer.classList.add('hide');
       let recipesContainer = '';
-      recipes.forEach(recipe => {
+      this._sortedRecipes.forEach(recipe => {
         const recipeTemplate = new RecipeTemplate(recipe);
         recipesContainer += recipeTemplate.render();
       });
       document.getElementById('recipesContainer').innerHTML = recipesContainer;
     }
-    document.getElementById('recipesCount').innerText = recipes.length + (recipes.length > 1 ? ' recettes' : ' recette');
+
+    // update the recipes count
+    document.getElementById('recipesCount').innerText = this._sortedRecipes.length + (this._sortedRecipes.length > 1 ? ' recettes' : ' recette');
+  }
+
+  displaySearchTags() {
+    const searchTagsContainer = document.getElementById('searchTagsContainer');
+    searchTagsContainer.innerHTML = '';
+
+    this._criteria.forEach(criteria => {
+      const searchTag = document.createElement('div');
+      searchTag.classList.add('search-tag');
+      searchTag.innerHTML = criteria + '<button class="search-tag__close" aria-label="Supprimer le tag de recherche"></button>';
+      searchTagsContainer.appendChild(searchTag);
+    });
+
+    // add a listener to each search tag to remove it when the user clicks on the close button
+    searchTagsContainer.querySelectorAll('.search-tag__close').forEach(closeButton => {
+      closeButton.addEventListener('click', (e) => {
+      const criteria = e.target.parentElement.innerText;
+      this._criteria = this._criteria.filter(c => c !== criteria);
+      this.updateRecipes();
+      this.displayRecipes();
+      e.target.parentElement.remove();
+      });
+    });
   }
 
   addListenersMainSearch() {
     const searchInput = document.getElementById('mainSearchInput');
     const clearSearchButton = document.getElementById('clearSearchButton');
-
-    // prevent the form from being submitted
-    document.getElementById('mainSearchForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-    });
 
     // clear the search input when the user clicks on the clear button
     clearSearchButton.addEventListener('click', () => {
@@ -47,29 +78,56 @@ class IndexApp {
       this.displayRecipes();
     });
 
+    // display the clear button when the user types in the search input
     searchInput.addEventListener('input', () => {
       if (searchInput.value.length > 0) {
         clearSearchButton.classList.remove('hide');
       } else {
         clearSearchButton.classList.add('hide');
       }
+    });
+
+    // search for recipes when the user submits the form
+    document.getElementById('mainSearchForm').addEventListener('submit', (e) => {
+      e.preventDefault();
 
       // if the search input is less than 3 characters, display all recipes
       if (searchInput.value.length < 3) {
         this.displayRecipes();
         return;
       }
+
+      // add the search input to the criteria
+      if (!this._criteria.includes(searchInput.value)) {
+        this._criteria.push(searchInput.value);
+      }
     
-      let searchResults = [];
-    
-      app.recipes.forEach(recipe => {
-        if (recipe.search(searchInput.value) || recipe.searchIngredient(searchInput.value) || recipe.searchDescription(searchInput.value)) {
-          searchResults.push(recipe);
-        }
-      })
-    
-      this.displayRecipes(searchResults);
+      this.updateRecipes();
+      this.displayRecipes();
+      this.displaySearchTags();
+
+      searchInput.value = '';
+      clearSearchButton.classList.add('hide');
     });
+  }
+
+  // update the recipes based on the criteria
+  updateRecipes() {
+    // if there are no criteria, display all recipes
+    if (this._criteria.length === 0) {
+      this._sortedRecipes = this._recipes;
+      return;
+    }
+
+    // filter the recipes based on the criteria
+    let searchResults = app.recipes.filter(recipe => {
+      return this._criteria.every(criteria => {
+      return recipe.search(criteria) || recipe.searchIngredient(criteria) 
+        || recipe.searchUstensil(criteria) || recipe.searchAppliance(criteria) || recipe.searchDescription(criteria);
+      });
+    });
+
+    this._sortedRecipes = searchResults;
   }
 
   getIngredients() {
