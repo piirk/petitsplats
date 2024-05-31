@@ -180,28 +180,30 @@ body {
   outline: 0;
   box-shadow: 0 0 5px 2px rgba(251, 146, 60, 0.7) inset;
 }
-.custom-select ul {
-  color: #3f403b;
+.custom-select__content {
   position: absolute;
   left: 0;
   right: 0;
-  top: 4.8rem;
+  z-index: 2;
   max-height: 10rem;
-  overflow-y: auto;
-  list-style-type: none;
-  padding: 0;
-  margin-top: 0.1rem;
   opacity: 0;
   transform: scale(1, 0);
   transform-origin: top left;
   transition: all 0.3s ease-in;
   pointer-events: none;
-  z-index: 2;
 }
-.custom-select ul.active {
+.custom-select__content.active {
   opacity: 1;
   transform: scale(1, 1);
   pointer-events: auto;
+}
+.custom-select ul {
+  color: #3f403b;
+  top: 4.8rem;
+  overflow-y: auto;
+  list-style-type: none;
+  padding: 0;
+  margin-top: 0.1rem;
 }
 .custom-select ul li {
   padding: 0.6rem 0.5rem;

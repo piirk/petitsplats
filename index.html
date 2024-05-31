@@ -59,6 +59,7 @@
 
         <!-- advanced form search -->
         <div class="custom-select-container d-flex">
+          
           <div class="custom-select">
             <label class="d-none" for="select">Custom Select box</label>
             <button
@@ -70,46 +71,19 @@
               tabindex="0"
               aria-expanded="false">
               Ingrédients</button>
-            <ul role="listbox" id="listboxIngredients">
-              <li role="option">Option 1</li>
-              <li role="option">Option 2</li>
-              <li role="option">Option 3</li>
-            </ul>
+            <div class="custom-select__content">
+              
+              <ul id="selectedOptions">
+
+              </ul>
+              <ul role="listbox" id="listboxIngredients">
+                <li role="option">Option 1</li>
+                <li role="option">Option 2</li>
+                <li role="option">Option 3</li>
+              </ul>
+            </div>
           </div>
-          <div class="custom-select">
-            <label class="d-none" for="select">Custom Select box</label>
-            <button
-              role="combobox"
-              id="select"
-              value="Select"
-              aria-controls="listbox"
-              aria-haspopup="listbox"
-              tabindex="0"
-              aria-expanded="false">
-              Select</button>
-            <ul role="listbox" id="listbox">
-              <li role="option">Option 1</li>
-              <li role="option">Option 2</li>
-              <li role="option">Option 3</li>
-            </ul>
-          </div>
-          <div class="custom-select">
-            <label class="d-none" for="select">Custom Select box</label>
-            <button
-              role="combobox"
-              id="select"
-              value="Select"
-              aria-controls="listbox"
-              aria-haspopup="listbox"
-              tabindex="0"
-              aria-expanded="false">
-              Select</button>
-            <ul role="listbox" id="listbox">
-              <li role="option">Option 1</li>
-              <li role="option">Option 2</li>
-              <li role="option">Option 3</li>
-            </ul>
-          </div>
+          
         </div>
 
         <!-- recipes count -->

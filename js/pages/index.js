@@ -174,14 +174,127 @@ app.init();
 
 const elements = {
   button: document.querySelector('[role="combobox"]'),
-  dropdown: document.querySelector('[role="listbox"]'),
-}; // I like to group all my elements into one objects 🤓.
+  dropdown: document.querySelector('.custom-select__content'),
+  options: document.querySelectorAll('[role="option"]'), // add the options elements
+};
 let isDropdownOpen = false;
+let currentOptionIndex = 0;
 
 const toggleDropdown = () => {
   elements.dropdown.classList.toggle('active');
   isDropdownOpen = !isDropdownOpen;
-  elements.button.setAttribute('aria-expanded', isDropdownOpen.toString()); // update the aria-expanded state
+  elements.button.setAttribute('aria-expanded', isDropdownOpen.toString());
+
+  if (isDropdownOpen) {
+    // todo: focus the search input
+    //focusCurrentOption();
+  } else {
+    elements.button.focus(); // focus the button when the dropdown is closed just like the select element
+  }
 };
 
-elements.button.addEventListener('click', toggleDropdown);
+const focusCurrentOption = () => {
+  const currentOption = elements.options[currentOptionIndex];
+
+  currentOption.classList.add('current');
+  currentOption.focus();
+
+  elements.options.forEach((option, index) => {
+    if (option !== currentOption) {
+      option.classList.remove('current');
+    }
+  });
+};
+
+const handleKeyPress = (event) => {
+  event.preventDefault();
+  const { key } = event;
+  const openKeys = ['ArrowDown', 'ArrowUp', 'Enter', ' '];
+
+  if (!isDropdownOpen && openKeys.includes(key)) {
+    toggleDropdown();
+    
+  } else if (isDropdownOpen) {
+    switch (key) {
+      case 'Escape':
+        toggleDropdown();
+        break;
+      case 'ArrowDown':
+        moveFocusDown();
+        break;
+      case 'ArrowUp':
+        moveFocusUp();
+        break;
+      case 'Enter':
+      case ' ':
+        selectCurrentOption();
+        break;
+      default:
+        break;
+    }
+  }
+};
+
+const handleDocumentInteraction = (event) => {
+  const isClickInsideButton = elements.button.contains(event.target);
+  const isClickInsideDropdown = elements.dropdown.contains(event.target);
+
+  if (isClickInsideButton || (!isClickInsideDropdown && isDropdownOpen)) {
+    toggleDropdown();
+  }
+
+  // Check if the click is on an option
+  const clickedOption = event.target.closest('[role="option"]');
+  if (clickedOption) {
+    selectOptionByElement(clickedOption);
+  }
+};
+
+
+const moveFocusDown = () => {
+  if (currentOptionIndex < elements.options.length - 1) {
+    currentOptionIndex++;
+  } else {
+    currentOptionIndex = 0;
+  }
+  focusCurrentOption();
+};
+
+const moveFocusUp = () => {
+  if (currentOptionIndex > 0) {
+    currentOptionIndex--;
+  } else {
+    currentOptionIndex = elements.options.length - 1;
+  }
+  focusCurrentOption();
+};
+
+const selectCurrentOption = () => {
+  const selectedOption = elements.options[currentOptionIndex];
+  selectOptionByElement(selectedOption);
+};
+
+// Add the selected option to the selected options list
+const selectOptionByElement = (optionElement) => {
+  /*
+  const optionValue = optionElement.textContent;
+
+  elements.button.textContent = optionValue;
+  elements.options.forEach(option => {
+    option.classList.remove('active');
+    option.setAttribute('aria-selected', 'false');
+  });
+  */
+
+  optionElement.classList.add('hide');
+  optionElement.setAttribute('aria-selected', 'true');
+
+  //
+  document.getElementById('selectedOptions').innerHTML += `
+    <li>${optionElement.textContent}</li>
+  `;
+  console.log(document.getElementById('selectedOptions').textContent);
+};
+
+elements.button.addEventListener('keydown', handleKeyPress);
+document.addEventListener('click', handleDocumentInteraction);
