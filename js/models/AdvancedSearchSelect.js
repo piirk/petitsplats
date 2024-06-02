@@ -26,23 +26,26 @@ class AdvancedSearchSelect {
     this._dropdown = this._select.querySelector('.custom-select__content');
     this._optionsList = this._select.querySelectorAll('[role="option"]');
 
-    document.addEventListener('click', (event) => {
-      //event.stopPropagation();
-      
+    document.addEventListener('click', () => {
+        this.hideDropdown();
+    });
+
+    this._select.addEventListener('click', (event) => {
+      event.stopPropagation();
+
       if (this._button.contains(event.target) || (!this._dropdown.contains(event.target) && this._isDropdownOpen)) {
         this.toggleDropdown();
       }
-    
       // Check if the click is on an option
       const clickedOption = event.target.closest('[role="option"]');
       if (clickedOption) {
-        selectOptionByElement(clickedOption);
+        this.selectOptionByElement(clickedOption);
       }
     
       // check if the click is on a selected option
-      const clickedSelectedOption = event.target.closest('#' + this._type + 'selectedOptions li');
+      const clickedSelectedOption = event.target.closest('#' + this._type + 'SelectedOptions li');
       if (clickedSelectedOption) {
-        removeSelectedOption(clickedSelectedOption);
+        this.removeSelectedOption(clickedSelectedOption);
       }
     });
   }
@@ -58,5 +61,33 @@ class AdvancedSearchSelect {
     } else {
       this._button.focus(); // focus the button when the dropdown is closed just like the select element
     }
+  };
+
+  hideDropdown() {
+    this._dropdown.classList.remove('active');
+    this._isDropdownOpen = false;
+    this._button.setAttribute('aria-expanded', 'false');
+  };
+
+  selectOptionByElement(optionElement) {
+    optionElement.classList.add('hide');
+    optionElement.setAttribute('aria-selected', 'true');
+  
+    this._selectedOptions.push(optionElement.textContent);
+    
+    document.getElementById(this._type + 'SelectedOptions').innerHTML += `
+      <li>${optionElement.textContent}</li>
+    `;
+  };
+
+  removeSelectedOption(selectedOption) {
+    const optionText = selectedOption.textContent;
+    this._selectedOptions = this._selectedOptions.filter(option => option !== optionText);
+  
+    const optionElement = Array.from(this._optionsList).find(option => option.textContent === optionText);
+    optionElement.removeAttribute('class');
+    optionElement.removeAttribute('aria-selected');
+  
+    selectedOption.remove();
   };
 }
