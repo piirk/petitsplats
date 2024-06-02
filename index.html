@@ -98,7 +98,25 @@
 
       </div>
 
+      <!-- search tags container -->
       <div id="searchTagsContainer" class="search-tags-container d-flex flex-row flex-wrap pb-4">
+
+        <!-- start search tag template -->
+        <template>
+          <button class="search-tag btn btn-yellow btn-lg d-flex flex-row align-items-center" aria-label="Supprimer le tag de recherche 'criteria'">
+            criteria<span class="search-tag__icon">&times;</span>
+          </button>
+        </template>
+        <!-- or? -->
+        <template>
+          <div class="search-tag d-flex align-items-center">
+            <span class="search-tag__text">Tag</span>
+            <button class="search-tag__btn" aria-label="Supprimer le tag">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </template>
+        <!-- end search tag template -->
 
       </div>
 
