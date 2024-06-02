@@ -1,12 +1,13 @@
 class AdvancedSearchSelectTemplate {
   constructor(select) {
     this._select = select;
+    this._name = select.type === 'ingredients' ? 'Ingrédients' : select.type === 'appliance' ? 'Appareils' : select.type === 'ustensils' ? 'Ustensiles' : '';
   }
 
   render() {
     return `
       <div id="${this._select.type}Select" class="custom-select">
-        <label class="d-none" for="${this._select.type}">${this._select.type}</label>
+        <label class="d-none" for="${this._select.type}">${this._name}</label>
         <button
           role="combobox"
           id="${this._select.type}"
@@ -15,7 +16,7 @@ class AdvancedSearchSelectTemplate {
           aria-haspopup="listboxIngredients"
           tabindex="0"
           aria-expanded="false">
-          ${this._select.type}</button>
+          ${this._name}</button>
         <div class="custom-select__content">
           <ul id="${this._select.type}SelectedOptions">
 
@@ -25,7 +26,7 @@ class AdvancedSearchSelectTemplate {
             return `
               <li role="option">${capitalizeFirstLetter(option)}</li>
             `;
-          }).join('')}
+          }).sort().join('')}
           </ul>
         </div>
       </div>
