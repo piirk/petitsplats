@@ -22,6 +22,7 @@ class AdvancedSearchSelect {
   updateOptions(options) {
     this._options = options;
     this._dropdown.querySelector('[role="listbox"]').innerHTML = AdvancedSearchSelectTemplate.getListboxTemplate(this._options);
+    this._optionsList = this._select.querySelectorAll('[role="option"]');
   }
 
   addListeners() {
@@ -32,7 +33,7 @@ class AdvancedSearchSelect {
     this._optionsList = this._select.querySelectorAll('[role="option"]');
 
     document.addEventListener('click', () => {
-        this.hideDropdown();
+      this.hideDropdown();
     });
 
     this._select.addEventListener('click', (event) => {
@@ -87,10 +88,10 @@ class AdvancedSearchSelect {
   removeSelectedOption(selectedOption) {
     const optionText = selectedOption.textContent;
     this._selectedOptions = this._selectedOptions.filter(option => option !== optionText);
-  
+
     const optionElement = Array.from(this._optionsList).find(option => option.textContent === optionText);
-    optionElement.removeAttribute('class');
-    optionElement.removeAttribute('aria-selected');
+    optionElement.classList.remove('hide');
+    optionElement.setAttribute('aria-selected', 'false');
   
     selectedOption.remove();
   };
