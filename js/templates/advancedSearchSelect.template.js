@@ -23,7 +23,7 @@ class AdvancedSearchSelectTemplate {
           <ul role="listbox" id="${this._select.type}ListboxIngredients">
           ${this._select.options.map(option => {
             return `
-              <li role="option">${option}</li>
+              <li role="option">${capitalizeFirstLetter(option)}</li>
             `;
           }).join('')}
           </ul>

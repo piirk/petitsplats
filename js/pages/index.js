@@ -159,13 +159,13 @@ class IndexApp {
         recipe[criteria].forEach(option => {
           if (typeof option === 'object') {
             options.push(option.name);
-          } else if (!options.includes(option)) {
-            options.push(option);
+          } else if (!options.includes(option.toLowerCase())) {
+            options.push(option.toLowerCase());
           }
         });
       } else {
-        if (!options.includes(recipe[criteria])) {
-          options.push(recipe[criteria]);
+        if (!options.includes(recipe[criteria].toLowerCase())) {
+          options.push(recipe[criteria].toLowerCase());
         }
       }
     });
