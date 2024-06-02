@@ -4,6 +4,7 @@ class IndexApp {
     this._sortedRecipes = this._recipes;
     this._criteria = [];
     this._advancedSearchCriteria = ['ingredients', 'appliance', 'ustensils'];
+    this._advancedSearchSelects = [];
   }
 
   get recipes() {
@@ -73,10 +74,17 @@ class IndexApp {
 
   createAdvancedSearchSelects() {
     this._advancedSearchCriteria.forEach(criteria => {
-      const select = new AdvancedSearchSelect(this.getOptions(criteria), criteria);
+      this._advancedSearchSelects.push(new AdvancedSearchSelect(this.getOptions(criteria), criteria));
+    });
+
+    this._advancedSearchSelects.forEach(select => {
       const selectTemplate = new AdvancedSearchSelectTemplate(select);
       document.getElementById('advancedSearchContainer').innerHTML += selectTemplate.render();
-      //select.addListeners();
+    });
+
+    // add listeners to the advanced search selects
+    this._advancedSearchSelects.forEach(select => {
+      select.addListeners();
     });
   }
 
@@ -125,7 +133,7 @@ class IndexApp {
     });
   }
 
-  // update the recipes based on the criteria
+  // update the recipes based on this._criteria
   updateRecipes() {
     // if there are no criteria, display all recipes
     if (this._criteria.length === 0) {
@@ -163,40 +171,6 @@ class IndexApp {
     });
     return options;
   }
-
-  getIngredients() {
-    let ingredients = [];
-    this._recipes.forEach(recipe => {
-      recipe.ingredients.forEach(ingredient => {
-        if (!ingredients.includes(ingredient)) {
-          ingredients.push(ingredient);
-        }
-      });
-    });
-    return ingredients;
-  }
-
-  getAppliances() {
-    let appliances = [];
-    this._recipes.forEach(recipe => {
-      if (!appliances.includes(recipe.appliance)) {
-        appliances.push(recipe.appliance);
-      }
-    });
-    return appliances;
-  }
-
-  getUstensils() {
-    let ustensils = [];
-    this._recipes.forEach(recipe => {
-      recipe.ustensils.forEach(ustensil => {
-        if (!ustensils.includes(ustensil)) {
-          ustensils.push(ustensil);
-        }
-      });
-    });
-    return ustensils;
-  }
 }
 
 //
@@ -204,15 +178,17 @@ const app = new IndexApp(recipes);
 app.init();
 
 // todo: switch custom select to a class AdvancedSearchSelect
+/*
 const elements = {
   button: document.querySelector('[role="combobox"]'),
   dropdown: document.querySelector('.custom-select__content'),
-  options: document.querySelectorAll('[role="option"]'), // add the options elements
+  options: document.querySelectorAll('[role="option"]'),
 };
 let isDropdownOpen = false;
 let currentOptionIndex = 0;
 let selectedOptions = [];
-
+*/
+/*
 const toggleDropdown = () => {
   elements.dropdown.classList.toggle('active');
   isDropdownOpen = !isDropdownOpen;
@@ -225,7 +201,9 @@ const toggleDropdown = () => {
     elements.button.focus(); // focus the button when the dropdown is closed just like the select element
   }
 };
+*/
 
+/*
 const focusCurrentOption = () => {
   const currentOption = elements.options[currentOptionIndex];
 
@@ -335,5 +313,6 @@ const removeSelectedOption = (selectedOption) => {
   selectedOption.remove();
 };
 
-elements.button.addEventListener('keydown', handleKeyPress);
-document.addEventListener('click', handleDocumentInteraction);
+//elements.button.addEventListener('keydown', handleKeyPress);
+//document.addEventListener('click', handleDocumentInteraction);
+*/

@@ -62,29 +62,33 @@
         <!-- advanced form search -->
         <div id="advancedSearchContainer" class="custom-select-container d-flex">
           
-          <div class="custom-select">
-            <label class="d-none" for="select">Custom Select box</label>
-            <button
-              role="combobox"
-              id="select"
-              value="Select"
-              aria-controls="listboxIngredients"
-              aria-haspopup="listboxIngredients"
-              tabindex="0"
-              aria-expanded="false">
-              Ingrédients</button>
-            <div class="custom-select__content">
-              
-              <ul id="selectedOptions">
+          <!-- start advanced search select template -->
+          <template>
+            <div id="typeSelect" class="custom-select">
+              <label class="d-none" for="select">Custom Select box</label>
+              <button
+                role="combobox"
+                id="select"
+                value="Select"
+                aria-controls="listboxIngredients"
+                aria-haspopup="listboxIngredients"
+                tabindex="0"
+                aria-expanded="false">
+                Ingrédients</button>
+              <div class="custom-select__content">
+                
+                <ul id="selectedOptions">
 
-              </ul>
-              <ul role="listbox" id="listboxIngredients">
-                <li role="option">Option 1</li>
-                <li role="option">Option 2</li>
-                <li role="option">Option 3</li>
-              </ul>
+                </ul>
+                <ul role="listbox" id="listboxIngredients">
+                  <li role="option">Option 1</li>
+                  <li role="option">Option 2</li>
+                  <li role="option">Option 3</li>
+                </ul>
+              </div>
             </div>
-          </div>
+          </template>
+          <!-- end advanced search select template -->
           
         </div>
 
