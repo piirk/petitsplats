@@ -172,6 +172,7 @@ class IndexApp {
 const app = new IndexApp(recipes);
 app.init();
 
+// todo: switch custom select to a class
 const elements = {
   button: document.querySelector('[role="combobox"]'),
   dropdown: document.querySelector('.custom-select__content'),
@@ -179,6 +180,7 @@ const elements = {
 };
 let isDropdownOpen = false;
 let currentOptionIndex = 0;
+let selectedOptions = [];
 
 const toggleDropdown = () => {
   elements.dropdown.classList.toggle('active');
@@ -248,8 +250,13 @@ const handleDocumentInteraction = (event) => {
   if (clickedOption) {
     selectOptionByElement(clickedOption);
   }
-};
 
+  // check if the click is on a selected option
+  const clickedSelectedOption = event.target.closest('#selectedOptions li');
+  if (clickedSelectedOption) {
+    removeSelectedOption(clickedSelectedOption);
+  }
+};
 
 const moveFocusDown = () => {
   if (currentOptionIndex < elements.options.length - 1) {
@@ -276,24 +283,25 @@ const selectCurrentOption = () => {
 
 // Add the selected option to the selected options list
 const selectOptionByElement = (optionElement) => {
-  /*
-  const optionValue = optionElement.textContent;
-
-  elements.button.textContent = optionValue;
-  elements.options.forEach(option => {
-    option.classList.remove('active');
-    option.setAttribute('aria-selected', 'false');
-  });
-  */
-
   optionElement.classList.add('hide');
   optionElement.setAttribute('aria-selected', 'true');
 
-  //
+  selectedOptions.push(optionElement.textContent);
   document.getElementById('selectedOptions').innerHTML += `
     <li>${optionElement.textContent}</li>
   `;
-  console.log(document.getElementById('selectedOptions').textContent);
+};
+
+// Remove the selected option from the selected options list
+const removeSelectedOption = (selectedOption) => {
+  const optionText = selectedOption.textContent;
+  selectedOptions = selectedOptions.filter(option => option !== optionText);
+
+  const optionElement = Array.from(elements.options).find(option => option.textContent === optionText);
+  optionElement.classList.remove('hide');
+  optionElement.setAttribute('aria-selected', 'false');
+
+  selectedOption.remove();
 };
 
 elements.button.addEventListener('keydown', handleKeyPress);
