@@ -158,7 +158,9 @@ class IndexApp {
       if (Array.isArray(recipe[criteria])) {
         recipe[criteria].forEach(option => {
           if (typeof option === 'object') {
-            options.push(option.name);
+            if (!options.includes(option.name)) {
+              options.push(option.name);
+            }
           } else if (!options.includes(option.toLowerCase())) {
             options.push(option.toLowerCase());
           }
