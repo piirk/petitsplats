@@ -21,9 +21,11 @@
 
     <script defer src="js/models/Ingredient.js"></script>
     <script defer src="js/models/Recipe.js"></script>
+    <script defer src="js/models/AdvancedSearchSelect.js"></script>
 
     <script defer src="js/templates/recipe.template.js"></script>
-
+    <script defer src="js/templates/advancedSearchSelect.template.js"></script>
+    
     <script defer src="js/pages/index.js"></script>
   </head>
 
@@ -58,7 +60,7 @@
       <div class="d-flex justify-content-between align-items-center py-4">
 
         <!-- advanced form search -->
-        <div class="custom-select-container d-flex">
+        <div id="advancedSearchContainer" class="custom-select-container d-flex">
           
           <div class="custom-select">
             <label class="d-none" for="select">Custom Select box</label>

@@ -3,6 +3,7 @@ class IndexApp {
     this._recipes = recipes.map(recipe => { return new Recipe(recipe) });
     this._sortedRecipes = this._recipes;
     this._criteria = [];
+    this._advancedSearchCriteria = ['ingredients', 'appliance', 'ustensils'];
   }
 
   get recipes() {
@@ -20,6 +21,7 @@ class IndexApp {
   init() {
     this.displayRecipes();
     this.addListenersMainSearch();
+    this.createAdvancedSearchSelects();
   }
 
   displayRecipes() {
@@ -66,6 +68,15 @@ class IndexApp {
       this.displayRecipes();
       e.target.parentElement.remove();
       });
+    });
+  }
+
+  createAdvancedSearchSelects() {
+    this._advancedSearchCriteria.forEach(criteria => {
+      const select = new AdvancedSearchSelect(this.getOptions(criteria), criteria);
+      const selectTemplate = new AdvancedSearchSelectTemplate(select);
+      document.getElementById('advancedSearchContainer').innerHTML += selectTemplate.render();
+      //select.addListeners();
     });
   }
 
@@ -133,6 +144,26 @@ class IndexApp {
     this._sortedRecipes = searchResults;
   }
 
+  getOptions(criteria) {
+    let options = [];
+    this._recipes.forEach(recipe => {
+      if (Array.isArray(recipe[criteria])) {
+        recipe[criteria].forEach(option => {
+          if (typeof option === 'object') {
+            options.push(option.name);
+          } else if (!options.includes(option)) {
+            options.push(option);
+          }
+        });
+      } else {
+        if (!options.includes(recipe[criteria])) {
+          options.push(recipe[criteria]);
+        }
+      }
+    });
+    return options;
+  }
+
   getIngredients() {
     let ingredients = [];
     this._recipes.forEach(recipe => {
@@ -172,7 +203,7 @@ class IndexApp {
 const app = new IndexApp(recipes);
 app.init();
 
-// todo: switch custom select to a class
+// todo: switch custom select to a class AdvancedSearchSelect
 const elements = {
   button: document.querySelector('[role="combobox"]'),
   dropdown: document.querySelector('.custom-select__content'),
