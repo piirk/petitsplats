@@ -171,148 +171,22 @@ class IndexApp {
     });
     return options;
   }
+
+  getRecipesIngredientsUnit() {
+    let ingredientsUnit = [];
+    this._recipes.forEach(recipe => {
+      recipe.ingredients.forEach(ingredient => {
+        if (!ingredientsUnit.includes(ingredient.unit)) {
+          ingredientsUnit.push(ingredient.unit);
+        }
+      });
+    });
+    return ingredientsUnit;
+  }
 }
 
 //
 const app = new IndexApp(recipes);
 app.init();
 
-// todo: switch custom select to a class AdvancedSearchSelect
-/*
-const elements = {
-  button: document.querySelector('[role="combobox"]'),
-  dropdown: document.querySelector('.custom-select__content'),
-  options: document.querySelectorAll('[role="option"]'),
-};
-let isDropdownOpen = false;
-let currentOptionIndex = 0;
-let selectedOptions = [];
-*/
-/*
-const toggleDropdown = () => {
-  elements.dropdown.classList.toggle('active');
-  isDropdownOpen = !isDropdownOpen;
-  elements.button.setAttribute('aria-expanded', isDropdownOpen.toString());
-
-  if (isDropdownOpen) {
-    // todo: focus the search input
-    //focusCurrentOption();
-  } else {
-    elements.button.focus(); // focus the button when the dropdown is closed just like the select element
-  }
-};
-*/
-
-/*
-const focusCurrentOption = () => {
-  const currentOption = elements.options[currentOptionIndex];
-
-  currentOption.classList.add('current');
-  currentOption.focus();
-
-  elements.options.forEach((option, index) => {
-    if (option !== currentOption) {
-      option.classList.remove('current');
-    }
-  });
-};
-
-const handleKeyPress = (event) => {
-  event.preventDefault();
-  const { key } = event;
-  const openKeys = ['ArrowDown', 'ArrowUp', 'Enter', ' '];
-
-  if (!isDropdownOpen && openKeys.includes(key)) {
-    toggleDropdown();
-    
-  } else if (isDropdownOpen) {
-    switch (key) {
-      case 'Escape':
-        toggleDropdown();
-        break;
-      case 'ArrowDown':
-        moveFocusDown();
-        break;
-      case 'ArrowUp':
-        moveFocusUp();
-        break;
-      case 'Enter':
-      case ' ':
-        selectCurrentOption();
-        break;
-      default:
-        break;
-    }
-  }
-};
-
-const handleDocumentInteraction = (event) => {
-  const isClickInsideButton = elements.button.contains(event.target);
-  const isClickInsideDropdown = elements.dropdown.contains(event.target);
-
-  if (isClickInsideButton || (!isClickInsideDropdown && isDropdownOpen)) {
-    toggleDropdown();
-  }
-
-  // Check if the click is on an option
-  const clickedOption = event.target.closest('[role="option"]');
-  if (clickedOption) {
-    selectOptionByElement(clickedOption);
-  }
-
-  // check if the click is on a selected option
-  const clickedSelectedOption = event.target.closest('#selectedOptions li');
-  if (clickedSelectedOption) {
-    removeSelectedOption(clickedSelectedOption);
-  }
-};
-
-const moveFocusDown = () => {
-  if (currentOptionIndex < elements.options.length - 1) {
-    currentOptionIndex++;
-  } else {
-    currentOptionIndex = 0;
-  }
-  focusCurrentOption();
-};
-
-const moveFocusUp = () => {
-  if (currentOptionIndex > 0) {
-    currentOptionIndex--;
-  } else {
-    currentOptionIndex = elements.options.length - 1;
-  }
-  focusCurrentOption();
-};
-
-const selectCurrentOption = () => {
-  const selectedOption = elements.options[currentOptionIndex];
-  selectOptionByElement(selectedOption);
-};
-
-// Add the selected option to the selected options list
-const selectOptionByElement = (optionElement) => {
-  optionElement.classList.add('hide');
-  optionElement.setAttribute('aria-selected', 'true');
-
-  selectedOptions.push(optionElement.textContent);
-  document.getElementById('selectedOptions').innerHTML += `
-    <li>${optionElement.textContent}</li>
-  `;
-};
-
-// Remove the selected option from the selected options list
-const removeSelectedOption = (selectedOption) => {
-  const optionText = selectedOption.textContent;
-  selectedOptions = selectedOptions.filter(option => option !== optionText);
-
-  const optionElement = Array.from(elements.options).find(option => option.textContent === optionText);
-  optionElement.classList.remove('hide');
-  optionElement.setAttribute('aria-selected', 'false');
-
-  selectedOption.remove();
-};
-
-//elements.button.addEventListener('keydown', handleKeyPress);
-//document.addEventListener('click', handleDocumentInteraction);
-*/
+console.log(app.getRecipesIngredientsUnit());

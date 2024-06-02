@@ -36,6 +36,7 @@ class AdvancedSearchSelect {
       if (this._button.contains(event.target) || (!this._dropdown.contains(event.target) && this._isDropdownOpen)) {
         this.toggleDropdown();
       }
+      
       // Check if the click is on an option
       const clickedOption = event.target.closest('[role="option"]');
       if (clickedOption) {

@@ -304,7 +304,7 @@ body {
   border-radius: 14px;
 }
 .cards .card-body {
-  row-gap: 30px;
+  row-gap: 35px;
   padding: 25px;
 }
 .cards .card-text-description {
@@ -320,5 +320,5 @@ body {
   padding: 0;
 }
 .cards .card .ingredients-list {
-  row-gap: 10px;
+  row-gap: 20px;
 }/*# sourceMappingURL=main.css.map */

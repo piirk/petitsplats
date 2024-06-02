@@ -11,7 +11,7 @@ class Ingredient {
 
   get quantity() {
     if (this._quantity === undefined) {
-      return '';
+      return '-';
     }
     return this._quantity;
   }
@@ -19,8 +19,10 @@ class Ingredient {
   get unit() {
     if (this._unit === undefined) {
       return '';
+    } else if (['ml', 'cl', 'litre', 'Litre', 'litres', 'grammes', 'kg'].includes(this._unit)) {
+      return this._unit;
     }
-    return this._unit;
+    return ' ' + this._unit;
   }
 
   set name(name) {
