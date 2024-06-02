@@ -63,7 +63,7 @@ class IndexApp {
     // add a listener to each search tag to remove it when the user clicks on the tag
     searchTagsContainer.querySelectorAll('.search-tag').forEach(button => {
       button.addEventListener('click', (e) => {
-      const criteria = button.innerText;
+      const criteria = button.innerText.replace('×', '').trim();
       this._criteria = this._criteria.filter(c => c !== criteria);
       this.updateRecipes();
       button.remove();
@@ -136,18 +136,16 @@ class IndexApp {
     // if there are no criteria, display all recipes
     if (this._criteria.length === 0) {
       this._sortedRecipes = this._recipes;
-      return;
-    }
-
-    // filter the recipes based on the criteria
-    let searchResults = app.recipes.filter(recipe => {
-      return this._criteria.every(criteria => {
-      return recipe.search(criteria) || recipe.searchIngredient(criteria) 
-        || recipe.searchUstensil(criteria) || recipe.searchAppliance(criteria) || recipe.searchDescription(criteria);
+    } else {
+      // filter the recipes based on the criteria
+      let searchResults = app.recipes.filter(recipe => {
+        return this._criteria.every(criteria => {
+        return recipe.search(criteria) || recipe.searchIngredient(criteria) 
+          || recipe.searchUstensil(criteria) || recipe.searchAppliance(criteria) || recipe.searchDescription(criteria);
+        });
       });
-    });
-
-    this._sortedRecipes = searchResults;
+      this._sortedRecipes = searchResults;
+    }
     this.displayRecipes();
     this.updateSelects();
   }
