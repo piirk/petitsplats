@@ -152,6 +152,7 @@ class IndexApp {
     this._sortedRecipes = searchResults;
   }
 
+  // get the options for a criteria
   getOptions(criteria) {
     let options = [];
     this._recipes.forEach(recipe => {
@@ -173,22 +174,8 @@ class IndexApp {
     });
     return options;
   }
-
-  getRecipesIngredientsUnit() {
-    let ingredientsUnit = [];
-    this._recipes.forEach(recipe => {
-      recipe.ingredients.forEach(ingredient => {
-        if (!ingredientsUnit.includes(ingredient.unit)) {
-          ingredientsUnit.push(ingredient.unit);
-        }
-      });
-    });
-    return ingredientsUnit;
-  }
 }
 
 //
 const app = new IndexApp(recipes);
 app.init();
-
-console.log(app.getRecipesIngredientsUnit());
