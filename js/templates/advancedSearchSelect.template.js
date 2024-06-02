@@ -21,15 +21,27 @@ class AdvancedSearchSelectTemplate {
           <ul id="${this._select.type}SelectedOptions">
 
           </ul>
-          <ul role="listbox" id="${this._select.type}ListboxIngredients">
-          ${this._select.options.map(option => {
-            return `
-              <li role="option">${capitalizeFirstLetter(option)}</li>
-            `;
-          }).sort().join('')}
-          </ul>
+          ${AdvancedSearchSelectTemplate.getDropdownTemplate(this._select.options, this._select.type)}
         </div>
       </div>
+    `;
+  }
+
+  static getDropdownTemplate(options, type) {
+    return `
+    <ul role="listbox" id="${type}ListboxIngredients">
+      ${options.map(option => {
+        return `
+          <li role="option">${capitalizeFirstLetter(option)}</li>
+        `;
+      }).sort().join('')}
+    </ul>
+    `;
+  }
+
+  static getSelectedOptionTemplate(option) {
+    return `
+      <li>${option}</li>
     `;
   }
 }

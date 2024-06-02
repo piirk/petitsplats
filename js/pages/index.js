@@ -66,7 +66,6 @@ class IndexApp {
       const criteria = e.target.parentElement.innerText;
       this._criteria = this._criteria.filter(c => c !== criteria);
       this.updateRecipes();
-      this.displayRecipes();
       e.target.parentElement.remove();
       });
     });
@@ -125,7 +124,6 @@ class IndexApp {
       }
     
       this.updateRecipes();
-      this.displayRecipes();
       this.displaySearchTags();
 
       searchInput.value = '';
@@ -150,12 +148,21 @@ class IndexApp {
     });
 
     this._sortedRecipes = searchResults;
+    this.displayRecipes();
+    this.updateSelects();
+  }
+
+  // update the options for each advanced search select
+  updateSelects() {
+    this._advancedSearchSelects.forEach(select => {
+      select.updateOptions(this.getOptions(select.type));
+    });
   }
 
   // get the options for a criteria
   getOptions(criteria) {
     let options = [];
-    this._recipes.forEach(recipe => {
+    this._sortedRecipes.forEach(recipe => {
       if (Array.isArray(recipe[criteria])) {
         recipe[criteria].forEach(option => {
           if (typeof option === 'object') {

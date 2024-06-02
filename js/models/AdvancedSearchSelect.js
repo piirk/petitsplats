@@ -19,6 +19,16 @@ class AdvancedSearchSelect {
     return this._type;
   }
 
+  updateOptions(options) {
+    this._options = options;
+    //this._optionsList = this._select.querySelectorAll('[role="option"]');
+    this.updateDropdown();
+  }
+
+  updateDropdown() {
+    this._dropdown.innerHTML = AdvancedSearchSelectTemplate.getDropdownTemplate(this._options, this._type);
+  }
+
   addListeners() {
     this._select = document.getElementById(this._type + 'Select');
     
@@ -36,7 +46,7 @@ class AdvancedSearchSelect {
       if (this._button.contains(event.target) || (!this._dropdown.contains(event.target) && this._isDropdownOpen)) {
         this.toggleDropdown();
       }
-      
+
       // Check if the click is on an option
       const clickedOption = event.target.closest('[role="option"]');
       if (clickedOption) {
@@ -76,9 +86,7 @@ class AdvancedSearchSelect {
   
     this._selectedOptions.push(optionElement.textContent);
     
-    document.getElementById(this._type + 'SelectedOptions').innerHTML += `
-      <li>${optionElement.textContent}</li>
-    `;
+    document.getElementById(this._type + 'SelectedOptions').innerHTML += AdvancedSearchSelectTemplate.getSelectedOptionTemplate(optionElement.textContent);
   };
 
   removeSelectedOption(selectedOption) {
