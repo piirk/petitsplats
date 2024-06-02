@@ -12,8 +12,8 @@ class AdvancedSearchSelectTemplate {
           role="combobox"
           id="${this._select.type}"
           value="Select"
-          aria-controls="listboxIngredients"
-          aria-haspopup="listboxIngredients"
+          aria-controls="${this._select.type}Listbox"
+          aria-haspopup="${this._select.type}Listbox"
           tabindex="0"
           aria-expanded="false">
           ${this._name}</button>
@@ -21,21 +21,21 @@ class AdvancedSearchSelectTemplate {
           <ul id="${this._select.type}SelectedOptions">
 
           </ul>
-          ${AdvancedSearchSelectTemplate.getDropdownTemplate(this._select.options, this._select.type)}
+            <ul id="${this._select.type}Listbox" role="listbox">
+              ${AdvancedSearchSelectTemplate.getListboxTemplate(this._select.options)}
+            </ul>
         </div>
       </div>
     `;
   }
 
-  static getDropdownTemplate(options, type) {
+  static getListboxTemplate(options) {
     return `
-    <ul role="listbox" id="${type}ListboxIngredients">
       ${options.map(option => {
         return `
           <li role="option">${capitalizeFirstLetter(option)}</li>
         `;
       }).sort().join('')}
-    </ul>
     `;
   }
 

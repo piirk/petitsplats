@@ -21,12 +21,7 @@ class AdvancedSearchSelect {
 
   updateOptions(options) {
     this._options = options;
-    //this._optionsList = this._select.querySelectorAll('[role="option"]');
-    this.updateDropdown();
-  }
-
-  updateDropdown() {
-    this._dropdown.innerHTML = AdvancedSearchSelectTemplate.getDropdownTemplate(this._options, this._type);
+    this._dropdown.querySelector('[role="listbox"]').innerHTML = AdvancedSearchSelectTemplate.getListboxTemplate(this._options);
   }
 
   addListeners() {
