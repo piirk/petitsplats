@@ -2,7 +2,6 @@
 
 // general buttons
 .btn {
-  width: 52px;
   height: 52px;
   background-color: $color-black;
   color: white;
@@ -17,5 +16,19 @@
 
   &:focus, &:focus-visible {
     border: 1px solid $color-black;
+  }
+
+  &-yellow {
+    background-color: $color-yellow;
+    color: $color-black;
+
+    &:hover, &:focus, &:focus-visible {
+      background-color: $color-black;
+      color: $color-yellow;
+    }
+
+    &:focus, &:focus-visible {
+      border: 1px solid $color-yellow;
+    }
   }
 }

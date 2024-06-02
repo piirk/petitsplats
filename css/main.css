@@ -144,6 +144,9 @@ body {
   box-shadow: none;
   border: 1px solid #1B1B1B;
 }
+.header__content__btn {
+  width: 52px;
+}
 
 .custom-select {
   position: relative;
@@ -233,7 +236,6 @@ body {
 }
 
 .btn {
-  width: 52px;
   height: 52px;
   background-color: #1B1B1B;
   color: white;
@@ -247,6 +249,17 @@ body {
 .btn:focus, .btn:focus-visible {
   border: 1px solid #1B1B1B;
 }
+.btn-yellow {
+  background-color: #FFD15B;
+  color: #1B1B1B;
+}
+.btn-yellow:hover, .btn-yellow:focus, .btn-yellow:focus-visible {
+  background-color: #1B1B1B;
+  color: #FFD15B;
+}
+.btn-yellow:focus, .btn-yellow:focus-visible {
+  border: 1px solid #FFD15B;
+}
 
 .no-recipes {
   min-height: 50vh;
@@ -255,6 +268,17 @@ body {
 
 .custom-select-container {
   gap: 60px;
+}
+
+.search-tags-container {
+  gap: 10px 20px;
+}
+.search-tags-container .search-tag {
+  gap: 20px;
+  font-size: 1rem;
+}
+.search-tags-container .search-tag__icon {
+  font-size: 2rem;
 }
 
 .cards {

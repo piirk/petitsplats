@@ -53,20 +53,20 @@ class IndexApp {
     searchTagsContainer.innerHTML = '';
     this._criteria.forEach(criteria => {
       searchTags += `
-        <div class="search-tag">
-          ${criteria}<button class="search-tag__close" aria-label="Supprimer le tag de recherche '${criteria}'"></button>
-        </div>
+        <button class="search-tag btn btn-yellow btn-lg d-flex flex-row align-items-center" aria-label="Supprimer le tag de recherche '${criteria}'">
+          ${criteria}<span class="search-tag__icon">&times;</span>
+        </button>
       `;
     });
     searchTagsContainer.innerHTML = searchTags;
 
-    // add a listener to each search tag to remove it when the user clicks on the close button
-    searchTagsContainer.querySelectorAll('.search-tag__close').forEach(closeButton => {
-      closeButton.addEventListener('click', (e) => {
-      const criteria = e.target.parentElement.innerText;
+    // add a listener to each search tag to remove it when the user clicks on the tag
+    searchTagsContainer.querySelectorAll('.search-tag').forEach(button => {
+      button.addEventListener('click', (e) => {
+      const criteria = button.innerText;
       this._criteria = this._criteria.filter(c => c !== criteria);
       this.updateRecipes();
-      e.target.parentElement.remove();
+      button.remove();
       });
     });
   }

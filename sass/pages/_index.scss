@@ -9,6 +9,20 @@
   gap: 60px;
 }
 
+.search-tags-container {
+  gap: 10px 20px;
+  
+  .search-tag {
+    gap: 20px;
+    font-size: 1rem;
+  
+    &__icon {
+      font-size: 2rem;
+    }
+  }
+}
+
+
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, 380px);
