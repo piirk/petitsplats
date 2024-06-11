@@ -46,12 +46,16 @@
       <form id="mainSearchForm" class="header__form container d-flex flex-column justify-content-center align-items-center text-center">
         <h1 class="header__title text-uppercase">Cherchez parmi plus de 1500 recettes<br />du quotidien, simples et délicieuses</h1>
         <div class="header__content d-flex align-items-center mt-4">
-          <label class="d-none" for="search">Cherchez parmi plus de 1500 recettes du quotidien, simples et délicieuses</label>
-          <input class="header__content__input form-control d-inline-block align-middle" type="text" id="mainSearchInput" name="search" placeholder="Rechercher une recette, un ingrédient, ...">
-          <label class="d-none" for="submit">Rechercher</label>
-          <button class="header__content__btn btn btn-lg align-middle" type="submit"><i class="fas fa-search"></i></button>
-          <lavel class="d-none" for="clearSearch">Vider le champ de recherche</lavel>
-          <button id="clearSearchButton" class="header__content__clear hide" for="clearSearch">&times;</button>
+
+          <label class="d-none" for="mainSearchInput">Cherchez parmi plus de 1500 recettes du quotidien, simples et délicieuses</label>
+          <input id="mainSearchInput" class="header__content__input form-control d-inline-block align-middle" type="text" name="search" placeholder="Rechercher une recette, un ingrédient, ...">
+
+          <label class="d-none" for="mainSearchSubmit">Rechercher</label>
+          <button id="mainSearchSubmit" class="header__content__btn btn btn-lg align-middle" type="submit"><i class="fas fa-search"></i></button>
+
+          <label class="d-none" for="clearSearchButton">Vider le champ de recherche</label>
+          <button id="clearSearchButton" class="header__content__clear hide">&times;</button>
+
         </div>
       </form>
 
@@ -124,7 +128,7 @@
       <div id="noRecipesContainer" class="no-recipes d-flex flex-column align-items-center hide mt-5">
         <div class="no-recipes__text">
           <i class="no-recipes__icon far fa-frown mb-5"></i>
-          <p>Aucune recette ne correspond à vos critères…</p>
+          <p>Aucune recette ne contient <span class="no-recipes__text-nowrap">« <span id="noRecipesCriterias"></span> »...</span></p>
           <p>Vous pouvez chercher <span class="no-recipes__text-nowrap">« tarte aux pommes »</span>, <span class="no-recipes__text-nowrap">« poisson »</span>, etc.</p>
         </div>
       </div>

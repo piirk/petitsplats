@@ -1,10 +1,18 @@
+/**
+ * App class
+ */
 class IndexApp {
+  /**
+   * @param {Array} recipes
+   * @param {Array} advancedSearchCriterias
+   */
   constructor(recipes) {
     this._recipes = recipes.map(recipe => { return new Recipe(recipe) });
     this._sortedRecipes = this._recipes;
     this._criteria = [];
-    this._advancedSearchCriteria = ['ingredients', 'appliance', 'ustensils'];
+    this._advancedSearchCriterias = ['ingredients', 'ustensils', 'appliance'];
     this._advancedSearchSelects = [];
+    this._advancedCriterias = [];
   }
 
   get recipes() {
@@ -19,18 +27,25 @@ class IndexApp {
     return this._criteria;
   }
 
+  /**
+   * Initialize the app
+   */
   init() {
     this.displayRecipes();
-    this.addListenersMainSearch();
+    this.attachListenersMainSearch();
     this.createAdvancedSearchSelects();
   }
 
+  /**
+   * Display the recipes
+   */
   displayRecipes() {
     const noRecipesContainer = document.getElementById('noRecipesContainer');
     
     // if there are no recipes, display a message, otherwise display the recipes
     if (this._sortedRecipes.length === 0) {
       noRecipesContainer.classList.remove('hide');
+      document.getElementById('noRecipesCriterias').innerHTML = this._criteria.join(', ');
       document.getElementById('recipesContainer').innerHTML = '';
     } else {
       noRecipesContainer.classList.add('hide');
@@ -71,8 +86,11 @@ class IndexApp {
     });
   }
 
+  /**
+   * Create the advanced search selects
+   */
   createAdvancedSearchSelects() {
-    this._advancedSearchCriteria.forEach(criteria => {
+    this._advancedSearchCriterias.forEach(criteria => {
       this._advancedSearchSelects.push(new AdvancedSearchSelect(this.getOptions(criteria), criteria));
     });
 
@@ -84,10 +102,39 @@ class IndexApp {
     // add listeners to the advanced search selects
     this._advancedSearchSelects.forEach(select => {
       select.addListeners();
+
+      select._select.addEventListener('click', (e) => {
+        e.stopPropagation();
+
+        // if the user clicks on the select button, close the other selects
+        this._advancedSearchSelects.forEach(otherSelect => {
+          if (otherSelect !== select) {
+            otherSelect.hideDropdown();
+          }
+        });
+
+        // if the user clicks on an option, add it to the advancedCriterias
+        const clickedOption = e.target.closest('[role="option"]');
+        if (clickedOption) {
+          const type = select.type;
+          const option = clickedOption.textContent;
+          if (!this._advancedCriterias[type]) {
+            this._advancedCriterias[type] = [];
+          }
+          if (!this._advancedCriterias[type].includes(option)) {
+            this._advancedCriterias[type].push(option);
+            this.updateRecipes();
+          }
+          console.log(this._advancedCriterias);
+        }
+      });
     });
   }
 
-  addListenersMainSearch() {
+  /**
+   * Attach listeners to the main search input
+   */
+  attachListenersMainSearch() {
     const searchInput = document.getElementById('mainSearchInput');
     const clearSearchButton = document.getElementById('clearSearchButton');
 
@@ -131,7 +178,9 @@ class IndexApp {
     });
   }
 
-  // update the recipes based on this._criteria
+  /**
+   * Update the recipes based on the criteria
+   */
   updateRecipes() {
     // if there are no criteria, display all recipes
     if (this._criteria.length === 0) {
@@ -140,8 +189,7 @@ class IndexApp {
       // filter the recipes based on the criteria
       let searchResults = app.recipes.filter(recipe => {
         return this._criteria.every(criteria => {
-        return recipe.search(criteria) || recipe.searchIngredient(criteria) 
-          || recipe.searchUstensil(criteria) || recipe.searchAppliance(criteria) || recipe.searchDescription(criteria);
+        return recipe.search(criteria) || recipe.searchIngredient(criteria) || recipe.searchUstensil(criteria) || recipe.searchAppliance(criteria) || recipe.searchDescription(criteria);
         });
       });
       this._sortedRecipes = searchResults;
@@ -157,22 +205,22 @@ class IndexApp {
     });
   }
 
-  // get the options for a criteria
+  // get the options for a criteria from the sorted recipes
   getOptions(criteria) {
     let options = [];
     this._sortedRecipes.forEach(recipe => {
       if (Array.isArray(recipe[criteria])) {
         recipe[criteria].forEach(option => {
-          if (typeof option === 'object') {
-            if (!options.includes(option.name)) {
+          if (option && typeof option === 'object') {
+            if (option.name && !options.includes(option.name)) {
               options.push(option.name);
             }
-          } else if (!options.includes(option.toLowerCase())) {
+          } else if (option && !options.includes(option.toLowerCase())) {
             options.push(option.toLowerCase());
           }
         });
       } else {
-        if (!options.includes(recipe[criteria].toLowerCase())) {
+        if (recipe[criteria] && !options.includes(recipe[criteria].toLowerCase())) {
           options.push(recipe[criteria].toLowerCase());
         }
       }
