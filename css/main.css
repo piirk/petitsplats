@@ -334,6 +334,9 @@ body {
 .cards .card-text-description {
   height: 120px;
   overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  display: -webkit-box;
 }
 .cards .card-subtitle {
   margin-bottom: 15px;
