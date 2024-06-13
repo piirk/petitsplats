@@ -101,7 +101,7 @@ class IndexApp {
 
     // add listeners to the advanced search selects
     this._advancedSearchSelects.forEach(select => {
-      select.addListeners();
+      select.attachListeners();
 
       select._select.addEventListener('click', (e) => {
         e.stopPropagation();
