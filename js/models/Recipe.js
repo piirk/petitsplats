@@ -1,4 +1,21 @@
+/**
+ * Class representing a recipe
+ * @class Recipe
+ * @property {Number} _id - The recipe id
+ * @property {String} _image - The recipe image
+ * @property {String} _name - The recipe name
+ * @property {String} _description - The recipe description
+ * @property {Array} _ingredients - The recipe ingredients
+ * @property {Number} _time - The recipe time
+ * @property {Number} _servings - The recipe servings
+ * @property {String} _appliance - The recipe appliance
+ * @property {Array} _ustensils - The recipe ustensils
+ */
 class Recipe {
+  /**
+   * Create a recipe
+   * @param {Object} data - The recipe data
+   */
   constructor(data) {
     this._id = data.id;
     this._image = data.image;
@@ -47,27 +64,47 @@ class Recipe {
     return this._ustensils;
   }
 
-  // Method to search a recipe by a query
+  /**
+   * Search a recipe by name
+   * @param {string} query - The query to search
+   * @returns {boolean} True if the recipe contains the query, false otherwise
+   */
   search(query) {
     return this._name.toLowerCase().includes(query.toLowerCase());
   }
 
-  // Method to search a recipe by an ingredient
+  /**
+   * Search a recipe by ingredient
+   * @param {string} query - The query to search
+   * @returns {boolean} True if the recipe contains the ingredient, false otherwise
+   */
   searchIngredient(query) {
     return this._ingredients.some(ingredient => ingredient.name.toLowerCase().includes(query.toLowerCase()));
   }
 
-  // Method to search a recipe by an appliance
+  /**
+   * Search a recipe by appliance
+   * @param {string} query - The query to search
+   * @returns {boolean} True if the recipe contains the appliance, false otherwise
+   */
   searchAppliance(query) {
     return this._appliance.toLowerCase().includes(query.toLowerCase());
   }
 
-  // Method to search a recipe by an ustensil
+  /**
+   * Search a recipe by ustensil
+   * @param {string} query - The query to search
+   * @returns {boolean} True if the recipe contains the ustensil, false otherwise
+   */
   searchUstensil(query) {
     return this._ustensils.some(ustensil => ustensil.toLowerCase().includes(query.toLowerCase()));
   }
 
-  // Method to search a recipe by description
+  /**
+   * Search a recipe by description
+   * @param {string} query - The query to search
+   * @returns {boolean} True if the recipe contains the description, false otherwise
+   */
   searchDescription(query) {
     return this._description.toLowerCase().includes(query.toLowerCase());
   }

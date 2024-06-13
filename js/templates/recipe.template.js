@@ -1,9 +1,17 @@
+/**
+ * RecipeTemplate
+ */
 class RecipeTemplate {
+  /**
+   * @param {Object} recipe
+   */
   constructor(recipe) {
     this._recipe = recipe;
   }
 
-  // Method to render the recipe card
+  /**
+   * Render the recipe template
+   */
   render() {
     return `
       <div class="card font-family-manrope">

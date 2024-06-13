@@ -1,4 +1,23 @@
+/**
+ * AdvancedSearchSelect
+ * Represents an advanced search select
+ * @class AdvancedSearchSelect
+ * @property {Array} _options - The options of the select
+ * @property {String} _type - The type of the select
+ * @property {HTMLElement} _select - The select element
+ * @property {HTMLElement} _button - The button element
+ * @property {HTMLElement} _dropdown - The dropdown element
+ * @property {Array} _optionsList - The list of options
+ * @property {Boolean} _isDropdownOpen - The state of the dropdown
+ * @property {Number} _currentOptionIndex - The index of the current option
+ * @property {Array} _selectedOptions - The list of selected options
+ */
 class AdvancedSearchSelect {
+  /**
+   * Create an advanced search select
+   * @param {Array} options - The options of the select
+   * @param {String} type - The type of the select
+   */
   constructor(options, type) {
     this._options = options;
     this._type = type;
@@ -19,13 +38,19 @@ class AdvancedSearchSelect {
     return this._type;
   }
 
+  /**
+   * Render the select element 
+   */
   updateOptions(options) {
     this._options = options;
     this._dropdown.querySelector('[role="listbox"]').innerHTML = AdvancedSearchSelectTemplate.getListboxTemplate(this._options);
     this._optionsList = this._select.querySelectorAll('[role="option"]');
   }
 
-  addListeners() {
+  /**
+   * Attach listeners to the select elements
+   */
+  attachListeners() {
     this._select = document.getElementById(this._type + 'Select');
     
     this._button = this._select.querySelector('[role="combobox"]');
@@ -57,6 +82,9 @@ class AdvancedSearchSelect {
     });
   }
 
+  /**
+   * Toggle the dropdown
+   */
   toggleDropdown() {
     this._dropdown.classList.toggle('active');
     this._isDropdownOpen = !this._isDropdownOpen;
@@ -70,12 +98,19 @@ class AdvancedSearchSelect {
     }
   };
 
+  /**
+   * Hide the dropdown
+   */
   hideDropdown() {
     this._dropdown.classList.remove('active');
     this._isDropdownOpen = false;
     this._button.setAttribute('aria-expanded', 'false');
   };
 
+  /**
+   * Select an option by element and add it to the selected options 
+   * @param {HTMLElement} optionElement - The option element to select
+   */
   selectOptionByElement(optionElement) {
     optionElement.classList.add('hide');
     optionElement.setAttribute('aria-selected', 'true');
@@ -85,6 +120,10 @@ class AdvancedSearchSelect {
     document.getElementById(this._type + 'SelectedOptions').innerHTML += AdvancedSearchSelectTemplate.getSelectedOptionTemplate(optionElement.textContent);
   };
 
+  /**
+   * Remove a selected option
+   * @param {HTMLElement} selectedOption - The selected option to remove
+   */
   removeSelectedOption(selectedOption) {
     const optionText = selectedOption.textContent;
     this._selectedOptions = this._selectedOptions.filter(option => option !== optionText);
