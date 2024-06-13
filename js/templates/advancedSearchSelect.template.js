@@ -22,6 +22,7 @@ class AdvancedSearchSelectTemplate {
         <button
           role="combobox"
           id="${this._select.type}"
+          class="custom-select__label"
           value="Select"
           aria-controls="${this._select.type}Listbox"
           aria-haspopup="${this._select.type}Listbox"
@@ -29,6 +30,9 @@ class AdvancedSearchSelectTemplate {
           aria-expanded="false">
           ${this._name}</button>
         <div class="custom-select__content">
+          <label class="d-none" for="${this._select.type}SelectSearch">Rechercher un ${this._name}</label>
+          <input id="${this._select.type}SelectSearch" class="form-control d-inline-block align-middle" type="text">
+          <button id="${this._select.type}SelectClearSearch" class="custom-select__content__clear hide" aria-label="Effacer la recherche">&times;</button>
           <ul id="${this._select.type}SelectedOptions">
 
           </ul>

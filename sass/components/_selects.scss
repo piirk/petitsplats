@@ -9,7 +9,7 @@
     opacity: 0;
   }
   
-  button,
+  &__label,
   ul {
     display: block;
     padding: 1.1rem 1rem;
@@ -20,7 +20,7 @@
     border-radius: 11px;
   }
 
-  button {
+  &__label {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -42,31 +42,42 @@
   }
 
   &__content {
+    @include center-flex-column;
     position: absolute;
     left: 0;
     right: 0;
     z-index: 2;
-    max-height: 10rem;
+    max-height: 20rem;
     opacity: 0;
     transform: scale(1,0);
     transform-origin: top left;
     transition: all .3s ease-in;
     pointer-events: none;
+    overflow: hidden;
 
     &.active {
       opacity: 1;
       transform: scale(1,1);
       pointer-events: auto;
     }
+    
+    &__clear {
+      width: 35px;
+      position: absolute;
+      right: 90px;
+      background: none;
+      border: none;
+    }
   }
 
   ul {
+    @include disable-scrollbars;
     color: #3f403b;
     top: 4.8rem;
     overflow-y: auto;
     list-style-type: none;
     padding: 0;
-    margin-top: .1rem;
+    margin: 0;
     
     li {
       padding: .6rem .5rem;
