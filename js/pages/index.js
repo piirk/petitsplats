@@ -90,10 +90,12 @@ class IndexApp {
    * Create the advanced search selects
    */
   createAdvancedSearchSelects() {
+    // create the advanced search selects objects
     this._advancedSearchCriterias.forEach(criteria => {
       this._advancedSearchSelects.push(new AdvancedSearchSelect(this.getOptions(criteria), criteria));
     });
 
+    // render the advanced search selects
     this._advancedSearchSelects.forEach(select => {
       const selectTemplate = new AdvancedSearchSelectTemplate(select);
       document.getElementById('advancedSearchContainer').innerHTML += selectTemplate.render();
@@ -103,8 +105,8 @@ class IndexApp {
     this._advancedSearchSelects.forEach(select => {
       select.attachListeners();
 
-      select._select.addEventListener('click', (e) => {
-        e.stopPropagation();
+      select._select.addEventListener('click', (event) => {
+        event.stopPropagation();
 
         // if the user clicks on the select button, close the other selects
         this._advancedSearchSelects.forEach(otherSelect => {
@@ -114,10 +116,10 @@ class IndexApp {
         });
 
         // if the user clicks on an option, add it to the advancedCriterias
-        const clickedOption = e.target.closest('[role="option"]');
+        const clickedOption = event.target.closest('[role="option"]');
         if (clickedOption) {
           const type = select.type;
-          const option = clickedOption.textContent;
+          const option = clickedOption.textContent.toLowerCase();
           if (!this._advancedCriterias[type]) {
             this._advancedCriterias[type] = [];
           }
@@ -125,7 +127,15 @@ class IndexApp {
             this._advancedCriterias[type].push(option);
             this.updateRecipes();
           }
-          console.log(this._advancedCriterias);
+        }
+
+        // if the user clicks on a selected option, remove it from the advancedCriterias
+        const clickedSelectedOption = event.target.closest('li.custom-select__content__list__selected-item');
+        if (clickedSelectedOption) {
+          const type = select.type;
+          const option = clickedSelectedOption.textContent.toLowerCase();
+          this._advancedCriterias[type] = this._advancedCriterias[type].filter(criteria => criteria.toLowerCase() !== option);
+          this.updateRecipes();
         }
       });
     });
@@ -182,14 +192,31 @@ class IndexApp {
    * Update the recipes based on the criteria
    */
   updateRecipes() {
-    // if there are no criteria, display all recipes
-    if (this._criteria.length === 0) {
+    console.log(this._advancedCriterias)
+    // if there are no criterias, display all recipes
+    if (this._criteria.length === 0 && Object.keys(this._advancedCriterias).length === 0) {
       this._sortedRecipes = this._recipes;
     } else {
       // filter the recipes based on the criteria
       let searchResults = app.recipes.filter(recipe => {
         return this._criteria.every(criteria => {
-        return recipe.search(criteria) || recipe.searchIngredient(criteria) || recipe.searchUstensil(criteria) || recipe.searchAppliance(criteria) || recipe.searchDescription(criteria);
+          return recipe.search(criteria) || recipe.searchIngredient(criteria) || recipe.searchUstensil(criteria) || recipe.searchAppliance(criteria) || recipe.searchDescription(criteria);
+        }) && Object.entries(this._advancedCriterias).every(([type, options]) => {
+          return options.every(option => {
+            // check if the type is a string or an array
+            if (typeof recipe[type] === 'string') {
+              return recipe[type].toLowerCase() === option.toLowerCase();
+            } else {
+              return recipe[type].some(item => {
+                // if the item is an object, check if the name matches the option
+                if (typeof item === 'object' && item.name) {
+                return item.name.toLowerCase() === option.toLowerCase();
+                } else {
+                return item.toLowerCase() === option.toLowerCase();
+                }
+              });
+            }
+          });
         });
       });
       this._sortedRecipes = searchResults;
