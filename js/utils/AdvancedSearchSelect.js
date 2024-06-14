@@ -74,7 +74,7 @@ class AdvancedSearchSelect {
 
     // hide the dropdown when clicking outside
     document.addEventListener('click', () => {
-      this.hideDropdown();
+      this.toggleDropdown(true);
     });
 
     // click events on the select
@@ -132,27 +132,24 @@ class AdvancedSearchSelect {
   /**
    * Toggle the dropdown
    */
-  toggleDropdown() {
-    this._dropdown.classList.toggle('active');
-    this._isDropdownOpen = !this._isDropdownOpen;
-    this._button.setAttribute('aria-expanded', this._isDropdownOpen.toString());
-  
-    if (this._isDropdownOpen) {
+  toggleDropdown(hide = false) {
+    if (!this._isDropdownOpen && !hide) {
+      console.log('toggleDropdown hide');
+      this._dropdown.classList.add('active');
+      this._isDropdownOpen = true;
+      this._button.setAttribute('aria-expanded', 'true');
       this._search.focus(); // focus the search input when the dropdown is open
+      this._search.setAttribute('tabindex', '0'); // add the search input to the tab order when the dropdown is open
+      this._optionsList.forEach(option => option.setAttribute('tabindex', '0')); // add the options to the tab order when the dropdown is open
     } else {
+      this._dropdown.classList.remove('active');
+      this._isDropdownOpen = false;
+      this._button.setAttribute('aria-expanded', 'false');
       this._search.value = ''; // clear the search input when the dropdown is closed
       this._search.setAttribute('tabindex', '-1'); // remove the search input from the tab order when the dropdown is closed
-      this._button.focus(); // focus the button when the dropdown is closed just like the select element
+      this._optionsList.forEach(option => option.setAttribute('tabindex', '-1')); // remove the options from the tab order when the dropdown is closed
+      //this._button.focus(); // focus the button when the dropdown is closed just like the select element
     }
-  };
-
-  /**
-   * Hide the dropdown
-   */
-  hideDropdown() {
-    this._dropdown.classList.remove('active');
-    this._isDropdownOpen = false;
-    this._button.setAttribute('aria-expanded', 'false');
   };
 
   /**
