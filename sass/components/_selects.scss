@@ -25,6 +25,7 @@
     justify-content: space-between;
     align-items: center;
     position: relative;
+    height: 56px;
     
     &::before {
       font-family: "Font Awesome 5 Free";
@@ -44,14 +45,18 @@
   &__content {
     @include center-flex-column;
     position: absolute;
+    top: 48px;
     left: 0;
     right: 0;
     z-index: 2;
-    max-height: 20rem;
+    max-height: 259px;
     opacity: 0;
     transform: scale(1,0);
     transform-origin: top left;
     transition: all .3s ease-in;
+    background-color: #ffffff;
+    border-bottom-left-radius: 11px;
+    border-bottom-right-radius: 11px;
     pointer-events: none;
     overflow: hidden;
 
@@ -59,6 +64,19 @@
       opacity: 1;
       transform: scale(1,1);
       pointer-events: auto;
+    }
+
+    &__search {
+      margin-bottom: 15px;
+      width: 90%;
+      border-radius: 2px;
+      border: 1px solid $color-light-grey;
+      color: $color-grey;
+
+      // todo: add focus styles
+      &:focus {
+        outline: 0;
+      }
     }
     
     &__clear {
@@ -68,24 +86,32 @@
       background: none;
       border: none;
     }
+
+    &__list {
+      @include disable-scrollbars;
+      width: 100%;
+      max-height: 200px;
+      overflow-y: auto;
+
+      &__selected-item {
+        background-color: $color-yellow;
+      }
+    }
   }
 
   ul {
-    @include disable-scrollbars;
-    color: #3f403b;
-    top: 4.8rem;
-    overflow-y: auto;
+    color: $color-black;
     list-style-type: none;
     padding: 0;
     margin: 0;
     
     li {
-      padding: .6rem .5rem;
-      border-top: 1px solid #e6e6e6;
+      padding: .3rem .5rem;
       cursor: pointer;
       transition: all .3s ease-in;
       position: relative;
       
+      /*
       &::before {
         font-family: "Font Awesome 5 Free";
         content: "\f00c";
@@ -96,6 +122,7 @@
         opacity: 0;
         transition: opacity .300s ease-out;
       }
+        */
 
       &:hover, &.current {
         background: #e6e6e6;

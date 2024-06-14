@@ -170,6 +170,7 @@ body {
   justify-content: space-between;
   align-items: center;
   position: relative;
+  height: 56px;
 }
 .custom-select__label::before {
   font-family: "Font Awesome 5 Free";
@@ -190,14 +191,18 @@ body {
   align-items: center;
   gap: 0px;
   position: absolute;
+  top: 48px;
   left: 0;
   right: 0;
   z-index: 2;
-  max-height: 20rem;
+  max-height: 259px;
   opacity: 0;
   transform: scale(1, 0);
   transform-origin: top left;
   transition: all 0.3s ease-in;
+  background-color: #ffffff;
+  border-bottom-left-radius: 11px;
+  border-bottom-right-radius: 11px;
   pointer-events: none;
   overflow: hidden;
 }
@@ -206,6 +211,16 @@ body {
   transform: scale(1, 1);
   pointer-events: auto;
 }
+.custom-select__content__search {
+  margin-bottom: 15px;
+  width: 90%;
+  border-radius: 2px;
+  border: 1px solid #C6C6C6;
+  color: #7A7A7A;
+}
+.custom-select__content__search:focus {
+  outline: 0;
+}
 .custom-select__content__clear {
   width: 35px;
   position: absolute;
@@ -213,36 +228,43 @@ body {
   background: none;
   border: none;
 }
-.custom-select ul {
+.custom-select__content__list {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE 10+ */
-  color: #3f403b;
-  top: 4.8rem;
+  width: 100%;
+  max-height: 200px;
   overflow-y: auto;
+}
+.custom-select__content__list::-webkit-scrollbar {
+  background: transparent; /* Chrome/Safari/Webkit */
+  width: 0px;
+}
+.custom-select__content__list__selected-item {
+  background-color: #FFD15B;
+}
+.custom-select ul {
+  color: #1B1B1B;
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
-.custom-select ul::-webkit-scrollbar {
-  background: transparent; /* Chrome/Safari/Webkit */
-  width: 0px;
-}
 .custom-select ul li {
-  padding: 0.6rem 0.5rem;
-  border-top: 1px solid #e6e6e6;
+  padding: 0.3rem 0.5rem;
   cursor: pointer;
   transition: all 0.3s ease-in;
   position: relative;
-}
-.custom-select ul li::before {
-  font-family: "Font Awesome 5 Free";
-  content: "\f00c";
-  vertical-align: middle;
-  font-weight: 900;
-  position: absolute;
-  right: 0.8rem;
-  opacity: 0;
-  transition: opacity 0.3s ease-out;
+  /*
+  &::before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f00c";
+    vertical-align: middle;
+    font-weight: 900;
+    position: absolute;
+    right: .8rem;
+    opacity: 0;
+    transition: opacity .300s ease-out;
+  }
+    */
 }
 .custom-select ul li:hover, .custom-select ul li.current {
   background: #e6e6e6;

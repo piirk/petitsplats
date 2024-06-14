@@ -30,15 +30,20 @@ class AdvancedSearchSelectTemplate {
           aria-expanded="false">
           ${this._name}</button>
         <div class="custom-select__content">
-          <label class="d-none" for="${this._select.type}SelectSearch">Rechercher un ${this._name}</label>
-          <input id="${this._select.type}SelectSearch" class="form-control d-inline-block align-middle" type="text">
-          <button id="${this._select.type}SelectClearSearch" class="custom-select__content__clear hide" aria-label="Effacer la recherche">&times;</button>
-          <ul id="${this._select.type}SelectedOptions">
 
-          </ul>
+          <label class="d-none" for="${this._select.type}SelectSearch">Rechercher un ${this._name}</label>
+          <input id="${this._select.type}SelectSearch" class="custom-select__content__search form-control d-inline-block align-middle" type="text">
+          <button id="${this._select.type}SelectClearSearch" class="custom-select__content__clear" aria-label="Effacer la recherche">&times;</button>
+
+          <div class="custom-select__content__list">
+            <ul id="${this._select.type}SelectedOptions">
+
+            </ul>
             <ul id="${this._select.type}Listbox" role="listbox">
               ${AdvancedSearchSelectTemplate.getListboxTemplate(this._select.options)}
             </ul>
+          </div>
+
         </div>
       </div>
     `;
@@ -66,7 +71,7 @@ class AdvancedSearchSelectTemplate {
    */
   static getSelectedOptionTemplate(option) {
     return `
-      <li>${option}</li>
+      <li class="custom-select__content__list__selected-item">${option}</li>
     `;
   }
 }
