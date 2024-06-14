@@ -6,6 +6,7 @@
  * @property {String} _type - The type of the select
  * @property {HTMLElement} _select - The select element
  * @property {HTMLElement} _button - The button element
+ * @property {HTMLElement} _search - The search input element
  * @property {HTMLElement} _dropdown - The dropdown element
  * @property {Array} _optionsList - The list of options
  * @property {Boolean} _isDropdownOpen - The state of the dropdown
@@ -23,6 +24,7 @@ class AdvancedSearchSelect {
     this._type = type;
     this._select = document.createElement('div');
     this._button = document.createElement('button');
+    this._search = document.createElement('input');
     this._dropdown = document.createElement('div');
     this._optionsList = [];
     this._isDropdownOpen = false;
@@ -66,6 +68,7 @@ class AdvancedSearchSelect {
     this._select = document.getElementById(this._type + 'Select');
     
     this._button = this._select.querySelector('[role="combobox"]');
+    this._search = document.getElementById(this._type + 'SelectSearch');
     this._dropdown = this._select.querySelector('.custom-select__content');
     this._optionsList = this._select.querySelectorAll('[role="option"]');
 
@@ -91,6 +94,18 @@ class AdvancedSearchSelect {
       if (clickedSelectedOption) {
         this.removeSelectedOption(clickedSelectedOption);
       }
+    });
+
+    // search input
+    this._search.addEventListener('input', () => {
+      const searchValue = this._search.value.toLowerCase();
+      this._optionsList.forEach(option => {
+        if (option.textContent.toLowerCase().includes(searchValue)) {
+          option.classList.remove('hide');
+        } else {
+          option.classList.add('hide');
+        }
+      });
     });
   }
 
@@ -137,7 +152,6 @@ class AdvancedSearchSelect {
    * @param {HTMLElement} selectedOption - The selected option to remove
    */
   removeSelectedOption(selectedOption) {
-    console.log(selectedOption)
     const optionText = selectedOption.textContent;
     this._selectedOptions = this._selectedOptions.filter(option => option !== optionText);
 
