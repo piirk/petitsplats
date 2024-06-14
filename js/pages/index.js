@@ -164,12 +164,13 @@ class IndexApp {
           this.displaySearchTags();
         }
 
-        // if the user clicks on a selected option, remove it from the advancedCriterias
+        // if the user clicks on a selected option, remove it from the advancedCriterias and remove associated tag
         const clickedSelectedOption = event.target.closest('li.custom-select__content__list__selected-item');
         if (clickedSelectedOption) {
           const type = select.type;
           const option = clickedSelectedOption.textContent.toLowerCase();
           this._advancedCriterias[type] = this._advancedCriterias[type].filter(criteria => criteria.toLowerCase() !== option);
+          this.displaySearchTags();
           this.updateRecipes();
         }
       });
