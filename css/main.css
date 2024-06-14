@@ -171,6 +171,7 @@ body {
   align-items: center;
   position: relative;
   height: 56px;
+  transition: all 0.1s ease-in;
 }
 .custom-select__label::before {
   font-family: "Font Awesome 5 Free";
@@ -180,9 +181,11 @@ body {
   position: absolute;
   right: 0.8rem;
 }
+.custom-select__label:hover {
+  text-shadow: 0px 0px 1px #000000;
+}
 .custom-select__label:focus-visible {
-  outline: 0;
-  box-shadow: 0 0 5px 2px rgba(251, 146, 60, 0.7) inset;
+  outline: 1px solid #1B1B1B;
 }
 .custom-select ul {
   color: #1B1B1B;
@@ -209,9 +212,6 @@ body {
 }
 .custom-select ul li:hover {
   font-weight: 700;
-}
-.custom-select ul li.active {
-  box-shadow: 0 0 0 2px rgba(251, 146, 60, 0.7);
 }
 .custom-select ul li.active::before {
   opacity: 1;
