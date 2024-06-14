@@ -87,13 +87,24 @@ class IndexApp {
 
     searchTagsContainer.innerHTML = searchTags;
 
+    // attach listeners to the search tags
+    this.attachListenersSearchTags();
+  }
+
+  /**
+   * Attach listeners to the search tags
+   * When the user clicks on a tag, remove the criteria from the criterias
+   * Update the recipes and the search tags
+   */
+  attachListenersSearchTags() {
     // add a listener to each search tag to remove it when the user clicks on the tag
-    searchTagsContainer.querySelectorAll('.search-tag').forEach(button => {
+    document.getElementById('searchTagsContainer').querySelectorAll('.search-tag').forEach(button => {
 
       button.addEventListener('click', (e) => {
         const tagOption = button.innerText.replace('×', '').trim();
 
         if (button.getAttribute('aria-type') === 'main') {
+          // remove the selected items from the criteria
           this._criteria = this._criteria.filter(c => c !== tagOption);
         } else {
           // remove the selected items from the advancedCriterias
@@ -106,6 +117,7 @@ class IndexApp {
             select.removeSelectedOption(document.getElementById(select._type + 'SelectedOptions').querySelector('li'));
           }
         }
+
         this.updateRecipes();
         button.remove();
       });
