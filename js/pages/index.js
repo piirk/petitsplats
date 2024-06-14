@@ -192,13 +192,12 @@ class IndexApp {
    * Update the recipes based on the criteria
    */
   updateRecipes() {
-    console.log(this._advancedCriterias)
     // if there are no criterias, display all recipes
-    if (this._criteria.length === 0 && Object.keys(this._advancedCriterias).length === 0) {
+    if (this._criteria.length === 0 && Object.values(this._advancedCriterias).every(options => options.length === 0)) {
       this._sortedRecipes = this._recipes;
     } else {
       // filter the recipes based on the criteria
-      let searchResults = app.recipes.filter(recipe => {
+      this._sortedRecipes = app.recipes.filter(recipe => {
         return this._criteria.every(criteria => {
           return recipe.search(criteria) || recipe.searchIngredient(criteria) || recipe.searchUstensil(criteria) || recipe.searchAppliance(criteria) || recipe.searchDescription(criteria);
         }) && Object.entries(this._advancedCriterias).every(([type, options]) => {
@@ -219,7 +218,6 @@ class IndexApp {
           });
         });
       });
-      this._sortedRecipes = searchResults;
     }
     this.displayRecipes();
     this.updateSelects();
