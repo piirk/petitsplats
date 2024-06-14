@@ -61,6 +61,13 @@ class IndexApp {
   }
 
   /**
+   * Create a search tag
+   */
+  createSearchTag(criteria, type) {
+      document.getElementById('searchTagsContainer').innerHTML += TagTemplate.getTagTemplate(criteria, type);
+  }
+
+  /**
    * Display the search tags
    * Create a button for each criteria and advanced criteria
    * Add a listener to each button to remove the criteria when the user clicks on it
@@ -68,24 +75,19 @@ class IndexApp {
    * Update the advanced search selects when a criteria is removed
    */
   displaySearchTags() {
-    const searchTagsContainer = document.getElementById('searchTagsContainer');
-    let searchTags = '';
-
-    searchTagsContainer.innerHTML = '';
+    document.getElementById('searchTagsContainer').innerHTML = '';
 
     // create a button for each criteria
     this._criteria.forEach(criteria => {
-      searchTags += TagTemplate.getTagTemplate(criteria, 'main');
-    });
+      this.createSearchTag(criteria, 'main');
+    }); 
 
     // create a button for each advanced criteria
     Object.entries(this._advancedCriterias).forEach(([type, options]) => {
       options.forEach(option => {
-        searchTags += TagTemplate.getTagTemplate(option, type);
+        this.createSearchTag(option, type);
       });
     });
-
-    searchTagsContainer.innerHTML = searchTags;
 
     // attach listeners to the search tags
     this.attachListenersSearchTags();
@@ -114,7 +116,12 @@ class IndexApp {
           const select = this._advancedSearchSelects.find(select => select.type === button.getAttribute('aria-type'));
           if (Array.from(select._optionsList).find(option => option.textContent.toLowerCase() === tagOption)) {
             select._selectedOptions = select._selectedOptions.filter(option => option !== tagOption);
-            select.removeSelectedOption(document.getElementById(select._type + 'SelectedOptions').querySelector('li'));
+            // remove the selected option from the list
+            document.getElementById(select.type + 'SelectedOptions').querySelectorAll('li').forEach(selectedOption => {
+              if (selectedOption.textContent.toLowerCase() === tagOption) {
+                select.removeSelectedOption(selectedOption);
+              }
+            });
           }
         }
 
