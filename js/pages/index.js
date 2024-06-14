@@ -61,37 +61,17 @@ class IndexApp {
   }
 
   /**
-   * Create a search tag
+   * Toggle the search tag
    */
-  createSearchTag(criteria, type) {
+  toggleSearchTag(criteria, type) {
     criteria = criteria.toLowerCase();
-    document.getElementById('searchTagsContainer').innerHTML += TagTemplate.getTagTemplate(criteria, type);
-  }
-
-  /**
-   * Display the search tags
-   * Create a button for each criteria and advanced criteria
-   * Add a listener to each button to remove the criteria when the user clicks on it
-   * Update the recipes when a criteria is removed
-   * Update the advanced search selects when a criteria is removed
-   */
-  displaySearchTags() {
-    document.getElementById('searchTagsContainer').innerHTML = '';
-
-    // create a button for each criteria
-    this._criteria.forEach(criteria => {
-      this.createSearchTag(criteria, 'main');
-    }); 
-
-    // create a button for each advanced criteria
-    Object.entries(this._advancedCriterias).forEach(([type, options]) => {
-      options.forEach(option => {
-        this.createSearchTag(option, type);
-      });
-    });
-
-    // attach listeners to the search tags
-    this.attachListenersSearchTags();
+    // if the tag already exists, remove it
+    if (document.getElementById('searchTagsContainer').querySelector(`[aria-type="${type}"][aria-name="${criteria}"]`)) {
+      document.getElementById('searchTagsContainer').querySelector(`[aria-type="${type}"][aria-name="${criteria}"]`).remove();
+    } else {
+      document.getElementById('searchTagsContainer').innerHTML += TagTemplate.getTagTemplate(criteria, type);
+      this.attachListenersSearchTags();
+    }
   }
 
   /**
@@ -178,10 +158,9 @@ class IndexApp {
           }
           if (!this._advancedCriterias[type].includes(option)) {
             this._advancedCriterias[type].push(option);
+            this.toggleSearchTag(option, type);
             this.updateRecipes();
           }
-
-          this.displaySearchTags();
         }
 
         // if the user clicks on a selected option, remove it from the advancedCriterias and remove associated tag
@@ -190,7 +169,7 @@ class IndexApp {
           const type = select.type;
           const option = clickedSelectedOption.textContent.toLowerCase();
           this._advancedCriterias[type] = this._advancedCriterias[type].filter(criteria => criteria.toLowerCase() !== option);
-          this.displaySearchTags();
+          this.toggleSearchTag(option, type);
           this.updateRecipes();
         }
       });
@@ -234,10 +213,10 @@ class IndexApp {
       // add the search input to the criteria
       if (!this._criteria.includes(searchInput.value)) {
         this._criteria.push(searchInput.value);
+        this.toggleSearchTag(searchInput.value, 'main');
       }
     
       this.updateRecipes();
-      this.displaySearchTags();
 
       searchInput.value = '';
       clearSearchButton.classList.add('hide');
