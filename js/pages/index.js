@@ -64,7 +64,8 @@ class IndexApp {
    * Create a search tag
    */
   createSearchTag(criteria, type) {
-      document.getElementById('searchTagsContainer').innerHTML += TagTemplate.getTagTemplate(criteria, type);
+    criteria = criteria.toLowerCase();
+    document.getElementById('searchTagsContainer').innerHTML += TagTemplate.getTagTemplate(criteria, type);
   }
 
   /**
