@@ -137,6 +137,7 @@ class AdvancedSearchSelect {
    * @param {HTMLElement} selectedOption - The selected option to remove
    */
   removeSelectedOption(selectedOption) {
+    console.log(selectedOption)
     const optionText = selectedOption.textContent;
     this._selectedOptions = this._selectedOptions.filter(option => option !== optionText);
 

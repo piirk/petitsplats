@@ -61,6 +61,13 @@ class IndexApp {
     document.getElementById('recipesCount').innerText = this._sortedRecipes.length + (this._sortedRecipes.length > 1 ? ' recettes' : ' recette');
   }
 
+  /**
+   * Display the search tags
+   * Create a button for each criteria and advanced criteria
+   * Add a listener to each button to remove the criteria when the user clicks on it
+   * Update the recipes when a criteria is removed
+   * Update the advanced search selects when a criteria is removed
+   */
   displaySearchTags() {
     const searchTagsContainer = document.getElementById('searchTagsContainer');
     let searchTags = '';
@@ -69,25 +76,41 @@ class IndexApp {
 
     // create a button for each criteria
     this._criteria.forEach(criteria => {
-      searchTags += `
-        <button class="search-tag btn btn-yellow btn-lg d-flex flex-row align-items-center" aria-label="Supprimer le tag de recherche '${criteria}'">
-          ${criteria}<span class="search-tag__icon">&times;</span>
-        </button>
-      `;
+      searchTags += TagTemplate.getTagTemplate(criteria, 'main');
     });
 
     // create a button for each advanced criteria
-    
+    Object.entries(this._advancedCriterias).forEach(([type, options]) => {
+      options.forEach(option => {
+        searchTags += TagTemplate.getTagTemplate(option, type);
+      });
+    });
 
     searchTagsContainer.innerHTML = searchTags;
 
     // add a listener to each search tag to remove it when the user clicks on the tag
     searchTagsContainer.querySelectorAll('.search-tag').forEach(button => {
+
       button.addEventListener('click', (e) => {
-      const criteria = button.innerText.replace('×', '').trim();
-      this._criteria = this._criteria.filter(c => c !== criteria);
-      this.updateRecipes();
-      button.remove();
+        const option = button.innerText.replace('×', '').trim();
+
+        if (button.getAttribute('aria-type') === 'main') {
+          this._criteria = this._criteria.filter(c => c !== option);
+        } else {
+          // remove the selected items from the advancedCriterias
+          this._advancedCriterias[button.getAttribute('aria-type')] = this._advancedCriterias[button.getAttribute('aria-type')].filter(c => c !== button.innerText.replace('×', '').trim());
+          
+          // remove the selected items from select
+          const select = this._advancedSearchSelects.find(select => select.type === button.getAttribute('aria-type'));
+          console.log(select._selectedOptions)
+          const optionElement = Array.from(select._optionsList).find(o => o.textContent.toLowerCase() === option);
+          if (optionElement) {
+            select._selectedOptions = select._selectedOptions.filter(o => o !== option);
+            select.removeSelectedOption(document.getElementById(select._type + 'SelectedOptions').querySelector('li'));
+          }
+        }
+        this.updateRecipes();
+        button.remove();
       });
     });
   }
@@ -133,6 +156,8 @@ class IndexApp {
             this._advancedCriterias[type].push(option);
             this.updateRecipes();
           }
+
+          this.displaySearchTags();
         }
 
         // if the user clicks on a selected option, remove it from the advancedCriterias
