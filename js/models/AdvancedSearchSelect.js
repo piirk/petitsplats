@@ -99,6 +99,14 @@ class AdvancedSearchSelect {
     // search input
     this._search.addEventListener('input', () => {
       const searchValue = this._search.value.toLowerCase();
+      const clearSearchButton = document.getElementById(this._type + 'SelectClearSearch');
+
+      if (searchValue) {
+        clearSearchButton.classList.remove('hide');
+      } else {
+        clearSearchButton.classList.add('hide');
+      }
+      
       this._optionsList.forEach(option => {
         if (option.textContent.toLowerCase().includes(searchValue)) {
           option.classList.remove('hide');
@@ -106,6 +114,16 @@ class AdvancedSearchSelect {
           option.classList.add('hide');
         }
       });
+    });
+
+    // clear search button
+    const clearSearchButton = document.getElementById(this._type + 'SelectClearSearch');
+
+    clearSearchButton.addEventListener('click', () => {
+      clearSearchButton.classList.add('hide');
+      this._search.value = '';
+      this._search.focus();
+      this._optionsList.forEach(option => option.classList.remove('hide'));
     });
   }
 

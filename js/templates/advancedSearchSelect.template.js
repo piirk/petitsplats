@@ -33,7 +33,7 @@ class AdvancedSearchSelectTemplate {
 
           <label class="d-none" for="${this._select.type}SelectSearch">Rechercher un ${this._name}</label>
           <input id="${this._select.type}SelectSearch" class="custom-select__content__search form-control d-inline-block align-middle" type="text">
-          <button id="${this._select.type}SelectClearSearch" class="custom-select__content__clear" aria-label="Effacer la recherche">&times;</button>
+          <button id="${this._select.type}SelectClearSearch" class="custom-select__content__clear hide" aria-label="Effacer la recherche">&times;</button>
 
           <div class="custom-select__content__list">
             <ul id="${this._select.type}SelectedOptions">
