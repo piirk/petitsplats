@@ -209,9 +209,9 @@ class IndexApp {
               return recipe[type].some(item => {
                 // if the item is an object, check if the name matches the option
                 if (typeof item === 'object' && item.name) {
-                return item.name.toLowerCase() === option.toLowerCase();
+                  return item.name.toLowerCase() === option.toLowerCase();
                 } else {
-                return item.toLowerCase() === option.toLowerCase();
+                  return item.toLowerCase() === option.toLowerCase();
                 }
               });
             }
