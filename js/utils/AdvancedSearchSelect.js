@@ -74,7 +74,7 @@ class AdvancedSearchSelect {
 
     // hide the dropdown when clicking outside
     document.addEventListener('click', () => {
-      this.toggleDropdown(true);
+      this.hideDropdown();
     });
 
     // click events on the select
@@ -151,6 +151,13 @@ class AdvancedSearchSelect {
       //this._button.focus(); // focus the button when the dropdown is closed just like the select element
     }
   };
+
+  /**
+   * Hide the dropdown
+   */
+  hideDropdown() {
+    this.toggleDropdown(true);
+  }
 
   /**
    * Select an option by element and add it to the selected options 
