@@ -72,6 +72,7 @@ class AdvancedSearchSelect {
     this._dropdown = this._select.querySelector('.custom-select__content');
     this._optionsList = this._select.querySelectorAll('[role="option"]');
 
+    // hide the dropdown when clicking outside
     document.addEventListener('click', () => {
       this.hideDropdown();
     });
@@ -106,7 +107,7 @@ class AdvancedSearchSelect {
       } else {
         clearSearchButton.classList.add('hide');
       }
-      
+
       this._optionsList.forEach(option => {
         if (option.textContent.toLowerCase().includes(searchValue)) {
           option.classList.remove('hide');
@@ -136,8 +137,7 @@ class AdvancedSearchSelect {
     this._button.setAttribute('aria-expanded', this._isDropdownOpen.toString());
   
     if (this._isDropdownOpen) {
-      // todo: focus the search input
-      //focusCurrentOption();
+      this._search.focus(); // focus the search input when the dropdown is open
     } else {
       this._button.focus(); // focus the button when the dropdown is closed just like the select element
     }

@@ -127,7 +127,14 @@ class IndexApp {
       document.getElementById('advancedSearchContainer').innerHTML += selectTemplate.render();
     });
 
-    // add listeners to the advanced search selects
+    // attach listeners to the advanced search selects
+    this.attachListenersAdvancedSearch();
+  }
+
+  /**
+   * Attach listeners to the advanced search selects
+   */
+  attachListenersAdvancedSearch() {
     this._advancedSearchSelects.forEach(select => {
       select.attachListeners();
 
