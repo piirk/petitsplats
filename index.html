@@ -49,10 +49,19 @@
         <div class="header__content d-flex align-items-center mt-4">
 
           <label class="d-none" for="mainSearchInput">Cherchez parmi plus de 1500 recettes du quotidien, simples et délicieuses</label>
-          <input id="mainSearchInput" class="header__content__input form-control d-inline-block align-middle" type="text" name="search" placeholder="Rechercher une recette, un ingrédient, ...">
+          <input
+            id="mainSearchInput"
+            class="header__content__input form-control d-inline-block align-middle"
+            type="text" name="search"
+            placeholder="Rechercher une recette, un ingrédient, ...">
 
           <label class="d-none" for="mainSearchSubmit">Rechercher</label>
-          <button id="mainSearchSubmit" class="header__content__btn btn btn-lg align-middle" type="submit"><i class="fas fa-search"></i></button>
+          <button
+            id="mainSearchSubmit"
+            class="header__content__btn btn btn-lg align-middle"
+            type="submit">
+            <i class="fas fa-search"></i>
+          </button>
 
           <label class="d-none" for="clearSearchButton">Vider le champ de recherche</label>
           <button id="clearSearchButton" class="header__content__clear hide">&times;</button>
@@ -108,7 +117,9 @@
 
         <!-- start search tag template -->
         <template>
-          <button class="search-tag btn btn-yellow btn-lg d-flex flex-row align-items-center" aria-label="Supprimer le tag de recherche 'criteria'">
+          <button
+            class="search-tag btn btn-yellow btn-lg d-flex flex-row align-items-center"
+            aria-label="Supprimer le tag de recherche 'criteria'">
             criteria<span class="search-tag__icon">&times;</span>
           </button>
         </template>
@@ -130,7 +141,10 @@
         <div class="no-recipes__text">
           <i class="no-recipes__icon far fa-frown mb-5"></i>
           <p>Aucune recette ne contient <span class="no-recipes__text-nowrap">« <span id="noRecipesCriterias"></span> »...</span></p>
-          <p>Vous pouvez chercher <span class="no-recipes__text-nowrap">« tarte aux pommes »</span>, <span class="no-recipes__text-nowrap">« poisson »</span>, etc.</p>
+          <p>
+            Vous pouvez chercher <span class="no-recipes__text-nowrap">« tarte aux pommes »</span>, 
+            <span class="no-recipes__text-nowrap">« poisson »</span>, etc.
+          </p>
         </div>
       </div>
 
