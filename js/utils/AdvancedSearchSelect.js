@@ -77,6 +77,7 @@ class AdvancedSearchSelect {
       this.hideDropdown();
     });
 
+    // click events on the select
     this._select.addEventListener('click', (event) => {
       event.stopPropagation();
 
