@@ -333,6 +333,7 @@ body {
 .search-tags-container .search-tag {
   gap: 20px;
   font-size: 1rem;
+  transition: all 0.1s ease-in-out;
 }
 .search-tags-container .search-tag__icon {
   font-size: 2rem;
