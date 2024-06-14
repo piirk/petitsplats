@@ -45,6 +45,18 @@ class AdvancedSearchSelect {
     this._options = options;
     this._dropdown.querySelector('[role="listbox"]').innerHTML = AdvancedSearchSelectTemplate.getListboxTemplate(this._options);
     this._optionsList = this._select.querySelectorAll('[role="option"]');
+
+    // hide the selected options in the listbox if they are already selected
+    this._selectedOptions.forEach(selectedOption => {
+      const optionElement = Array.from(this._optionsList).find(option => option.textContent === selectedOption);
+      if (optionElement) {
+        optionElement.classList.add('hide');
+        optionElement.setAttribute('aria-selected', 'true');
+      } else { // if the option is not in the list, remove it from the selected options
+        this._selectedOptions = this._selectedOptions.filter(option => option !== selectedOption);
+        this.removeSelectedOption(document.getElementById(this._type + 'SelectedOptions').querySelector('li'));
+      }
+    });
   }
 
   /**
@@ -129,8 +141,10 @@ class AdvancedSearchSelect {
     this._selectedOptions = this._selectedOptions.filter(option => option !== optionText);
 
     const optionElement = Array.from(this._optionsList).find(option => option.textContent === optionText);
-    optionElement.classList.remove('hide');
-    optionElement.setAttribute('aria-selected', 'false');
+    if (optionElement) {
+      optionElement.classList.remove('hide');
+      optionElement.setAttribute('aria-selected', 'false');
+    }
   
     selectedOption.remove();
   };
