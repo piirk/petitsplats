@@ -66,10 +66,11 @@ class IndexApp {
   toggleSearchTag(criteria, type) {
     criteria = criteria.toLowerCase();
     // if the tag already exists, remove it
-    if (document.getElementById('searchTagsContainer').querySelector(`[aria-type="${type}"][aria-name="${criteria}"]`)) {
-      document.getElementById('searchTagsContainer').querySelector(`[aria-type="${type}"][aria-name="${criteria}"]`).remove();
+    if (document.getElementById('searchTagsContainer').querySelector(`.search-tag[aria-type="${type}"][aria-name="${criteria}"]`)) {
+      document.getElementById('searchTagsContainer').querySelector(`.search-tag[aria-type="${type}"][aria-name="${criteria}"]`).remove();
     } else {
       document.getElementById('searchTagsContainer').innerHTML += TagTemplate.getTagTemplate(criteria, type);
+      //this.attachListenersSearchTag(criteria, type);
       this.attachListenersSearchTags();
     }
   }
@@ -79,10 +80,8 @@ class IndexApp {
    * When the user clicks on a tag, remove the criteria from the criterias
    * Update the recipes and the search tags
    */
-  attachListenersSearchTags() {
-    // add a listener to each search tag to remove it when the user clicks on the tag
+  attachListenersSearchTags() { // attachListenersSearchTag(criteria, type)
     document.getElementById('searchTagsContainer').querySelectorAll('.search-tag').forEach(button => {
-
       button.addEventListener('click', (e) => {
         const tagOption = button.innerText.replace('×', '').trim();
 

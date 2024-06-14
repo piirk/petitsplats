@@ -134,7 +134,6 @@ class AdvancedSearchSelect {
    */
   toggleDropdown(hide = false) {
     if (!this._isDropdownOpen && !hide) {
-      console.log('toggleDropdown hide');
       this._dropdown.classList.add('active');
       this._isDropdownOpen = true;
       this._button.setAttribute('aria-expanded', 'true');
