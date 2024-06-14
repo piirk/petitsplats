@@ -101,5 +101,10 @@
     .ingredients-list {
       row-gap: 20px;
     }
+
+    &:focus,
+    &:focus-visible {
+      outline: 1px solid $color-black;
+    }
   }
 }

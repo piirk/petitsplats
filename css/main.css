@@ -411,4 +411,7 @@ body {
 }
 .cards .card .ingredients-list {
   row-gap: 20px;
+}
+.cards .card:focus, .cards .card:focus-visible {
+  outline: 1px solid #1B1B1B;
 }/*# sourceMappingURL=main.css.map */
