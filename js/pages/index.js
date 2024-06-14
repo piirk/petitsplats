@@ -4,7 +4,6 @@
 class IndexApp {
   /**
    * @param {Array} recipes
-   * @param {Array} advancedSearchCriterias
    */
   constructor(recipes) {
     this._recipes = recipes.map(recipe => { return new Recipe(recipe) });
@@ -92,20 +91,18 @@ class IndexApp {
     searchTagsContainer.querySelectorAll('.search-tag').forEach(button => {
 
       button.addEventListener('click', (e) => {
-        const option = button.innerText.replace('×', '').trim();
+        const tagOption = button.innerText.replace('×', '').trim();
 
         if (button.getAttribute('aria-type') === 'main') {
-          this._criteria = this._criteria.filter(c => c !== option);
+          this._criteria = this._criteria.filter(c => c !== tagOption);
         } else {
           // remove the selected items from the advancedCriterias
           this._advancedCriterias[button.getAttribute('aria-type')] = this._advancedCriterias[button.getAttribute('aria-type')].filter(c => c !== button.innerText.replace('×', '').trim());
           
           // remove the selected items from select
           const select = this._advancedSearchSelects.find(select => select.type === button.getAttribute('aria-type'));
-          console.log(select._selectedOptions)
-          const optionElement = Array.from(select._optionsList).find(o => o.textContent.toLowerCase() === option);
-          if (optionElement) {
-            select._selectedOptions = select._selectedOptions.filter(o => o !== option);
+          if (Array.from(select._optionsList).find(option => option.textContent.toLowerCase() === tagOption)) {
+            select._selectedOptions = select._selectedOptions.filter(option => option !== tagOption);
             select.removeSelectedOption(document.getElementById(select._type + 'SelectedOptions').querySelector('li'));
           }
         }
