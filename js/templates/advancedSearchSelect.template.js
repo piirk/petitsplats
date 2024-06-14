@@ -58,7 +58,7 @@ class AdvancedSearchSelectTemplate {
     return `
       ${options.map(option => {
         return `
-          <li role="option">${capitalizeFirstLetter(option)}</li>
+          <li class="custom-select__content__list__item" role="option">${capitalizeFirstLetter(option)}</li>
         `;
       }).sort().join('')}
     `;
