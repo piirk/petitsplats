@@ -32,7 +32,11 @@ class AdvancedSearchSelectTemplate {
         <div class="custom-select__content">
 
           <label class="d-none" for="${this._select.type}SelectSearch">Rechercher un ${this._name}</label>
-          <input id="${this._select.type}SelectSearch" class="custom-select__content__search form-control d-inline-block align-middle" type="text">
+          <input 
+            id="${this._select.type}SelectSearch"
+            class="custom-select__content__search form-control d-inline-block align-middle"
+            type="text"
+            tabindex="-1">
           <button id="${this._select.type}SelectClearSearch" class="custom-select__content__clear hide" aria-label="Effacer la recherche">&times;</button>
 
           <div class="custom-select__content__list">
@@ -58,7 +62,7 @@ class AdvancedSearchSelectTemplate {
     return `
       ${options.map(option => {
         return `
-          <li class="custom-select__content__list__item" role="option">${capitalizeFirstLetter(option)}</li>
+          <li class="custom-select__content__list__item" role="option" tabindex="0">${capitalizeFirstLetter(option)}</li>
         `;
       }).sort().join('')}
     `;

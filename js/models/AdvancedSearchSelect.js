@@ -139,6 +139,8 @@ class AdvancedSearchSelect {
     if (this._isDropdownOpen) {
       this._search.focus(); // focus the search input when the dropdown is open
     } else {
+      this._search.value = ''; // clear the search input when the dropdown is closed
+      this._search.setAttribute('tabindex', '-1'); // remove the search input from the tab order when the dropdown is closed
       this._button.focus(); // focus the button when the dropdown is closed just like the select element
     }
   };
