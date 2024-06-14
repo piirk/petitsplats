@@ -66,6 +66,8 @@ class IndexApp {
     let searchTags = '';
 
     searchTagsContainer.innerHTML = '';
+
+    // create a button for each criteria
     this._criteria.forEach(criteria => {
       searchTags += `
         <button class="search-tag btn btn-yellow btn-lg d-flex flex-row align-items-center" aria-label="Supprimer le tag de recherche '${criteria}'">
@@ -73,6 +75,10 @@ class IndexApp {
         </button>
       `;
     });
+
+    // create a button for each advanced criteria
+    
+
     searchTagsContainer.innerHTML = searchTags;
 
     // add a listener to each search tag to remove it when the user clicks on the tag
