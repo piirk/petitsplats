@@ -45,18 +45,18 @@ h3 {
   font-weight: 700;
   line-height: 16.39px;
   letter-spacing: 0.09em;
-  color: #7A7A7A;
+  color: #737373;
 }
 
 .header__content__clear {
   font-size: 35px;
-  color: #7A7A7A;
+  color: #737373;
 }
 .header__content__clear:hover {
   color: #1B1B1B;
 }
 .header__content__input {
-  color: #7A7A7A;
+  color: #737373;
 }
 
 .recipes-count {
@@ -71,7 +71,7 @@ h3 {
 }
 .no-recipes__icon {
   font-size: 60px;
-  color: #7A7A7A;
+  color: #737373;
 }
 .no-recipes__text {
   font-size: 1.2rem;
@@ -79,10 +79,6 @@ h3 {
 }
 .no-recipes__text-nowrap {
   text-wrap: nowrap;
-}
-
-.card {
-  --bs-card-subtitle-color: #7A7A7A;
 }
 
 .badge {
@@ -103,7 +99,11 @@ h3 {
 }
 .ingredients-list__quantity {
   font-weight: 400;
-  color: #7A7A7A;
+  color: #737373;
+}
+
+.cards .card .card-subtitle {
+  color: #737373;
 }
 
 body {
@@ -265,7 +265,7 @@ body {
   width: 90%;
   border-radius: 2px;
   border: 1px solid #C6C6C6;
-  color: #7A7A7A;
+  color: #737373;
   padding: 5px 35px 5px 10px;
 }
 @media (max-width: 768px) {
@@ -275,7 +275,7 @@ body {
 }
 .custom-select__content__search:focus {
   box-shadow: none;
-  border: 1px solid #7A7A7A;
+  border: 1px solid #737373;
   color: #1B1B1B;
 }
 .custom-select__content__clear {
@@ -286,7 +286,7 @@ body {
   background: none;
   border: none;
   font-size: 1.4rem;
-  color: #7A7A7A;
+  color: #737373;
   padding: 0;
 }
 .custom-select__content__clear:hover {

@@ -56,7 +56,6 @@
             type="text" name="search"
             placeholder="Rechercher une recette, un ingrédient, ...">
 
-          <label class="sr-only" for="mainSearchSubmit">Valider la recherche</label>
           <button
             id="mainSearchSubmit"
             name="mainSearchSubmit"
@@ -65,8 +64,11 @@
             <i class="fas fa-search"><span class="sr-only">Rechercher</span></i>
           </button>
 
-          <label class="sr-only" for="clearSearchButton">Vider le champ de recherche</label>
-          <button id="clearSearchButton" name="clearSearchButton" class="header__content__clear hide">&times;</button>
+          <button
+            id="clearSearchButton"
+            name="clearSearchButton"
+            class="header__content__clear hide">
+            &times;<span class="sr-only">Vider le champ de recherche</span></button>
 
         </div>
       </form>

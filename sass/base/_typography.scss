@@ -71,11 +71,6 @@ h3 {
   }
 }
 
-.card {
-  // bootstrap specific
-  --bs-card-subtitle-color: #7A7A7A;
-}
-
 .badge {
   font-weight: 400;
   line-height: 1.4;
@@ -96,5 +91,13 @@ h3 {
   &__quantity {
     font-weight: 400;
     color: $color-grey;
+  }
+}
+
+.cards {
+  .card {
+    .card-subtitle {
+      color: $color-grey;
+    }
   }
 }

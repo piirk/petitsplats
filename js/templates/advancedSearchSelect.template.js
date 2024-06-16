@@ -18,7 +18,6 @@ class AdvancedSearchSelectTemplate {
   render() {
     return `
       <div id="${this._select.type}Select" class="custom-select">
-        <label class="sr-only" for="${this._select.type}">${this._name}</label>
         <button
           role="combobox"
           id="${this._select.type}"
@@ -28,7 +27,7 @@ class AdvancedSearchSelectTemplate {
           aria-haspopup="${this._select.type}Listbox"
           tabindex="0"
           aria-expanded="false">
-          ${this._name}</button>
+          <span class="sr-only">Liste déroulante pour trier via les </span>${this._name}</button>
         <div class="custom-select__content">
 
           <label class="sr-only" for="${this._select.type}SelectSearch">Rechercher un ${this._name}</label>
