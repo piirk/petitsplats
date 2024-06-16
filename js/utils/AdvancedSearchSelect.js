@@ -110,7 +110,7 @@ class AdvancedSearchSelect {
       }
 
       this._optionsList.forEach(option => {
-        if (option.textContent.toLowerCase().includes(searchValue)) {
+        if (option.textContent.toLowerCase().includes(searchValue) && this._selectedOptions.indexOf(option.textContent) === -1){
           option.classList.remove('hide');
         } else {
           option.classList.add('hide');
@@ -134,21 +134,24 @@ class AdvancedSearchSelect {
    */
   toggleDropdown(hide = false) {
     if (!this._isDropdownOpen && !hide) {
+      console.log("toggle dropdown")
       this._dropdown.classList.add('active');
       this._isDropdownOpen = true;
       this._button.setAttribute('aria-expanded', 'true');
       this._search.focus(); // focus the search input when the dropdown is open
       this._search.setAttribute('tabindex', '0'); // add the search input to the tab order when the dropdown is open
       this._optionsList.forEach(option => option.setAttribute('tabindex', '0')); // add the options to the tab order when the dropdown is open
-    } else {
+    } else if (this._isDropdownOpen) {
+      console.log("hide dropdown")
       this._dropdown.classList.remove('active');
       this._isDropdownOpen = false;
       this._button.setAttribute('aria-expanded', 'false');
       this._search.value = ''; // clear the search input when the dropdown is closed
+      this._search.dispatchEvent(new Event('input')); // force the listener from search input to be triggered
       this._search.setAttribute('tabindex', '-1'); // remove the search input from the tab order when the dropdown is closed
       this._optionsList.forEach(option => option.setAttribute('tabindex', '-1')); // remove the options from the tab order when the dropdown is closed
-      //this._button.focus(); // focus the button when the dropdown is closed just like the select element
-    }
+      this._button.focus(); // focus the button when the dropdown is closed just like the select element
+    } 
   };
 
   /**
@@ -157,6 +160,8 @@ class AdvancedSearchSelect {
   hideDropdown() {
     this.toggleDropdown(true);
   }
+
+  // todo: hide options who's not in the search after render
 
   /**
    * Select an option by element and add it to the selected options 
@@ -168,6 +173,7 @@ class AdvancedSearchSelect {
   
     this._selectedOptions.push(optionElement.textContent);
     
+    this._search.dispatchEvent(new Event('input'));
     document.getElementById(this._type + 'SelectedOptions').innerHTML += AdvancedSearchSelectTemplate.getSelectedOptionTemplate(optionElement.textContent);
   };
 
@@ -185,6 +191,8 @@ class AdvancedSearchSelect {
       optionElement.setAttribute('aria-selected', 'false');
     }
   
+    console.log('input event dispatched' + this._search.value)
+    this._search.dispatchEvent(new Event('input'));
     selectedOption.remove();
   };
 }
