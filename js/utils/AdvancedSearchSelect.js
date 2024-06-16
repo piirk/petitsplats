@@ -134,7 +134,6 @@ class AdvancedSearchSelect {
    */
   toggleDropdown(hide = false) {
     if (!this._isDropdownOpen && !hide) {
-      console.log("toggle dropdown")
       this._dropdown.classList.add('active');
       this._isDropdownOpen = true;
       this._button.setAttribute('aria-expanded', 'true');
@@ -142,7 +141,6 @@ class AdvancedSearchSelect {
       this._search.setAttribute('tabindex', '0'); // add the search input to the tab order when the dropdown is open
       this._optionsList.forEach(option => option.setAttribute('tabindex', '0')); // add the options to the tab order when the dropdown is open
     } else if (this._isDropdownOpen) {
-      console.log("hide dropdown")
       this._dropdown.classList.remove('active');
       this._isDropdownOpen = false;
       this._button.setAttribute('aria-expanded', 'false');
