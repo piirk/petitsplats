@@ -48,23 +48,25 @@
         <h1 class="header__title text-uppercase">Cherchez parmi plus de 1500 recettes<br />du quotidien, simples et délicieuses</h1>
         <div class="header__content d-flex align-items-center mt-4">
 
-          <label class="d-none" for="mainSearchInput">Cherchez parmi plus de 1500 recettes du quotidien, simples et délicieuses</label>
+          <label class="sr-only" for="mainSearchInput">Cherchez une recette, un ingrédient, ...</label>
           <input
             id="mainSearchInput"
+            name="mainSearchInput"
             class="header__content__input form-control d-inline-block align-middle"
             type="text" name="search"
             placeholder="Rechercher une recette, un ingrédient, ...">
 
-          <label class="d-none" for="mainSearchSubmit">Rechercher</label>
+          <label class="sr-only" for="mainSearchSubmit">Valider la recherche</label>
           <button
             id="mainSearchSubmit"
+            name="mainSearchSubmit"
             class="header__content__btn btn btn-lg align-middle"
             type="submit">
-            <i class="fas fa-search"></i>
+            <i class="fas fa-search"><span class="sr-only">Rechercher</span></i>
           </button>
 
-          <label class="d-none" for="clearSearchButton">Vider le champ de recherche</label>
-          <button id="clearSearchButton" class="header__content__clear hide">&times;</button>
+          <label class="sr-only" for="clearSearchButton">Vider le champ de recherche</label>
+          <button id="clearSearchButton" name="clearSearchButton" class="header__content__clear hide">&times;</button>
 
         </div>
       </form>
