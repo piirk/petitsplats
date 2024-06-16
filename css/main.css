@@ -202,7 +202,9 @@ body {
   text-shadow: 0px 0px 1px #000000;
 }
 .custom-select__label:focus-visible {
-  outline: 1px solid #1B1B1B;
+  outline: 2px solid #FFD15B;
+  border: 2px solid #1B1B1B;
+  text-shadow: 0px 0px 1px #000000;
 }
 .custom-select ul {
   color: #1B1B1B;
@@ -387,6 +389,13 @@ body {
   color: #1B1B1B;
   text-shadow: 0px 0px 1px #000000;
 }
+.search-tags-container .search-tag:focus-visible {
+  outline: 2px solid #FFD15B;
+  border: 2px solid #1B1B1B;
+  background-color: #FFD15B;
+  color: #1B1B1B;
+  text-shadow: 0px 0px 1px #000000;
+}
 
 .cards {
   display: grid;
@@ -457,5 +466,6 @@ body {
   row-gap: 20px;
 }
 .cards .card:focus, .cards .card:focus-visible {
-  outline: 1px solid #1B1B1B;
+  outline: 2px solid #FFD15B;
+  border: 2px solid #1B1B1B;
 }/*# sourceMappingURL=main.css.map */

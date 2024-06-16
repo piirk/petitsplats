@@ -46,7 +46,8 @@
     }
 
     &:focus-visible {
-      outline: 1px solid $color-black;
+      @include focus-border;
+      text-shadow: 0px 0px 1px #000000;
     }
   }
 
