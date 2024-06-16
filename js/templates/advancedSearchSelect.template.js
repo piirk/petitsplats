@@ -18,7 +18,7 @@ class AdvancedSearchSelectTemplate {
   render() {
     return `
       <div id="${this._select.type}Select" class="custom-select">
-        <label class="d-none" for="${this._select.type}">${this._name}</label>
+        <label class="sr-only" for="${this._select.type}">${this._name}</label>
         <button
           role="combobox"
           id="${this._select.type}"
@@ -31,7 +31,7 @@ class AdvancedSearchSelectTemplate {
           ${this._name}</button>
         <div class="custom-select__content">
 
-          <label class="d-none" for="${this._select.type}SelectSearch">Rechercher un ${this._name}</label>
+          <label class="sr-only" for="${this._select.type}SelectSearch">Rechercher un ${this._name}</label>
           <input 
             id="${this._select.type}SelectSearch"
             class="custom-select__content__search form-control d-inline-block align-middle"
