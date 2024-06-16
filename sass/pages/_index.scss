@@ -1,5 +1,14 @@
 // _index.scss
 
+.main {
+  &__header {
+    @include md {
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+}
+
 .no-recipes {
   min-height: 50vh;
   padding: 0 25px;
@@ -7,10 +16,25 @@
 
 .custom-select-container {
   gap: 60px;
+
+  @include md {
+    justify-content: space-between;
+    width: 100%;
+    gap: 0;
+  }
+
+  @include sm {
+    flex-direction: column;
+    gap: 15px;
+  }
 }
 
 .search-tags-container {
   gap: 10px 20px;
+
+  @include md {
+    justify-content: center;
+  }
 
   .search-tag {
     gap: 20px;

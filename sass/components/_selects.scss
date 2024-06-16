@@ -5,6 +5,10 @@
   position: relative;
   width: 195px;
 
+  @include sm {
+    width: 100%;
+  }
+
   #announcement {
     opacity: 0;
   }
@@ -145,10 +149,6 @@
       &__selected-item {
         background-color: $color-yellow;
         padding: 0.5rem 1rem;
-
-        &:last-child {
-          margin-bottom: 5px;
-        }
       }
 
       &__item {
