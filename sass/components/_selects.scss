@@ -116,7 +116,10 @@
       color: $color-grey;
       padding: 5px 35px 5px 10px;
 
-      // todo: add focus styles
+      @include sm {
+        width: 95%;
+      }
+
       &:focus {
         box-shadow: none;
         border: 1px solid $color-grey;

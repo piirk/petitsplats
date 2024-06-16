@@ -189,7 +189,6 @@ class AdvancedSearchSelect {
       optionElement.setAttribute('aria-selected', 'false');
     }
   
-    console.log('input event dispatched' + this._search.value)
     this._search.dispatchEvent(new Event('input'));
     selectedOption.remove();
   };

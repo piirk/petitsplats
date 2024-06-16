@@ -256,6 +256,11 @@ body {
   color: #7A7A7A;
   padding: 5px 35px 5px 10px;
 }
+@media (max-width: 768px) {
+  .custom-select__content__search {
+    width: 95%;
+  }
+}
 .custom-select__content__search:focus {
   box-shadow: none;
   border: 1px solid #7A7A7A;
