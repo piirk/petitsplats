@@ -24,10 +24,11 @@ class AdvancedSearchSelectTemplate {
           class="custom-select__label"
           value="Select"
           aria-controls="${this._select.type}Listbox"
-          aria-haspopup="${this._select.type}Listbox"
+          aria-haspopup="listbox"
           tabindex="0"
-          aria-expanded="false">
-          <span class="sr-only">Liste déroulante pour trier via les </span>${this._name}</button>
+          aria-expanded="false"
+          aria-label="Liste déroulante pour les ${this._name}">
+          ${this._name}</button>
         <div class="custom-select__content">
 
           <label class="sr-only" for="${this._select.type}SelectSearch">Rechercher un ${this._name}</label>
@@ -36,7 +37,11 @@ class AdvancedSearchSelectTemplate {
             class="custom-select__content__search form-control d-inline-block align-middle"
             type="text"
             tabindex="-1">
-          <button id="${this._select.type}SelectClearSearch" class="custom-select__content__clear hide" aria-label="Effacer la recherche">&times;</button>
+          <button
+            id="${this._select.type}SelectClearSearch"
+            class="custom-select__content__clear hide"
+            aria-label="Effacer la recherche">
+            &times;</button>
 
           <div class="custom-select__content__list">
             <ul id="${this._select.type}SelectedOptions">
