@@ -59,6 +59,9 @@ class AdvancedSearchSelect {
         this.removeSelectedOption(document.getElementById(this._type + 'SelectedOptions').querySelector('li'));
       }
     });
+    
+    // force the search input listener to be triggered
+    this._search.dispatchEvent(new Event('input'));
   }
 
   /**
