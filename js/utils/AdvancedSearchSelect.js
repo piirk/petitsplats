@@ -128,7 +128,16 @@ class AdvancedSearchSelect {
       clearSearchButton.classList.add('hide');
       this._search.value = '';
       this._search.focus();
-      this._optionsList.forEach(option => option.classList.remove('hide'));
+      
+      if (this._selectedOptions.length === 0) {
+        this._optionsList.forEach(option => option.classList.remove('hide'));
+      } else {
+        this._optionsList.forEach(option => {
+          if (this._selectedOptions.indexOf(option.textContent) === -1) {
+            option.classList.remove('hide');
+          }
+        });
+      }
     });
   }
 
