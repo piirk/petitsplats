@@ -42,6 +42,7 @@ class AdvancedSearchSelectTemplate {
             class="custom-select__content__clear hide"
             aria-label="Effacer la recherche">
             &times;</button>
+          <div class="custom-select__content__search-icon" aria-hidden="true"><i class="fas fa-search"></i></div>
 
           <div class="custom-select__content__list">
             <ul id="${this._select.type}SelectedOptions">

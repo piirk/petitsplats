@@ -113,6 +113,13 @@
         border: 1px solid $color-grey;
         color: $color-black;
       }
+
+      &-icon {
+        position: absolute;
+        right: 18px;
+        top: 6px;
+        color: $color-light-grey;
+      }
     }
     
     &__clear {
@@ -150,7 +157,7 @@
           opacity: 0;
           transition: all .2s ease-in;
         }
-        
+
         &:hover {
           &::before {
             opacity: 1;
