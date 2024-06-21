@@ -7,6 +7,16 @@
   background-color: rgba(0, 0, 0, 0.3);
   height: 670px;
 
+  &__logo {
+    display: block;
+    max-width: fit-content;
+    &:focus,
+    &:focus-visible {
+      @include focus-border;
+      border: none;
+    }
+  }
+
   &__form {
     margin-top: 160px;
 
