@@ -287,8 +287,8 @@ body {
 .custom-select__content__clear {
   width: 20px;
   position: absolute;
-  right: 20px;
-  top: 2px;
+  right: 38px;
+  top: 1px;
   background: none;
   border: none;
   font-size: 1.4rem;
