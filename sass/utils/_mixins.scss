@@ -50,7 +50,7 @@
 // focus border
 @mixin focus-border {
     outline: 2px solid $color-yellow;
-    border: 2px solid $color-black;
+    border: 1px solid $color-black;
 }
 
 // breakpoint mixins

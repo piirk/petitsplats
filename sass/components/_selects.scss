@@ -62,8 +62,11 @@
       transition: all .1s ease-in;
       position: relative;
 
-      &:hover {
+      &:hover,
+      &:focus,
+      &:focus-visible {
         text-shadow: 0px 0px 1px #000000;
+        outline: none;
       }
 
       &.active::before {
