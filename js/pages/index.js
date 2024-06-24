@@ -277,20 +277,27 @@ class IndexApp {
   getOptions(criteria) {
     let options = [];
     this._sortedRecipes.forEach(recipe => {
+
+      // if the criteria is an array, get the options from the array
       if (Array.isArray(recipe[criteria])) {
+
         recipe[criteria].forEach(option => {
+          // if the option is an object, get the name property
           if (option && typeof option === 'object') {
             if (option.name && !options.includes(option.name)) {
               options.push(option.name);
             }
-          } else if (option && !options.includes(option.toLowerCase())) {
+          } else if (option && !options.includes(option.toLowerCase())) { // if the option is a string, get the option from the string
             options.push(option.toLowerCase());
           }
         });
-      } else {
+
+      } else { // if the criteria is a string, get the option from the string
+
         if (recipe[criteria] && !options.includes(recipe[criteria].toLowerCase())) {
           options.push(recipe[criteria].toLowerCase());
         }
+        
       }
     });
     return options;
