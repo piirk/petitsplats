@@ -29,7 +29,7 @@ class RecipeTemplate {
               <ul class="ingredients-list list-group d-flex flex-row flex-wrap">
                 ${this._recipe.ingredients.map(ingredient => {
                   return `
-                    <li class="list-group-item">${ingredient.name}<br /><span class="ingredients-list__quantity">${ingredient.quantity + ingredient.unit}</span></li>
+                    <li class="list-group-item">${ingredient.name}<br /><span class="ingredients-list__quantity">${ingredient.getQuantityLabel() + ingredient.getUnitLabel()}</span></li>
                   `}).join('')}
               </ul>
             </div>

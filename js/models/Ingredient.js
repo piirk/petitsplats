@@ -50,9 +50,9 @@ class Ingredient {
     if (this._unit === undefined) {
       return '';
     } else if (['ml', 'cl', 'litre', 'Litre', 'litres', 'grammes', 'kg'].includes(this._unit)) {
-      return '';
+      return this._unit;
     }
-    return this._unit;
+    return ' ' + this._unit;
   }
 
   /**
