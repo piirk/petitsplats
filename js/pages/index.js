@@ -181,11 +181,13 @@ class IndexApp {
     const clearSearchButton = document.getElementById('clearSearchButton');
 
     // clear the search input when the user clicks on the clear button
-    clearSearchButton.addEventListener('click', () => {
+    clearSearchButton.addEventListener('click', (e) => {
+      e.preventDefault();
+
       clearSearchButton.classList.add('hide');
       searchInput.value = '';
       searchInput.focus();
-      this.displayRecipes();
+      document.getElementById('mainSearchForm').dispatchEvent(new Event('input'));
     });
 
     // display the clear button when the user types in the search input
@@ -201,11 +203,11 @@ class IndexApp {
     document.getElementById('mainSearchForm').addEventListener('input', (e) => {
       e.preventDefault();
 
-      // remove the search tags and advanced criterias if there are any
+      // remove the search tags and advanced criterias
       document.getElementById('searchTagsContainer').innerHTML = '';
       this._advancedCriterias = {};
 
-      // clear the advanced search selected items if there are any
+      // clear the advanced search selected items
       this._advancedSearchSelects.forEach(select => {
         select.clearSelectedItems();
       });
