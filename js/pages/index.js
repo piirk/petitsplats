@@ -259,14 +259,21 @@ class IndexApp {
     this.updateSelects();
   }
 
-  // update the options for each advanced search select
+  /**
+   * Update the advanced search selects
+   * Update the options based on the sorted recipes
+   */
   updateSelects() {
     this._advancedSearchSelects.forEach(select => {
       select.updateOptions(this.getOptions(select.type));
     });
   }
 
-  // get the options for a criteria from the sorted recipes
+  /**
+   * Get the options based on the criteria
+   * @param {string} criteria - The criteria to get the options from
+   * @returns {Array} The options
+   */
   getOptions(criteria) {
     let options = [];
     this._sortedRecipes.forEach(recipe => {
