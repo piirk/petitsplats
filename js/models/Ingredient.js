@@ -23,19 +23,11 @@ class Ingredient {
   }
 
   get quantity() {
-    if (this._quantity === undefined) {
-      return '-';
-    }
     return this._quantity;
   }
 
   get unit() {
-    if (this._unit === undefined) {
-      return '';
-    } else if (['ml', 'cl', 'litre', 'Litre', 'litres', 'grammes', 'kg'].includes(this._unit)) {
-      return this._unit;
-    }
-    return ' ' + this._unit;
+    return this._unit;
   }
 
   set name(name) {
@@ -48,5 +40,29 @@ class Ingredient {
 
   set unit(unit) {
     this._unit = unit;
+  }
+
+  /**
+   * Get the ingredient label
+   * @returns {String} The ingredient label
+   */
+  getUnitLabel() {
+    if (this._unit === undefined) {
+      return '';
+    } else if (['ml', 'cl', 'litre', 'Litre', 'litres', 'grammes', 'kg'].includes(this._unit)) {
+      return '';
+    }
+    return this._unit;
+  }
+
+  /**
+   * Get the ingredient label
+   * @returns {String} The ingredient label
+   */
+  getQuantityLabel() {
+    if (this._quantity === undefined) {
+      return '';
+    }
+    return this._quantity;
   }
 }
