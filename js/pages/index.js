@@ -48,7 +48,7 @@ class IndexApp {
     // if there are no recipes, display a message, otherwise display the recipes
     if (this._sortedRecipes.length === 0) {
       noRecipesContainer.classList.remove('hide');
-      document.getElementById('noRecipesCriterias').innerHTML = this._criteria.join(', ');
+      document.getElementById('noRecipesCriterias').innerHTML = this._criteria;
       document.getElementById('recipesContainer').innerHTML = '';
     } else {
       noRecipesContainer.classList.add('hide');
@@ -209,7 +209,7 @@ class IndexApp {
       }
 
       // add the search input to the criteria
-      this.criteria = searchInput.value;
+      this.criteria = searchInput.value.trim().toLowerCase();
     
       this.updateRecipes();
     });
