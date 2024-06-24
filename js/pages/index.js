@@ -235,18 +235,11 @@ class IndexApp {
 
           return options.every(option => {
             // check if the type is a string or an array
-            if (typeof recipe[type] === 'string') {
-              return recipe[type].toLowerCase() === option.toLowerCase();
-            } else {
-              return recipe[type].some(item => {
-                // if the item is an object, check if the name matches the option
-                if (typeof item === 'object' && item.name) {
-                  return item.name.toLowerCase() === option.toLowerCase();
-                } else {
-                  return item.toLowerCase() === option.toLowerCase();
-                }
-              });
-            }
+            return typeof recipe[type] === 'string' 
+              ? recipe[type].toLowerCase() === option.toLowerCase() 
+              : recipe[type].some(item => typeof item === 'object' && item.name 
+                ? item.name.toLowerCase() === option.toLowerCase() 
+                : item.toLowerCase() === option.toLowerCase());
           });
 
         });
