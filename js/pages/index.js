@@ -228,7 +228,12 @@ class IndexApp {
         return recipe.search(this._criteria) || recipe.searchIngredient(this._criteria) || recipe.searchUstensil(this._criteria) || recipe.searchAppliance(this._criteria) || recipe.searchDescription(this._criteria);
       }).filter(recipe => {
         return Object.entries(this._advancedCriterias).every(([type, options]) => {
-          return options.some(option => {
+          
+          if (options.length === 0) {
+            return true;
+          }
+
+          return options.every(option => {
             // check if the type is a string or an array
             if (typeof recipe[type] === 'string') {
               return recipe[type].toLowerCase() === option.toLowerCase();
@@ -243,6 +248,7 @@ class IndexApp {
               });
             }
           });
+
         });
       });
     }
