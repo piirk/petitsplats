@@ -135,8 +135,8 @@ class IndexApp {
     this._advancedSearchSelects.forEach(select => {
       select.attachListeners();
 
-      select._select.addEventListener('click', (event) => {
-        event.stopPropagation();
+      select._select.addEventListener('click', (e) => {
+        e.stopPropagation();
 
         // if the user clicks on the select button, close the other selects
         this._advancedSearchSelects.forEach(otherSelect => {
@@ -146,7 +146,7 @@ class IndexApp {
         });
 
         // if the user clicks on an option, add it to the advancedCriterias
-        const clickedOption = event.target.closest('[role="option"]');
+        const clickedOption = e.target.closest('[role="option"]');
         if (clickedOption) {
           const type = select.type;
           const option = clickedOption.textContent.toLowerCase();
@@ -161,7 +161,7 @@ class IndexApp {
         }
 
         // if the user clicks on a selected option, remove it from the advancedCriterias and remove associated tag
-        const clickedSelectedOption = event.target.closest('li.custom-select__content__list__selected-item');
+        const clickedSelectedOption = e.target.closest('li.custom-select__content__list__selected-item');
         if (clickedSelectedOption) {
           const type = select.type;
           const option = clickedSelectedOption.textContent.toLowerCase();

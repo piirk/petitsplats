@@ -149,8 +149,8 @@ class AdvancedSearchSelect {
       this._dropdown.classList.add('active');
       this._isDropdownOpen = true;
       this._button.setAttribute('aria-expanded', 'true');
-      this._search.focus(); // focus the search input when the dropdown is open
       this._search.setAttribute('tabindex', '0'); // add the search input to the tab order when the dropdown is open
+      this._search.focus(); // focus the search input when the dropdown is open
       this._optionsList.forEach(option => option.setAttribute('tabindex', '0')); // add the options to the tab order when the dropdown is open
     } else if (this._isDropdownOpen) {
       this._dropdown.classList.remove('active');
@@ -160,7 +160,7 @@ class AdvancedSearchSelect {
       this._search.dispatchEvent(new Event('input')); // force the listener from search input to be triggered
       this._search.setAttribute('tabindex', '-1'); // remove the search input from the tab order when the dropdown is closed
       this._optionsList.forEach(option => option.setAttribute('tabindex', '-1')); // remove the options from the tab order when the dropdown is closed
-      this._button.focus(); // focus the button when the dropdown is closed just like the select element
+      //this._button.focus(); // focus the button when the dropdown is closed just like the select element
     } 
   };
 
