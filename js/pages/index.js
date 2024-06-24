@@ -201,6 +201,15 @@ class IndexApp {
     document.getElementById('mainSearchForm').addEventListener('input', (e) => {
       e.preventDefault();
 
+      // remove the search tags and advanced criterias if there are any
+      document.getElementById('searchTagsContainer').innerHTML = '';
+      this._advancedCriterias = {};
+
+      // clear the advanced search selected items if there are any
+      this._advancedSearchSelects.forEach(select => {
+        select.clearSelectedItems();
+      });
+
       // if the search input is less than 3 characters, display all recipes
       if (searchInput.value.length < 3) {
         this.criteria = '';

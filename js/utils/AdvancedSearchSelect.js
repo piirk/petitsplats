@@ -171,7 +171,14 @@ class AdvancedSearchSelect {
     this.toggleDropdown(true);
   }
 
-  // todo: hide options who's not in the search after render
+  /**
+   * Clear the selected items
+   */
+  clearSelectedItems() {
+    this._selectedOptions = [];
+    document.getElementById(this._type + 'SelectedOptions').innerHTML = '';
+    this._optionsList.forEach(option => option.classList.remove('hide'));
+  }
 
   /**
    * Select an option by element and add it to the selected options 
