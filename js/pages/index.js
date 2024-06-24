@@ -197,7 +197,7 @@ class IndexApp {
       }
     });
 
-    // search for recipes when the user submits the form
+    // search for recipes when the user updates the search input
     document.getElementById('mainSearchForm').addEventListener('input', (e) => {
       e.preventDefault();
 
