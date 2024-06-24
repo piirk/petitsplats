@@ -8,7 +8,7 @@ class IndexApp {
   constructor(recipes) {
     this._recipes = recipes.map(recipe => { return new Recipe(recipe) });
     this._sortedRecipes = this._recipes;
-    this._criteria = [];
+    this._criteria = '';
     this._advancedSearchCriterias = ['ingredients', 'ustensils', 'appliance'];
     this._advancedSearchSelects = [];
     this._advancedCriterias = [];
@@ -24,6 +24,10 @@ class IndexApp {
 
   get criteria() {
     return this._criteria;
+  }
+
+  set criteria(criteria) {
+    this._criteria = criteria;
   }
 
   /**
@@ -70,7 +74,6 @@ class IndexApp {
       document.getElementById('searchTagsContainer').querySelector(`.search-tag[aria-type="${type}"][aria-name="${criteria}"]`).remove();
     } else {
       document.getElementById('searchTagsContainer').innerHTML += TagTemplate.getTagTemplate(criteria, type);
-      //this.attachListenersSearchTag(criteria, type);
       this.attachListenersSearchTags();
     }
   }
@@ -80,29 +83,24 @@ class IndexApp {
    * When the user clicks on a tag, remove the criteria from the criterias
    * Update the recipes and the search tags
    */
-  attachListenersSearchTags() { // attachListenersSearchTag(criteria, type)
+  attachListenersSearchTags() {
     document.getElementById('searchTagsContainer').querySelectorAll('.search-tag').forEach(button => {
       button.addEventListener('click', (e) => {
         const tagOption = button.innerText.replace('×', '').trim();
 
-        if (button.getAttribute('aria-type') === 'main') {
-          // remove the selected items from the criteria
-          this._criteria = this._criteria.filter(c => c !== tagOption);
-        } else {
-          // remove the selected items from the advancedCriterias
-          this._advancedCriterias[button.getAttribute('aria-type')] = this._advancedCriterias[button.getAttribute('aria-type')].filter(c => c !== button.innerText.replace('×', '').trim());
-          
-          // remove the selected items from select
-          const select = this._advancedSearchSelects.find(select => select.type === button.getAttribute('aria-type'));
-          if (Array.from(select._optionsList).find(option => option.textContent.toLowerCase() === tagOption)) {
-            select._selectedOptions = select._selectedOptions.filter(option => option !== tagOption);
-            // remove the selected option from the list
-            document.getElementById(select.type + 'SelectedOptions').querySelectorAll('li').forEach(selectedOption => {
-              if (selectedOption.textContent.toLowerCase() === tagOption) {
-                select.removeSelectedOption(selectedOption);
-              }
-            });
-          }
+        // remove the selected items from the advancedCriterias
+        this._advancedCriterias[button.getAttribute('aria-type')] = this._advancedCriterias[button.getAttribute('aria-type')].filter(c => c !== button.innerText.replace('×', '').trim());
+        
+        // remove the selected items from select
+        const select = this._advancedSearchSelects.find(select => select.type === button.getAttribute('aria-type'));
+        if (Array.from(select._optionsList).find(option => option.textContent.toLowerCase() === tagOption)) {
+          select._selectedOptions = select._selectedOptions.filter(option => option !== tagOption);
+          // remove the selected option from the list
+          document.getElementById(select.type + 'SelectedOptions').querySelectorAll('li').forEach(selectedOption => {
+            if (selectedOption.textContent.toLowerCase() === tagOption) {
+              select.removeSelectedOption(selectedOption);
+            }
+          });
         }
 
         this.updateRecipes();
@@ -200,25 +198,20 @@ class IndexApp {
     });
 
     // search for recipes when the user submits the form
-    document.getElementById('mainSearchForm').addEventListener('submit', (e) => {
+    document.getElementById('mainSearchForm').addEventListener('input', (e) => {
       e.preventDefault();
 
       // if the search input is less than 3 characters, display all recipes
       if (searchInput.value.length < 3) {
+        this.criteria = '';
         this.displayRecipes();
         return;
       }
 
       // add the search input to the criteria
-      if (!this._criteria.includes(searchInput.value)) {
-        this._criteria.push(searchInput.value);
-        this.toggleSearchTag(searchInput.value, 'main');
-      }
+      this.criteria = searchInput.value;
     
       this.updateRecipes();
-
-      searchInput.value = '';
-      clearSearchButton.classList.add('hide');
     });
   }
 
@@ -227,15 +220,15 @@ class IndexApp {
    */
   updateRecipes() {
     // if there are no criterias, display all recipes
-    if (this._criteria.length === 0 && Object.values(this._advancedCriterias).every(options => options.length === 0)) {
+    if (this.criteria === '' && Object.values(this._advancedCriterias).every(options => options.length === 0)) {
       this._sortedRecipes = this._recipes;
     } else {
       // filter the recipes based on the criteria
       this._sortedRecipes = app.recipes.filter(recipe => {
-        return this._criteria.every(criteria => {
-          return recipe.search(criteria) || recipe.searchIngredient(criteria) || recipe.searchUstensil(criteria) || recipe.searchAppliance(criteria) || recipe.searchDescription(criteria);
-        }) && Object.entries(this._advancedCriterias).every(([type, options]) => {
-          return options.every(option => {
+        return recipe.search(this._criteria) || recipe.searchIngredient(this._criteria) || recipe.searchUstensil(this._criteria) || recipe.searchAppliance(this._criteria) || recipe.searchDescription(this._criteria);
+      }).filter(recipe => {
+        return Object.entries(this._advancedCriterias).every(([type, options]) => {
+          return options.some(option => {
             // check if the type is a string or an array
             if (typeof recipe[type] === 'string') {
               return recipe[type].toLowerCase() === option.toLowerCase();
@@ -253,6 +246,7 @@ class IndexApp {
         });
       });
     }
+    
     this.displayRecipes();
     this.updateSelects();
   }
