@@ -117,6 +117,11 @@ class AdvancedSearchSelect {
               this._currentOptionIndex++;
             } while (this._currentOptionIndex < this._optionsList.length - 1 && this._optionsList[this._currentOptionIndex].classList.contains('hide'));
           } else {
+            // if there is selected options, focus the first one
+            if (this._selectedOptions.length > 0) {
+              document.getElementById(this._type + 'SelectedOptions').lastElementChild.focus();
+              return;
+            }
             for (let i = 0; i < this._optionsList.length; i++) {
               if (!this._optionsList[i].classList.contains('hide')) {
                 this._currentOptionIndex = i;
@@ -136,6 +141,11 @@ class AdvancedSearchSelect {
               this._currentOptionIndex--;
             } while (this._currentOptionIndex > 0 && (this._optionsList[this._currentOptionIndex].classList.contains('hide')));
           } else {
+            // if there is selected options, focus the last one
+            if (this._selectedOptions.length > 0) {
+              document.getElementById(this._type + 'SelectedOptions').lastElementChild.focus();
+              return;
+            }
             for (let i = this._optionsList.length - 1; i >= 0; i--) {
               if (!this._optionsList[i].classList.contains('hide')) {
                 this._currentOptionIndex = i;
@@ -157,9 +167,19 @@ class AdvancedSearchSelect {
           this._search.focus();
         }
 
-        // select an option with the enter key
-        if (event.key === 'Enter') {
-          this.selectOptionByElement(this._optionsList[this._currentOptionIndex]);
+        if (event.key === 'Enter' || event.key === ' ') {
+          // if it's a selected option, remove it
+          const focusedOption = document.getElementById(this._type + 'SelectedOptions').querySelector('li:focus');
+          if (focusedOption) {
+            this.removeSelectedOption(focusedOption);
+          }
+
+          // if it's an option, select it
+          const focusedListOption = document.getElementById(this._type + 'Listbox').querySelector('li:focus');
+          if (focusedListOption) {
+            this.selectOptionByElement(focusedListOption);
+          }
+
           // focus the selected option
           document.getElementById(this._type + 'SelectedOptions').lastElementChild.focus();
         }
@@ -190,17 +210,6 @@ class AdvancedSearchSelect {
       // if no option is found, set the current option index to 0
       if (this._currentOptionIndex === -1) {
         this._currentOptionIndex = 0;
-      }
-
-      // focus the first option if the search input is empty
-      if (!searchValue) {
-        this._optionsList[this._currentOptionIndex].focus();
-      }
-
-      // focus the first option if the search input is not empty and the current option is hidden
-      if (this._currentOptionIndex === -1) {
-        this._currentOptionIndex = 0;
-        this._optionsList[this._currentOptionIndex].focus();
       }
     });
 

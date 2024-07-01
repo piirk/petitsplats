@@ -147,30 +147,67 @@ class IndexApp {
 
         // if the user clicks on an option, add it to the advancedCriterias
         const clickedOption = e.target.closest('[role="option"]');
-        if (clickedOption) {
-          const type = select.type;
-          const option = clickedOption.textContent.toLowerCase();
-          if (!this._advancedCriterias[type]) {
-            this._advancedCriterias[type] = [];
-          }
-          if (!this._advancedCriterias[type].includes(option)) {
-            this._advancedCriterias[type].push(option);
-            this.toggleSearchTag(option, type);
-            this.updateRecipes();
-          }
-        }
+        this.addAdvancedSelectOption(select.type, clickedOption);
 
         // if the user clicks on a selected option, remove it from the advancedCriterias and remove associated tag
         const clickedSelectedOption = e.target.closest('li.custom-select__content__list__selected-item');
-        if (clickedSelectedOption) {
-          const type = select.type;
-          const option = clickedSelectedOption.textContent.toLowerCase();
-          this._advancedCriterias[type] = this._advancedCriterias[type].filter(criteria => criteria.toLowerCase() !== option);
-          this.toggleSearchTag(option, type);
-          this.updateRecipes();
+        this.removeAdvancedSelectOption(select.type, clickedSelectedOption);
+      });
+
+      select._select.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          
+          if (select._isDropdownOpen) {
+            // if it's a selected option, remove it
+            console.log(document.getElementById(select._type + 'SelectedOptions'));
+            const focusedOption = document.getElementById(select._type + 'SelectedOptions').querySelector('li:focus');
+            if (focusedOption) {
+              this.removeAdvancedSelectOption(select._type, focusedOption);
+            }
+
+            // if it's an option, select it
+            const focusedListOption = document.getElementById(select._type + 'Listbox').querySelector('li:focus');
+            if (focusedListOption) {
+              this.addAdvancedSelectOption(select._type, focusedListOption);
+            }
+          }
         }
       });
     });
+  }
+
+  /**
+   * Add an option to the advanced criterias
+   * @param {string} type - The type of the criteria
+   * @param {Element} option - The option to add
+   */
+  addAdvancedSelectOption(type, option) {
+    if (option) {
+      const optionText = option.textContent.toLowerCase();
+      if (!this._advancedCriterias[type]) {
+        this._advancedCriterias[type] = [];
+      }
+      if (!this._advancedCriterias[type].includes(optionText)) {
+        this._advancedCriterias[type].push(optionText);
+        this.toggleSearchTag(optionText, type);
+        this.updateRecipes();
+      }
+    }
+  }
+
+  /**
+   * Remove an option from the advanced criterias
+   * @param {string} type - The type of the criteria
+   * @param {Element} option - The option to remove
+   */
+  removeAdvancedSelectOption(type, option) {
+    if (option) {
+      const optionText = option.textContent.toLowerCase();
+      this._advancedCriterias[type] = this._advancedCriterias[type].filter(criteria => criteria.toLowerCase() !== optionText);
+      this.toggleSearchTag(optionText, type);
+      this.updateRecipes();
+    }
   }
 
   /**
