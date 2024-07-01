@@ -133,6 +133,8 @@ class IndexApp {
    */
   attachListenersAdvancedSearch() {
     this._advancedSearchSelects.forEach(select => {
+      select.attachListeners();
+
       select._select.addEventListener('click', (e) => {
         e.stopPropagation();
 
@@ -154,7 +156,7 @@ class IndexApp {
 
       select._select.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
+          e.stopPropagation();
           
           if (select._isDropdownOpen) {
             // if it's a selected option, remove it
@@ -164,7 +166,7 @@ class IndexApp {
               this.removeAdvancedSelectOption(select._type, focusedOption);
             }
 
-            // if it's an option, select it
+            // if it's an option, add it
             const focusedListOption = document.getElementById(select._type + 'Listbox').querySelector('li:focus');
             if (focusedListOption) {
               this.addAdvancedSelectOption(select._type, focusedListOption);
@@ -172,8 +174,6 @@ class IndexApp {
           }
         }
       });
-
-      select.attachListeners();
     });
   }
 

@@ -168,10 +168,12 @@ class AdvancedSearchSelect {
         }
 
         if (event.key === 'Enter' || event.key === ' ') {
+          event.stopPropagation();
           // if it's a selected option, remove it
           const focusedOption = document.getElementById(this._type + 'SelectedOptions').querySelector('li:focus');
           if (focusedOption) {
             this.removeSelectedOption(focusedOption);
+            this._currentOptionIndex = 0;
             this._search.focus();
           }
 
@@ -201,8 +203,10 @@ class AdvancedSearchSelect {
       this._optionsList.forEach(option => {
         if (option.textContent.toLowerCase().includes(searchValue) && this._selectedOptions.indexOf(option.textContent) === -1){
           option.classList.remove('hide');
+          option.setAttribute('tabindex', '0');
         } else {
           option.classList.add('hide');
+          option.setAttribute('tabindex', '-1');
         }
       });
 
