@@ -80,7 +80,7 @@ class AdvancedSearchSelectTemplate {
    */
   static getSelectedOptionTemplate(option) {
     return `
-      <li class="custom-select__content__list__selected-item">${option}</li>
+      <li class="custom-select__content__list__selected-item" tabindex="0">${option}</li>
     `;
   }
 }

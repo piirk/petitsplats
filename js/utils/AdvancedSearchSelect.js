@@ -172,16 +172,15 @@ class AdvancedSearchSelect {
           const focusedOption = document.getElementById(this._type + 'SelectedOptions').querySelector('li:focus');
           if (focusedOption) {
             this.removeSelectedOption(focusedOption);
+            this._search.focus();
           }
 
           // if it's an option, select it
           const focusedListOption = document.getElementById(this._type + 'Listbox').querySelector('li:focus');
           if (focusedListOption) {
             this.selectOptionByElement(focusedListOption);
+            document.getElementById(this._type + 'SelectedOptions').lastElementChild.focus();
           }
-
-          // focus the selected option
-          document.getElementById(this._type + 'SelectedOptions').lastElementChild.focus();
         }
       }
     });
@@ -215,7 +214,6 @@ class AdvancedSearchSelect {
 
     // clear search button
     const clearSearchButton = document.getElementById(this._type + 'SelectClearSearch');
-
     clearSearchButton.addEventListener('click', () => {
       clearSearchButton.classList.add('hide');
       this._search.value = '';
@@ -252,7 +250,6 @@ class AdvancedSearchSelect {
       this._search.dispatchEvent(new Event('input')); // force the listener from search input to be triggered
       this._search.setAttribute('tabindex', '-1'); // remove the search input from the tab order when the dropdown is closed
       this._optionsList.forEach(option => option.setAttribute('tabindex', '-1')); // remove the options from the tab order when the dropdown is closed
-      //this._button.focus(); // focus the button when the dropdown is closed just like the select element
     } 
   };
 

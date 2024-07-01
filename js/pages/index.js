@@ -133,8 +133,6 @@ class IndexApp {
    */
   attachListenersAdvancedSearch() {
     this._advancedSearchSelects.forEach(select => {
-      select.attachListeners();
-
       select._select.addEventListener('click', (e) => {
         e.stopPropagation();
 
@@ -174,6 +172,8 @@ class IndexApp {
           }
         }
       });
+
+      select.attachListeners();
     });
   }
 
