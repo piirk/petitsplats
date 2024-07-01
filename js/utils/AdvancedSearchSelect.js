@@ -101,6 +101,71 @@ class AdvancedSearchSelect {
       }
     });
 
+    // keyboard events on the select
+    this._select.addEventListener('keydown', (event) => {
+      // open the dropdown with the enter or space key
+      if ((event.key === 'Enter' || event.key === ' ') && !this._isDropdownOpen) {
+        this.toggleDropdown();
+      }
+
+      if (this._isDropdownOpen) {
+        if (event.key === 'ArrowDown') {
+          event.preventDefault();
+          
+          if (this._currentOptionIndex < this._optionsList.length - 1) {
+            do {
+              this._currentOptionIndex++;
+            } while (this._currentOptionIndex < this._optionsList.length - 1 && this._optionsList[this._currentOptionIndex].classList.contains('hide'));
+          } else {
+            for (let i = 0; i < this._optionsList.length; i++) {
+              if (!this._optionsList[i].classList.contains('hide')) {
+                this._currentOptionIndex = i;
+                break;
+              }
+            }
+          }
+
+          this._optionsList[this._currentOptionIndex].focus();
+        }
+
+        if (event.key === 'ArrowUp') {
+          event.preventDefault();
+          
+          if (this._currentOptionIndex > 0) {
+            do {
+              this._currentOptionIndex--;
+            } while (this._currentOptionIndex > 0 && (this._optionsList[this._currentOptionIndex].classList.contains('hide')));
+          } else {
+            for (let i = this._optionsList.length - 1; i >= 0; i--) {
+              if (!this._optionsList[i].classList.contains('hide')) {
+                this._currentOptionIndex = i;
+                break;
+              }
+            }
+          }
+
+          this._optionsList[this._currentOptionIndex].focus();
+        }
+          
+        // close the dropdown with the escape key
+        if (event.key === 'Escape') {
+          this.hideDropdown();
+        }
+
+        // if alphanumeric key is pressed, focus the search input
+        if (event.key.match(/^[a-zA-Z0-9]$/)) {
+          this._search.focus();
+        }
+
+        // select an option with the enter key
+        if (event.key === 'Enter') {
+          this.selectOptionByElement(this._optionsList[this._currentOptionIndex]);
+          // focus the selected option
+          document.getElementById(this._type + 'SelectedOptions').lastElementChild.focus();
+        }
+      }
+    });
+
     // search input
     this._search.addEventListener('input', () => {
       const searchValue = this._search.value.toLowerCase();
@@ -119,6 +184,22 @@ class AdvancedSearchSelect {
           option.classList.add('hide');
         }
       });
+
+      // if no option is found, set the current option index to 0
+      if (this._currentOptionIndex === -1) {
+        this._currentOptionIndex = 0;
+      }
+
+      // focus the first option if the search input is empty
+      if (!searchValue) {
+        this._optionsList[this._currentOptionIndex].focus();
+      }
+
+      // focus the first option if the search input is not empty and the current option is hidden
+      if (this._currentOptionIndex === -1) {
+        this._currentOptionIndex = 0;
+        this._optionsList[this._currentOptionIndex].focus();
+      }
     });
 
     // clear search button
