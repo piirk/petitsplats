@@ -171,12 +171,14 @@ class AdvancedSearchSelect {
       const searchValue = this._search.value.toLowerCase();
       const clearSearchButton = document.getElementById(this._type + 'SelectClearSearch');
 
+      // show the clear search button if the search input is not empty
       if (searchValue) {
         clearSearchButton.classList.remove('hide');
       } else {
         clearSearchButton.classList.add('hide');
       }
 
+      // hide the options that do not match the search value
       this._optionsList.forEach(option => {
         if (option.textContent.toLowerCase().includes(searchValue) && this._selectedOptions.indexOf(option.textContent) === -1){
           option.classList.remove('hide');
