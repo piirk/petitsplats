@@ -280,8 +280,8 @@ class IndexApp {
     if (this.criteria === '' && Object.values(this._advancedCriterias).every(options => options.length === 0)) {
       this._sortedRecipes = this._recipes;
     } else {
-      // filter the recipes based on the criteria
-      this._sortedRecipes = app.recipes.filter(recipe => {
+      // filter the recipes based on the criterias
+      this._sortedRecipes = this._recipes.filter(recipe => {
         return recipe.search(this._criteria) || recipe.searchIngredient(this._criteria) || recipe.searchUstensil(this._criteria) || recipe.searchAppliance(this._criteria) || recipe.searchDescription(this._criteria);
       }).filter(recipe => {
         return Object.entries(this._advancedCriterias).every(([type, options]) => {
