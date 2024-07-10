@@ -166,24 +166,6 @@ class AdvancedSearchSelect {
         if (event.key.match(/^[a-zA-Z0-9]$/)) {
           this._search.focus();
         }
-
-        if (event.key === 'Enter' || event.key === ' ') {
-          event.stopPropagation();
-          // if it's a selected option, remove it
-          const focusedOption = document.getElementById(this._type + 'SelectedOptions').querySelector('li:focus');
-          if (focusedOption) {
-            this.removeSelectedOption(focusedOption);
-            this._currentOptionIndex = 0;
-            this._search.focus();
-          }
-
-          // if it's an option, select it
-          const focusedListOption = document.getElementById(this._type + 'Listbox').querySelector('li:focus');
-          if (focusedListOption) {
-            this.selectOptionByElement(focusedListOption);
-            document.getElementById(this._type + 'SelectedOptions').lastElementChild.focus();
-          }
-        }
       }
     });
 

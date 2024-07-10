@@ -160,16 +160,20 @@ class IndexApp {
           
           if (select._isDropdownOpen) {
             // if it's a selected option, remove it
-            console.log(document.getElementById(select._type + 'SelectedOptions'));
             const focusedOption = document.getElementById(select._type + 'SelectedOptions').querySelector('li:focus');
             if (focusedOption) {
               this.removeAdvancedSelectOption(select._type, focusedOption);
+              select.removeSelectedOption(focusedOption);
+              select._currentOptionIndex = 0;
+              select._search.focus();
             }
 
             // if it's an option, add it
             const focusedListOption = document.getElementById(select._type + 'Listbox').querySelector('li:focus');
             if (focusedListOption) {
               this.addAdvancedSelectOption(select._type, focusedListOption);
+              select.selectOptionByElement(focusedListOption);
+              document.getElementById(select._type + 'SelectedOptions').lastElementChild.focus();
             }
           }
         }
@@ -260,6 +264,11 @@ class IndexApp {
       this.criteria = searchInput.value.trim().toLowerCase();
     
       this.updateRecipes();
+    });
+
+    // prevent the form from submitting
+    document.getElementById('mainSearchForm').addEventListener('submit', (e) => {
+      e.preventDefault();
     });
   }
 
