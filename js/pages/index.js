@@ -6,7 +6,10 @@ class IndexApp {
    * @param {Array} recipes
    */
   constructor(recipes) {
-    this._recipes = recipes.map(recipe => { return new Recipe(recipe) });
+    this._recipes = [];
+    for (let i = 0; i < recipes.length; i++) {
+      this._recipes.push(new Recipe(recipes[i]));
+    }
     this._sortedRecipes = this._recipes;
     this._criteria = '';
     this._advancedSearchCriterias = ['ingredients', 'ustensils', 'appliance'];
@@ -53,10 +56,13 @@ class IndexApp {
     } else {
       noRecipesContainer.classList.add('hide');
       let recipesContainer = '';
-      this._sortedRecipes.forEach(recipe => {
+
+      for (let i = 0; i < this._sortedRecipes.length; i++) {
+        const recipe = this._sortedRecipes[i];
         const recipeTemplate = new RecipeTemplate(recipe);
         recipesContainer += recipeTemplate.render();
-      });
+      }
+      
       document.getElementById('recipesContainer').innerHTML = recipesContainer;
     }
 
@@ -114,15 +120,16 @@ class IndexApp {
    */
   createAdvancedSearchSelects() {
     // create the advanced search selects objects
-    this._advancedSearchCriterias.forEach(criteria => {
+    for (let i = 0; i < this._advancedSearchCriterias.length; i++) {
+      const criteria = this._advancedSearchCriterias[i];
       this._advancedSearchSelects.push(new AdvancedSearchSelect(this.getOptions(criteria), criteria));
-    });
+    }
 
     // render the advanced search selects
-    this._advancedSearchSelects.forEach(select => {
-      const selectTemplate = new AdvancedSearchSelectTemplate(select);
+    for (let i = 0; i < this._advancedSearchSelects.length; i++) {
+      const selectTemplate = new AdvancedSearchSelectTemplate(this._advancedSearchSelects[i]);
       document.getElementById('advancedSearchContainer').innerHTML += selectTemplate.render();
-    });
+    }
 
     // attach listeners to the advanced search selects
     this.attachListenersAdvancedSearch();
@@ -281,6 +288,15 @@ class IndexApp {
       this._sortedRecipes = this._recipes;
     } else {
       // filter the recipes based on the criterias
+      let sortedRecipes = [];
+
+      for (let i = 0; i < this._recipes.length; i++) {
+        const recipe = this._recipes[i];
+        if (recipe.search(this.criteria) || recipe.searchIngredient(this.criteria) || recipe.searchUstensil(this.criteria) || recipe.searchAppliance(this.criteria) || recipe.searchDescription(this.criteria)) {
+          sortedRecipes.push(recipe);
+        }
+      }
+
       this._sortedRecipes = this._recipes.filter(recipe => {
         return recipe.search(this._criteria) || recipe.searchIngredient(this._criteria) || recipe.searchUstensil(this._criteria) || recipe.searchAppliance(this._criteria) || recipe.searchDescription(this._criteria);
       }).filter(recipe => {

@@ -70,7 +70,12 @@ class Recipe {
    * @returns {boolean} True if the recipe contains the query, false otherwise
    */
   search(query) {
-    return this._name.toLowerCase().includes(query.toLowerCase());
+    for (let i = 0; i < this._name.length; i++) {
+      if (this._name[i].toLowerCase() === query.toLowerCase()) {
+      return true;
+      }
+    }
+    return false;
   }
 
   /**
@@ -79,7 +84,12 @@ class Recipe {
    * @returns {boolean} True if the recipe contains the ingredient, false otherwise
    */
   searchIngredient(query) {
-    return this._ingredients.some(ingredient => ingredient.name.toLowerCase().includes(query.toLowerCase()));
+    for (let i = 0; i < this._ingredients.length; i++) {
+      if (this._ingredients[i].name.toLowerCase() === query.toLowerCase()) {
+        return true;
+      }
+    }
+    return false;
   }
 
   /**
@@ -88,7 +98,12 @@ class Recipe {
    * @returns {boolean} True if the recipe contains the appliance, false otherwise
    */
   searchAppliance(query) {
-    return this._appliance.toLowerCase().includes(query.toLowerCase());
+    for (let i = 0; i < this._appliance.length; i++) {
+      if (this._appliance[i].toLowerCase() === query.toLowerCase()) {
+        return true;
+      }
+    }
+    return false;
   }
 
   /**
@@ -97,7 +112,12 @@ class Recipe {
    * @returns {boolean} True if the recipe contains the ustensil, false otherwise
    */
   searchUstensil(query) {
-    return this._ustensils.some(ustensil => ustensil.toLowerCase().includes(query.toLowerCase()));
+    for (let i = 0; i < this._ustensils.length; i++) {
+      if (this._ustensils[i].toLowerCase() === query.toLowerCase()) {
+      return true;
+      }
+    }
+    return false;
   }
 
   /**
@@ -106,6 +126,11 @@ class Recipe {
    * @returns {boolean} True if the recipe contains the description, false otherwise
    */
   searchDescription(query) {
-    return this._description.toLowerCase().includes(query.toLowerCase());
+    for (let i = 0; i < this._description.length; i++) {
+      if (this._description[i].toLowerCase() === query.toLowerCase()) {
+      return true;
+      }
+    }
+    return false;
   }
 }
