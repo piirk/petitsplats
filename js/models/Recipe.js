@@ -71,8 +71,8 @@ class Recipe {
    */
   search(query) {
     for (let i = 0; i < this._name.length; i++) {
-      if (this._name[i].toLowerCase() === query.toLowerCase()) {
-      return true;
+      if (this._name[i].toLowerCase().includes(query.toLowerCase())) {
+        return true;
       }
     }
     return false;
@@ -127,8 +127,8 @@ class Recipe {
    */
   searchDescription(query) {
     for (let i = 0; i < this._description.length; i++) {
-      if (this._description[i].toLowerCase() === query.toLowerCase()) {
-      return true;
+      if (this._description[i].toLowerCase().includes(query.toLowerCase())) {
+        return true;
       }
     }
     return false;
