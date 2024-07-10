@@ -256,13 +256,10 @@ class IndexApp {
       // if the search input is less than 3 characters, display all recipes
       if (searchInput.value.length < 3) {
         this.criteria = '';
-        this.displayRecipes();
-        return;
+      } else {
+        this.criteria = searchInput.value.trim().toLowerCase();
       }
 
-      // add the search input to the criteria
-      this.criteria = searchInput.value.trim().toLowerCase();
-    
       this.updateRecipes();
     });
 
