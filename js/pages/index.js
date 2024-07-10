@@ -285,13 +285,16 @@ class IndexApp {
       this._sortedRecipes = this._recipes;
     } else {
       // filter the recipes based on the criterias
+      let sortedRecipes = [];
 
-
+      for (let i = 0; i < this._recipes.length; i++) {
+        const recipe = this._recipes[i];
+        if (recipe.search(this._criteria) || recipe.searchIngredient(this._criteria) || recipe.searchUstensil(this._criteria) || recipe.searchAppliance(this._criteria) || recipe.searchDescription(this._criteria)) {
+          sortedRecipes.push(recipe);
+        }
+      }
       
-
-      this._sortedRecipes = this._recipes.filter(recipe => {
-        return recipe.search(this._criteria) || recipe.searchIngredient(this._criteria) || recipe.searchUstensil(this._criteria) || recipe.searchAppliance(this._criteria) || recipe.searchDescription(this._criteria);
-      }).filter(recipe => {
+      this._sortedRecipes = sortedRecipes.filter(recipe => {
         return Object.entries(this._advancedCriterias).every(([type, options]) => {
           
           if (options.length === 0) {
