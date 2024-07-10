@@ -70,12 +70,7 @@ class Recipe {
    * @returns {boolean} True if the recipe contains the query, false otherwise
    */
   search(query) {
-    for (let i = 0; i < this._name.length; i++) {
-      if (this._name[i].toLowerCase().includes(query.toLowerCase())) {
-        return true;
-      }
-    }
-    return false;
+    return this._name.toLowerCase().includes(query.toLowerCase());
   }
 
   /**
@@ -85,7 +80,7 @@ class Recipe {
    */
   searchIngredient(query) {
     for (let i = 0; i < this._ingredients.length; i++) {
-      if (this._ingredients[i].name.toLowerCase() === query.toLowerCase()) {
+      if (this._ingredients[i].name.toLowerCase().includes(query.toLowerCase())) {
         return true;
       }
     }
@@ -99,7 +94,7 @@ class Recipe {
    */
   searchAppliance(query) {
     for (let i = 0; i < this._appliance.length; i++) {
-      if (this._appliance[i].toLowerCase() === query.toLowerCase()) {
+      if (this._appliance[i].toLowerCase().includes(query.toLowerCase())) {
         return true;
       }
     }
@@ -113,7 +108,7 @@ class Recipe {
    */
   searchUstensil(query) {
     for (let i = 0; i < this._ustensils.length; i++) {
-      if (this._ustensils[i].toLowerCase() === query.toLowerCase()) {
+      if (this._ustensils[i].toLowerCase().includes(query.toLowerCase())) {
       return true;
       }
     }
@@ -126,11 +121,6 @@ class Recipe {
    * @returns {boolean} True if the recipe contains the description, false otherwise
    */
   searchDescription(query) {
-    for (let i = 0; i < this._description.length; i++) {
-      if (this._description[i].toLowerCase().includes(query.toLowerCase())) {
-        return true;
-      }
-    }
-    return false;
+    return this._description.toLowerCase().includes(query.toLowerCase());
   }
 }

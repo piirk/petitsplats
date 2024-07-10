@@ -263,12 +263,9 @@ class IndexApp {
       // if the search input is less than 3 characters, display all recipes
       if (searchInput.value.length < 3) {
         this.criteria = '';
-        this.displayRecipes();
-        return;
+      } else {
+        this.criteria = searchInput.value.trim().toLowerCase();
       }
-
-      // add the search input to the criteria
-      this.criteria = searchInput.value.trim().toLowerCase();
     
       this.updateRecipes();
     });
@@ -288,14 +285,9 @@ class IndexApp {
       this._sortedRecipes = this._recipes;
     } else {
       // filter the recipes based on the criterias
-      let sortedRecipes = [];
 
-      for (let i = 0; i < this._recipes.length; i++) {
-        const recipe = this._recipes[i];
-        if (recipe.search(this.criteria) || recipe.searchIngredient(this.criteria) || recipe.searchUstensil(this.criteria) || recipe.searchAppliance(this.criteria) || recipe.searchDescription(this.criteria)) {
-          sortedRecipes.push(recipe);
-        }
-      }
+
+      
 
       this._sortedRecipes = this._recipes.filter(recipe => {
         return recipe.search(this._criteria) || recipe.searchIngredient(this._criteria) || recipe.searchUstensil(this._criteria) || recipe.searchAppliance(this._criteria) || recipe.searchDescription(this._criteria);
