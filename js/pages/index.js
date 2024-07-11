@@ -287,6 +287,7 @@ class IndexApp {
       // filter the recipes based on the criterias
       let sortedRecipes = [];
 
+      // main search
       for (let i = 0; i < this._recipes.length; i++) {
         const recipe = this._recipes[i];
         if (recipe.search(this._criteria) || recipe.searchIngredient(this._criteria) || recipe.searchUstensil(this._criteria) || recipe.searchAppliance(this._criteria) || recipe.searchDescription(this._criteria)) {
@@ -294,6 +295,7 @@ class IndexApp {
         }
       }
       
+      // advanced search
       this._sortedRecipes = sortedRecipes.filter(recipe => {
         return Object.entries(this._advancedCriterias).every(([criteria, options]) => {
           return Criteria.isCriteriasValid(recipe, criteria, options);
@@ -323,7 +325,7 @@ class IndexApp {
   getOptions(criteria) {
     let options = [];
     this._sortedRecipes.forEach(recipe => {
-      options.push(...Criteria.getOptionsFromRecipe(recipe, criteria));
+      options.push(...Criteria.getOptionsFromRecipe(recipe, criteria)); // set
     });
     return options.filter((item, index) => options.indexOf(item) === index);
   }
