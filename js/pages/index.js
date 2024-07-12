@@ -247,8 +247,8 @@ class IndexApp {
       }
     });
 
-    // search for recipes when the user updates the search input
-    document.getElementById('mainSearchForm').addEventListener('input', (e) => {
+    // fonction pour l'input et le submit
+    const mainSearchFormEvent = (e) => {
       e.preventDefault();
 
       // remove the search tags and advanced criterias
@@ -266,13 +266,18 @@ class IndexApp {
       } else {
         this.criteria = searchInput.value.trim().toLowerCase();
       }
-    
+
       this.updateRecipes();
+    }
+
+    // search for recipes when the user updates the search input
+    document.getElementById('mainSearchForm').addEventListener('input', (e) => {
+      mainSearchFormEvent(e);
     });
 
-    // prevent the form from submitting
+    // search for recipes when the user submits the search form
     document.getElementById('mainSearchForm').addEventListener('submit', (e) => {
-      e.preventDefault();
+      mainSearchFormEvent(e);
     });
   }
 
@@ -290,7 +295,13 @@ class IndexApp {
       // main search
       for (let i = 0; i < this._recipes.length; i++) {
         const recipe = this._recipes[i];
-        if (recipe.search(this._criteria) || recipe.searchIngredient(this._criteria) || recipe.searchUstensil(this._criteria) || recipe.searchAppliance(this._criteria) || recipe.searchDescription(this._criteria)) {
+        if (
+          recipe.search(this._criteria) ||
+          recipe.searchIngredient(this._criteria) ||
+          recipe.searchUstensil(this._criteria) ||
+          recipe.searchAppliance(this._criteria) ||
+          recipe.searchDescription(this._criteria)
+        ) {
           sortedRecipes.push(recipe);
         }
       }
