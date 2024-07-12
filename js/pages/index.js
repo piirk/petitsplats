@@ -334,11 +334,11 @@ class IndexApp {
    * @returns {Array} The options
    */
   getOptions(criteria) {
-    let options = [];
+    let options = new Set();
     this._sortedRecipes.forEach(recipe => {
-      options.push(...Criteria.getOptionsFromRecipe(recipe, criteria)); // set
+      options = options.symmetricDifference(Criteria.getOptionsFromRecipe(recipe, criteria));
     });
-    return options.filter((item, index) => options.indexOf(item) === index);
+    return options;
   }
 }
 

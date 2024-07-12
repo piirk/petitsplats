@@ -60,12 +60,12 @@ class AdvancedSearchSelectTemplate {
 
   /**
    * Get the listbox template
-   * @param {Array} options - The options to render
+   * @param {Set} options - The options to render
    * @returns {string} The listbox template
    */
   static getListboxTemplate(options) {
     return `
-      ${options.map(option => {
+      ${[...options].map(option => {
         return `
           <li class="custom-select__content__list__item" role="option" tabindex="-1">${capitalizeFirstLetter(option)}</li>
         `;
