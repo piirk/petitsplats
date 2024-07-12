@@ -109,7 +109,7 @@ class IndexApp {
           });
         }
 
-        this.updateRecipes();
+        this.updateRecipesFromSelect();
         button.remove();
       });
     });
@@ -202,7 +202,7 @@ class IndexApp {
       if (!this._advancedCriterias[type].includes(optionText)) {
         this._advancedCriterias[type].push(optionText);
         this.toggleSearchTag(optionText, type);
-        this.updateRecipes();
+        this.updateRecipesFromSelect();
       }
     }
   }
@@ -217,7 +217,7 @@ class IndexApp {
       const optionText = option.textContent.toLowerCase();
       this._advancedCriterias[type] = this._advancedCriterias[type].filter(criteria => criteria.toLowerCase() !== optionText);
       this.toggleSearchTag(optionText, type);
-      this.updateRecipes();
+      this.updateRecipesFromSelect();
     }
   }
 
@@ -262,12 +262,12 @@ class IndexApp {
 
       // if the search input is less than 3 characters, display all recipes
       if (searchInput.value.length < 3) {
-        this.criteria = '';
+        this._criteria = '';
       } else {
-        this.criteria = searchInput.value.trim().toLowerCase();
+        this._criteria = searchInput.value.trim().toLowerCase();
       }
 
-      this.updateRecipes();
+      this.updateRecipesFromMainSearch();
     }
 
     // search for recipes when the user updates the search input
@@ -284,15 +284,31 @@ class IndexApp {
   /**
    * Update the recipes based on the criteria
    */
-  updateRecipes() {
+  updateRecipesFromSelect() {
+    this.updateRecipesFromMainSearch(true);
+
+    // filers the recipes based on the advanced criterias (selects)
+    this._sortedRecipes = this._sortedRecipes.filter(recipe => {
+      return Object.entries(this._advancedCriterias).every(([criteria, options]) => {
+        return Criteria.isCriteriasValid(recipe, criteria, options);
+      });
+    });
+
+    this.displayRecipes();
+    this.updateSelects();
+  }
+
+  /**
+   * update the recipes from the main search
+   */
+  updateRecipesFromMainSearch(cancelDisplay = false) {
     // if there are no criterias, display all recipes
-    if (this.criteria === '' && Object.values(this._advancedCriterias).every(options => options.length === 0)) {
+    if (this.criteria === '') {
       this._sortedRecipes = this._recipes;
     } else {
-      // filter the recipes based on the criterias
+      // filters the recipes based on the main criteria (search input)
       let sortedRecipes = [];
 
-      // main search
       for (let i = 0; i < this._recipes.length; i++) {
         const recipe = this._recipes[i];
         if (
@@ -305,17 +321,14 @@ class IndexApp {
           sortedRecipes.push(recipe);
         }
       }
-      
-      // advanced search
-      this._sortedRecipes = sortedRecipes.filter(recipe => {
-        return Object.entries(this._advancedCriterias).every(([criteria, options]) => {
-          return Criteria.isCriteriasValid(recipe, criteria, options);
-        });
-      });
-    }
+
+      this._sortedRecipes = sortedRecipes;
     
-    this.displayRecipes();
-    this.updateSelects();
+      if (!cancelDisplay) {
+        this.displayRecipes();
+        this.updateSelects();
+      }
+    }
   }
 
   /**
