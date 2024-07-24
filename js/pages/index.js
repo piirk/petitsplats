@@ -110,8 +110,7 @@ class IndexApp {
         }
 
         this.updateRecipesFromSelect();
-        this.displayRecipes();
-        this.updateSelects();
+        this.displayRecipesAndUpdateSelects();
 
         button.remove();
       });
@@ -206,8 +205,7 @@ class IndexApp {
         this._advancedCriterias[type].push(optionText);
         this.toggleSearchTag(optionText, type);
         this.updateRecipesFromSelect();
-        this.displayRecipes();
-        this.updateSelects();
+        this.displayRecipesAndUpdateSelects();
       }
     }
   }
@@ -223,8 +221,7 @@ class IndexApp {
       this._advancedCriterias[type] = this._advancedCriterias[type].filter(criteria => criteria.toLowerCase() !== optionText);
       this.toggleSearchTag(optionText, type);
       this.updateRecipesFromSelect();
-      this.displayRecipes();
-      this.updateSelects();
+      this.displayRecipesAndUpdateSelects();
     }
   }
 
@@ -275,8 +272,7 @@ class IndexApp {
       }
 
       this.updateRecipesFromMainSearch();
-      this.displayRecipes();
-      this.updateSelects();
+      this.displayRecipesAndUpdateSelects();
     }
 
     // search for recipes when the user updates the search input
@@ -333,10 +329,12 @@ class IndexApp {
   }
 
   /**
-   * Update the advanced search selects
-   * Update the options based on the sorted recipes
+   * display the recipes and update the selects based on the sorted recipes
    */
-  updateSelects() {
+  displayRecipesAndUpdateSelects() {
+    this.displayRecipes();
+
+    // update the options based on the sorted recipes
     this._advancedSearchSelects.forEach(select => {
       select.updateOptions(this.getOptions(select.type));
     });
