@@ -343,7 +343,7 @@ class IndexApp {
   /**
    * Get the options based on the criteria
    * @param {string} criteria - The criteria to get the options from
-   * @returns {Array} The options
+   * @returns {Set} - The options
    */
   getOptions(criteria) {
     let options = new Set();

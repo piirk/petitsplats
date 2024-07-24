@@ -6,25 +6,21 @@ class Criteria {
   /**
    * Get the options from the recipe based on the criteria
    * @param {Object} recipe - The recipe object
-   * @param {string} criteria - The criteria
+   * @param {string} criteria - The criteria name
    * @returns {Set} - The options
    */
   static getOptionsFromRecipe(recipe, criteria) {
     let options = new Set();
     if (Array.isArray(recipe[criteria])) { // if the criteria is an array, get the option from the array
       recipe[criteria].forEach(option => {
-        if (option && typeof option === 'object') {
-          if (option.name) {
-            options.add(option.name);
-          }
-        } else if (option) { // if the option is a string, get the option from the string
+        if (typeof option === 'object') {
+          options.add(option.name);
+        } else { // if the option is a string, get the option from the string
           options.add(option.toLowerCase());
         }
       });
     } else { // if the criteria is a string, get the option from the string
-      if (recipe[criteria]) {
-        options.add(recipe[criteria].toLowerCase());
-      }
+      options.add(recipe[criteria].toLowerCase());
     }
     return options;
   }
