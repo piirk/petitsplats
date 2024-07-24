@@ -110,6 +110,9 @@ class IndexApp {
         }
 
         this.updateRecipesFromSelect();
+        this.displayRecipes();
+        this.updateSelects();
+
         button.remove();
       });
     });
@@ -203,6 +206,8 @@ class IndexApp {
         this._advancedCriterias[type].push(optionText);
         this.toggleSearchTag(optionText, type);
         this.updateRecipesFromSelect();
+        this.displayRecipes();
+        this.updateSelects();
       }
     }
   }
@@ -218,6 +223,8 @@ class IndexApp {
       this._advancedCriterias[type] = this._advancedCriterias[type].filter(criteria => criteria.toLowerCase() !== optionText);
       this.toggleSearchTag(optionText, type);
       this.updateRecipesFromSelect();
+      this.displayRecipes();
+      this.updateSelects();
     }
   }
 
@@ -268,6 +275,8 @@ class IndexApp {
       }
 
       this.updateRecipesFromMainSearch();
+      this.displayRecipes();
+      this.updateSelects();
     }
 
     // search for recipes when the user updates the search input
@@ -282,26 +291,22 @@ class IndexApp {
   }
 
   /**
-   * Update the recipes based on the criteria
+   * Update the recipes based on the advanced criterias (selects)
    */
   updateRecipesFromSelect() {
-    this.updateRecipesFromMainSearch(true);
+    this.updateRecipesFromMainSearch();
 
-    // filers the recipes based on the advanced criterias (selects)
     this._sortedRecipes = this._sortedRecipes.filter(recipe => {
       return Object.entries(this._advancedCriterias).every(([criteria, options]) => {
         return Criteria.isCriteriasValid(recipe, criteria, options);
       });
     });
-
-    this.displayRecipes();
-    this.updateSelects();
   }
 
   /**
    * update the recipes from the main search
    */
-  updateRecipesFromMainSearch(cancelDisplay = false) {
+  updateRecipesFromMainSearch() {
     // if there are no criterias, display all recipes
     if (this.criteria === '') {
       this._sortedRecipes = this._recipes;
@@ -322,12 +327,8 @@ class IndexApp {
         }
       }
 
+      // update the sorted recipes
       this._sortedRecipes = sortedRecipes;
-    
-      if (!cancelDisplay) {
-        this.displayRecipes();
-        this.updateSelects();
-      }
     }
   }
 
