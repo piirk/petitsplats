@@ -6,10 +6,7 @@ class IndexApp {
    * @param {Array} recipes
    */
   constructor(recipes) {
-    this._recipes = [];
-    for (let i = 0; i < recipes.length; i++) {
-      this._recipes.push(new Recipe(recipes[i]));
-    }
+    this._recipes = recipes.map(recipe => new Recipe(recipe));
     this._sortedRecipes = this._recipes;
     this._criteria = '';
     this._advancedSearchCriterias = ['ingredients', 'ustensils', 'appliance'];
@@ -308,23 +305,13 @@ class IndexApp {
       this._sortedRecipes = this._recipes;
     } else {
       // filters the recipes based on the main criteria (search input)
-      let sortedRecipes = [];
-
-      for (let i = 0; i < this._recipes.length; i++) {
-        const recipe = this._recipes[i];
-        if (
-          recipe.search(this._criteria) ||
-          recipe.searchIngredient(this._criteria) ||
-          recipe.searchUstensil(this._criteria) ||
-          recipe.searchAppliance(this._criteria) ||
-          recipe.searchDescription(this._criteria)
-        ) {
-          sortedRecipes.push(recipe);
-        }
-      }
-
-      // update the sorted recipes
-      this._sortedRecipes = sortedRecipes;
+      this._sortedRecipes = this._recipes.filter(recipe => 
+        recipe.search(this._criteria) ||
+        recipe.searchIngredient(this._criteria) ||
+        recipe.searchUstensil(this._criteria) ||
+        recipe.searchAppliance(this._criteria) ||
+        recipe.searchDescription(this._criteria)
+      );
     }
   }
 
