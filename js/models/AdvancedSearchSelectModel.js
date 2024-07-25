@@ -2,7 +2,7 @@
  * AdvancedSearchSelect
  * Represents an advanced search select
  * @class AdvancedSearchSelect
- * @property {Array} _options - The options of the select
+ * @property {Set} _options - The options of the select
  * @property {String} _type - The type of the select
  * @property {HTMLElement} _select - The select element
  * @property {HTMLElement} _button - The button element
@@ -16,7 +16,7 @@
 class AdvancedSearchSelect {
   /**
    * Create an advanced search select
-   * @param {Array} options - The options of the select
+   * @param {Set} options - The options of the select
    * @param {String} type - The type of the select
    */
   constructor(options, type) {
