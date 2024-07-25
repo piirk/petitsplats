@@ -305,7 +305,7 @@ class IndexApp {
       this._sortedRecipes = this._recipes;
     } else {
       // filters the recipes based on the main criteria (search input)
-      let sortedRecipes = [];
+      this._sortedRecipes = [];
 
       for (let i = 0; i < this._recipes.length; i++) {
         const recipe = this._recipes[i];
@@ -316,12 +316,9 @@ class IndexApp {
           recipe.searchAppliance(this._criteria) ||
           recipe.searchDescription(this._criteria)
         ) {
-          sortedRecipes.push(recipe);
+          this._sortedRecipes.push(recipe);
         }
       }
-
-      // update the sorted recipes
-      this._sortedRecipes = sortedRecipes;
     }
   }
 
