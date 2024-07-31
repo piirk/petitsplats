@@ -185,11 +185,7 @@ class AdvancedSearchSelect {
       this._optionsList.forEach(option => {
         if (option.textContent.toLowerCase().includes(searchValue) && this._selectedOptions.indexOf(option.textContent) === -1){
           option.classList.remove('hide');
-          if (this._isDropdownOpen) {
-            option.setAttribute('tabindex', '0');
-          } else {
-            option.setAttribute('tabindex', '-1');
-          }
+          option.setAttribute('tabindex', this._isDropdownOpen ? '0' : '-1');
         } else {
           option.classList.add('hide');
           option.setAttribute('tabindex', '-1');
