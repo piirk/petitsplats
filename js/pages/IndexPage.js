@@ -265,7 +265,7 @@ class IndexApp {
       if (searchInput.value.length < 3) {
         this._criteria = '';
       } else {
-        this._criteria = searchInput.value.trim().toLowerCase();
+        this._criteria = searchInput.value.trim().toLowerCase().replace(/<[^>]*>?/gm, '');
       }
 
       this.updateRecipesFromMainSearch();
