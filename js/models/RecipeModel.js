@@ -21,11 +21,7 @@ class Recipe {
     this._image = data.image;
     this._name = data.name;
     this._description = data.description;
-    this._ingredients = [];
-    for (let i = 0; i < data.ingredients.length; i++) {
-      const ingredient = data.ingredients[i];
-      this._ingredients.push(new Ingredient(ingredient.ingredient, ingredient.quantity, ingredient.unit));
-    }
+    this._ingredients = data.ingredients.map(ingredient => new Ingredient(ingredient.ingredient, ingredient.quantity, ingredient.unit));
     this._time = data.time;
     this._servings = data.servings;
     this._appliance = data.appliance;
@@ -83,12 +79,7 @@ class Recipe {
    * @returns {boolean} True if the recipe contains the ingredient, false otherwise
    */
   searchIngredient(query) {
-    for (let i = 0; i < this._ingredients.length; i++) {
-      if (this._ingredients[i].name.toLowerCase().includes(query.toLowerCase())) {
-        return true;
-      }
-    }
-    return false;
+    return this._ingredients.some(ingredient => ingredient.name.toLowerCase().includes(query.toLowerCase()));
   }
 
   /**
@@ -97,12 +88,7 @@ class Recipe {
    * @returns {boolean} True if the recipe contains the appliance, false otherwise
    */
   searchAppliance(query) {
-    for (let i = 0; i < this._appliance.length; i++) {
-      if (this._appliance[i].toLowerCase().includes(query.toLowerCase())) {
-        return true;
-      }
-    }
-    return false;
+    return this._appliance.toLowerCase().includes(query.toLowerCase());
   }
 
   /**
@@ -111,12 +97,7 @@ class Recipe {
    * @returns {boolean} True if the recipe contains the ustensil, false otherwise
    */
   searchUstensil(query) {
-    for (let i = 0; i < this._ustensils.length; i++) {
-      if (this._ustensils[i].toLowerCase().includes(query.toLowerCase())) {
-      return true;
-      }
-    }
-    return false;
+    return this._ustensils.some(ustensil => ustensil.toLowerCase().includes(query.toLowerCase()));
   }
 
   /**
