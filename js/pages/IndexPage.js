@@ -119,16 +119,15 @@ class IndexApp {
    */
   createAdvancedSearchSelects() {
     // create the advanced search selects objects
-    for (let i = 0; i < this._advancedSearchCriterias.length; i++) {
-      const criteria = this._advancedSearchCriterias[i];
+    this._advancedSearchCriterias.forEach(criteria => {
       this._advancedSearchSelects.push(new AdvancedSearchSelect(this.getOptions(criteria), criteria));
-    }
+    });
 
     // render the advanced search selects
-    for (let i = 0; i < this._advancedSearchSelects.length; i++) {
-      const selectTemplate = new AdvancedSearchSelectTemplate(this._advancedSearchSelects[i]);
+    this._advancedSearchSelects.forEach(select => {
+      const selectTemplate = new AdvancedSearchSelectTemplate(select);
       document.getElementById('advancedSearchContainer').innerHTML += selectTemplate.render();
-    }
+    });
 
     // attach listeners to the advanced search selects
     this.attachListenersAdvancedSearch();
