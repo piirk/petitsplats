@@ -6,7 +6,10 @@ class IndexApp {
    * @param {Array} recipes
    */
   constructor(recipes) {
-    this._recipes = recipes.map(recipe => new Recipe(recipe));
+    this._recipes = [];
+    for (let i = 0; i < recipes.length; i++) {
+      this._recipes.push(new Recipe(recipes[i]));
+    }
     this._sortedRecipes = this._recipes;
     this._criteria = '';
     this._advancedSearchCriterias = ['ingredients', 'ustensils', 'appliance'];
