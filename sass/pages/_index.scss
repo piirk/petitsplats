@@ -133,6 +133,10 @@
       row-gap: 20px;
     }
 
+    &:hover {
+      cursor: pointer;
+    }
+
     &:focus,
     &:focus-visible {
       @include focus-border;
