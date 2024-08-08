@@ -64,13 +64,15 @@ class AdvancedSearchSelectTemplate {
    * @returns {string} The listbox template
    */
   static getListboxTemplate(options) {
-    return `
-      ${[...options].map(option => {
-        return `
-          <li class="custom-select__content__list__item" role="option" tabindex="-1">${capitalizeFirstLetter(option)}</li>
-        `;
-      }).sort().join('')}
-    `;
+    let template = '';
+    const sortedOptions = [...options].sort();
+    for (let i = 0; i < sortedOptions.length; i++) {
+      const option = sortedOptions[i];
+      template += `
+        <li class="custom-select__content__list__item" role="option" tabindex="-1">${capitalizeFirstLetter(option)}</li>
+      `;
+    }
+    return template;
   }
 
   /**

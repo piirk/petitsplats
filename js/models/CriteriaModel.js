@@ -12,13 +12,14 @@ class Criteria {
   static getOptionsFromRecipe(recipe, criteria) {
     let options = new Set();
     if (Array.isArray(recipe[criteria])) { // if the criteria is an array, get the option from the array
-      recipe[criteria].forEach(option => {
+      for (let i = 0; i < recipe[criteria].length; i++) {
+        const option = recipe[criteria][i];
         if (typeof option === 'object') {
           options.add(option.name);
         } else { // if the option is a string, get the option from the string
           options.add(option.toLowerCase());
         }
-      });
+      }
     } else { // if the criteria is a string, get the option from the string
       options.add(recipe[criteria].toLowerCase());
     }

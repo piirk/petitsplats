@@ -49,16 +49,25 @@ class AdvancedSearchSelect {
     this._optionsList = this._select.querySelectorAll('[role="option"]');
 
     // hide the selected options in the listbox if they are already selected
-    this._selectedOptions.forEach(selectedOption => {
-      const optionElement = Array.from(this._optionsList).find(option => option.textContent === selectedOption);
+    for (let i = 0; i < this._selectedOptions.length; i++) {
+        const selectedOption = this._selectedOptions[i];
+        let optionElement = null;
+      for (let j = 0; j < this._optionsList.length; j++) {
+        const option = this._optionsList[j];
+        if (option.textContent === selectedOption) {
+          optionElement = option;
+          break;
+        }
+      }
       if (optionElement) {
         optionElement.classList.add('hide');
         optionElement.setAttribute('aria-selected', 'true');
       } else { // if the option is not in the list, remove it from the selected options
-        this._selectedOptions = this._selectedOptions.filter(option => option !== selectedOption);
+        this._selectedOptions.splice(i, 1);
         this.removeSelectedOption(document.getElementById(this._type + 'SelectedOptions').querySelector('li'));
+        i--;
       }
-    });
+    }
     
     // force the search input listener to be triggered
     this._search.dispatchEvent(new Event('input'));
@@ -275,9 +284,26 @@ class AdvancedSearchSelect {
    */
   removeSelectedOption(selectedOption) {
     const optionText = selectedOption.textContent;
-    this._selectedOptions = this._selectedOptions.filter(option => option !== optionText);
 
-    const optionElement = Array.from(this._optionsList).find(option => option.textContent === optionText);
+    const updatedSelectedOptions = [];
+    for (let i = 0; i < this._selectedOptions.length; i++) {
+      const option = this._selectedOptions[i];
+      if (option !== optionText) {
+      updatedSelectedOptions.push(option);
+      }
+    }
+    this._selectedOptions = updatedSelectedOptions;
+
+    let optionElement;
+    let i = 0;
+    while (i < this._optionsList.length && !optionElement) {
+      const option = this._optionsList[i];
+      if (option.textContent === optionText) {
+      optionElement = option;
+      }
+      i++;
+    }
+
     if (optionElement) {
       optionElement.classList.remove('hide');
       optionElement.setAttribute('aria-selected', 'false');

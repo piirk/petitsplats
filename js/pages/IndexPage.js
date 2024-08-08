@@ -329,9 +329,10 @@ class IndexApp {
     this.displayRecipes();
 
     // update the options based on the sorted recipes
-    this._advancedSearchSelects.forEach(select => {
+    for (let i = 0; i < this._advancedSearchSelects.length; i++) {
+      const select = this._advancedSearchSelects[i];
       select.updateOptions(this.getOptions(select.type));
-    });
+    }
   }
 
   /**
@@ -341,9 +342,10 @@ class IndexApp {
    */
   getOptions(criteria) {
     let options = new Set();
-    this._sortedRecipes.forEach(recipe => {
+    for (let i = 0; i < this._sortedRecipes.length; i++) {
+      const recipe = this._sortedRecipes[i];
       options = options.symmetricDifference(Criteria.getOptionsFromRecipe(recipe, criteria));
-    });
+    }
     return options;
   }
 }
