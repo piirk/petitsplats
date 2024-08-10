@@ -54,11 +54,10 @@ class IndexApp {
       noRecipesContainer.classList.add('hide');
       let recipesContainer = '';
 
-      for (let i = 0; i < this._sortedRecipes.length; i++) {
-        const recipe = this._sortedRecipes[i];
+      this._sortedRecipes.forEach(recipe => {
         const recipeTemplate = new RecipeTemplate(recipe);
         recipesContainer += recipeTemplate.render();
-      }
+      });
       
       document.getElementById('recipesContainer').innerHTML = recipesContainer;
     }
