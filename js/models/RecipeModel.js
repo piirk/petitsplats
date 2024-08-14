@@ -22,10 +22,7 @@ class Recipe {
     this._name = data.name;
     this._description = data.description;
     this._ingredients = [];
-    for (let i = 0; i < data.ingredients.length; i++) {
-      const ingredient = data.ingredients[i];
-      this._ingredients.push(new Ingredient(ingredient.ingredient, ingredient.quantity, ingredient.unit));
-    }
+    this._ingredients = data.ingredients.map(ingredient => new Ingredient(ingredient.ingredient, ingredient.quantity, ingredient.unit));
     this._time = data.time;
     this._servings = data.servings;
     this._appliance = data.appliance;
