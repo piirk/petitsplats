@@ -6,10 +6,7 @@ class IndexApp {
    * @param {Array} recipes
    */
   constructor(recipes) {
-    this._recipes = [];
-    for (let i = 0; i < recipes.length; i++) {
-      this._recipes.push(new Recipe(recipes[i]));
-    }
+    this._recipes = recipes.map(recipe => new Recipe(recipe));
     this._sortedRecipes = this._recipes;
     this._criteria = '';
     this._advancedSearchCriterias = ['ingredients', 'ustensils', 'appliance'];
@@ -57,12 +54,10 @@ class IndexApp {
       noRecipesContainer.classList.add('hide');
       let recipesContainer = '';
 
-      //
-      for (let i = 0; i < this._sortedRecipes.length; i++) {
-        const recipe = this._sortedRecipes[i];
+      this._sortedRecipes.forEach(recipe => {
         const recipeTemplate = new RecipeTemplate(recipe);
         recipesContainer += recipeTemplate.render();
-      }
+      });
       
       document.getElementById('recipesContainer').innerHTML = recipesContainer;
     }
@@ -123,16 +118,15 @@ class IndexApp {
    */
   createAdvancedSearchSelects() {
     // create the advanced search selects objects
-    for (let i = 0; i < this._advancedSearchCriterias.length; i++) {
-      const criteria = this._advancedSearchCriterias[i];
+    this._advancedSearchCriterias.forEach(criteria => {
       this._advancedSearchSelects.push(new AdvancedSearchSelect(this.getOptions(criteria), criteria));
-    }
+    });
 
     // render the advanced search selects
-    for (let i = 0; i < this._advancedSearchSelects.length; i++) {
-      const selectTemplate = new AdvancedSearchSelectTemplate(this._advancedSearchSelects[i]);
+    this._advancedSearchSelects.forEach(select => {
+      const selectTemplate = new AdvancedSearchSelectTemplate(select);
       document.getElementById('advancedSearchContainer').innerHTML += selectTemplate.render();
-    }
+    });
 
     // attach listeners to the advanced search selects
     this.attachListenersAdvancedSearch();
@@ -302,27 +296,20 @@ class IndexApp {
 
   /**
    * update the recipes from the main search
+   * if there are no criterias, display all recipes
+   * otherwise, filter the recipes based on the main criteria (on the name, ingredients and description)
    */
   updateRecipesFromMainSearch() {
     // if there are no criterias, display all recipes
-    if (this.criteria === '') {
+    if (this._criteria === '') {
       this._sortedRecipes = this._recipes;
     } else {
-      // filters the recipes based on the main criteria (search input)
-      this._sortedRecipes = [];
-
-      for (let i = 0; i < this._recipes.length; i++) {
-        const recipe = this._recipes[i];
-        if (
-          recipe.search(this._criteria) ||
-          recipe.searchIngredient(this._criteria) ||
-          recipe.searchUstensil(this._criteria) ||
-          recipe.searchAppliance(this._criteria) ||
-          recipe.searchDescription(this._criteria)
-        ) {
-          this._sortedRecipes.push(recipe);
-        }
-      }
+      // filters the recipes based on the main criteria (on the name, ingredients and description)
+      this._sortedRecipes = this._recipes.filter(recipe => 
+        recipe.search(this._criteria) ||
+        recipe.searchIngredient(this._criteria) ||
+        recipe.searchDescription(this._criteria)
+      );
     }
   }
 
@@ -333,10 +320,9 @@ class IndexApp {
     this.displayRecipes();
 
     // update the options based on the sorted recipes
-    for (let i = 0; i < this._advancedSearchSelects.length; i++) {
-      const select = this._advancedSearchSelects[i];
+    this._advancedSearchSelects.forEach(select => {
       select.updateOptions(this.getOptions(select.type));
-    }
+    });
   }
 
   /**
@@ -346,10 +332,9 @@ class IndexApp {
    */
   getOptions(criteria) {
     let options = new Set();
-    for (let i = 0; i < this._sortedRecipes.length; i++) {
-      const recipe = this._sortedRecipes[i];
+    this._sortedRecipes.forEach(recipe => {
       options = options.symmetricDifference(Criteria.getOptionsFromRecipe(recipe, criteria));
-    }
+    });
     return options;
   }
 }
