@@ -67,7 +67,9 @@ class IndexApp {
   }
 
   /**
-   * Toggle the search tag
+   * Toggle the search tag based
+   * @param {string} criteria - The criteria to add or remove
+   * @param {string} type - The type of the criteria
    */
   toggleSearchTag(criteria, type) {
     criteria = criteria.toLowerCase();
