@@ -80,12 +80,7 @@ class Recipe {
    * @returns {boolean} True if the recipe contains the ingredient, false otherwise
    */
   searchIngredient(query) {
-    for (let i = 0; i < this._ingredients.length; i++) {
-      if (this._ingredients[i].name.toLowerCase().includes(query.toLowerCase())) {
-        return true;
-      }
-    }
-    return false;
+    return this._ingredients.some(ingredient => ingredient.name.toLowerCase().includes(query.toLowerCase()));
   }
 
   /**
@@ -94,12 +89,7 @@ class Recipe {
    * @returns {boolean} True if the recipe contains the appliance, false otherwise
    */
   searchAppliance(query) {
-    for (let i = 0; i < this._appliance.length; i++) {
-      if (this._appliance[i].toLowerCase().includes(query.toLowerCase())) {
-        return true;
-      }
-    }
-    return false;
+    return this._appliance.some(appliance => appliance.toLowerCase().includes(query.toLowerCase()));
   }
 
   /**
@@ -108,12 +98,7 @@ class Recipe {
    * @returns {boolean} True if the recipe contains the ustensil, false otherwise
    */
   searchUstensil(query) {
-    for (let i = 0; i < this._ustensils.length; i++) {
-      if (this._ustensils[i].toLowerCase().includes(query.toLowerCase())) {
-      return true;
-      }
-    }
-    return false;
+    return this._ustensils.some(ustensil => ustensil.toLowerCase().includes(query.toLowerCase()));
   }
 
   /**
