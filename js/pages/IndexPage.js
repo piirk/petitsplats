@@ -71,11 +71,13 @@ class IndexApp {
    */
   toggleSearchTag(criteria, type) {
     criteria = criteria.toLowerCase();
-    // if the tag already exists, remove it
-    if (document.getElementById('searchTagsContainer').querySelector(`.search-tag[aria-type="${type}"][aria-name="${criteria}"]`)) {
-      document.getElementById('searchTagsContainer').querySelector(`.search-tag[aria-type="${type}"][aria-name="${criteria}"]`).remove();
+    const searchTagsContainer = document.getElementById('searchTagsContainer');
+    const existingTag = searchTagsContainer.querySelector(`.search-tag[aria-type="${type}"][aria-name="${criteria}"]`);
+
+    if (existingTag) {
+      existingTag.remove();
     } else {
-      document.getElementById('searchTagsContainer').innerHTML += TagTemplate.getTagTemplate(criteria, type);
+      searchTagsContainer.innerHTML += TagTemplate.getTagTemplate(criteria, type);
       this.attachListenersSearchTags();
     }
   }
