@@ -270,15 +270,9 @@ class IndexApp {
       this.displayRecipesAndUpdateSelects();
     }
 
-    // search for recipes when the user updates the search input
-    document.getElementById('mainSearchForm').addEventListener('input', (e) => {
-      mainSearchFormEvent(e);
-    });
-
-    // search for recipes when the user submits the search form
-    document.getElementById('mainSearchForm').addEventListener('submit', (e) => {
-      mainSearchFormEvent(e);
-    });
+    // search for recipes when the user updates the search input or submits the search form
+    document.getElementById('mainSearchForm').addEventListener('input', mainSearchFormEvent);
+    document.getElementById('mainSearchForm').addEventListener('submit', mainSearchFormEvent);
   }
 
   /**
