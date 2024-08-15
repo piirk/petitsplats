@@ -304,7 +304,7 @@ class IndexApp {
     } else {
       // filters the recipes based on the main criteria (on the name, ingredients and description)
       this._sortedRecipes = [];
-
+      console.time('search');
       for (let i = 0; i < this._recipes.length; i++) {
         const recipe = this._recipes[i];
         if (
@@ -315,6 +315,7 @@ class IndexApp {
           this._sortedRecipes.push(recipe);
         }
       }
+      console.timeEnd('search');
     }
   }
 
