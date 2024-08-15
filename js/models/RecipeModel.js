@@ -21,7 +21,6 @@ class Recipe {
     this._image = data.image;
     this._name = data.name;
     this._description = data.description;
-    this._ingredients = [];
     this._ingredients = data.ingredients.map(ingredient => new Ingredient(ingredient.ingredient, ingredient.quantity, ingredient.unit));
     this._time = data.time;
     this._servings = data.servings;
@@ -89,7 +88,7 @@ class Recipe {
    * @returns {boolean} True if the recipe contains the appliance, false otherwise
    */
   searchAppliance(query) {
-    return this._appliance.some(appliance => appliance.toLowerCase().includes(query.toLowerCase()));
+    return this._appliance.toLowerCase().includes(query.toLowerCase());
   }
 
   /**
