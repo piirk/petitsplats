@@ -303,11 +303,15 @@ class IndexApp {
       this._sortedRecipes = this._recipes;
     } else {
       // filters the recipes based on the main criteria (on the name, ingredients and description)
-      this._sortedRecipes = this._recipes.filter(recipe => 
-        recipe.search(this._criteria) ||
-        recipe.searchIngredient(this._criteria) ||
-        recipe.searchDescription(this._criteria)
-      );
+      this._sortedRecipes = this._recipes.map(recipe => {
+        if (
+          recipe.search(this._criteria) ||
+          recipe.searchIngredient(this._criteria) ||
+          recipe.searchDescription(this._criteria)
+        ) {
+          return recipe;
+        }
+      }).filter(recipe => recipe);
     }
   }
 
