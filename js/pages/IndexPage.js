@@ -304,18 +304,16 @@ class IndexApp {
     } else {
       // filters the recipes based on the main criteria (on the name, ingredients and description)
       this._sortedRecipes = [];
-      console.time('search');
-      for (let i = 0; i < this._recipes.length; i++) {
-        const recipe = this._recipes[i];
+      
+      for (const recipe in this._recipes) {
         if (
-          recipe.search(this._criteria) || 
-          recipe.searchIngredient(this._criteria) || 
-          recipe.searchDescription(this._criteria)
+          this._recipes[recipe].search(this._criteria) ||
+          this._recipes[recipe].searchIngredient(this._criteria) ||
+          this._recipes[recipe].searchDescription(this._criteria)
         ) {
-          this._sortedRecipes.push(recipe);
+          this._sortedRecipes.push(this._recipes[recipe]);
         }
       }
-      console.timeEnd('search');
     }
   }
 
