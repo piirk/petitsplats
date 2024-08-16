@@ -311,7 +311,7 @@ class IndexApp {
         ) {
           return recipe;
         }
-      }).filter(recipe => recipe);
+      }).filter(Boolean);
     }
   }
 
